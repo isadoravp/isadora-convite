@@ -1,102 +1,114 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Fundo Convite</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Convite 15 Anos</title>
 
-  <style>
-    :root{
-      --azul:#1f3f73;
-      --roxo:#4a3b6e;
-      --vermelho:#7a2c2c;
-      --dourado:#f2c94c;
-    }
+<style>
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
 
-    html,body{
-      margin:0;
-      padding:0;
-      width:100%;
-      height:100%;
-      overflow:hidden;
-    }
+body {
+  height: 100vh;
+  background: radial-gradient(circle at center, #3a1c0f, #120805);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
 
-    /* FUNDO GRADIENTE - 3 cores na diagonal */
-    body{
-      background:
-        linear-gradient(
-          45deg, /* Gradiente diagonal */
-          var(--azul) 0%,       /* Azul no início */
-          var(--roxo) 35%,      /* Roxo no meio */
-          var(--vermelho) 65%,  /* Vermelho no final */
-          #c98b2b 100%          /* Dourado suave */
-        );
-      position:relative;
-    }
+/* Container da carta */
+.carta-container {
+  position: relative;
+  width: 320px;
+  max-width: 85vw;
+  cursor: pointer;
+}
 
-    /* CAMADA DE PARTÍCULAS */
-    #particles{
-      position:fixed;
-      inset:0;
-      pointer-events:none;
-      overflow:hidden;
-    }
+/* Carta fechada */
+.carta-fechada,
+.carta-aberta {
+  width: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  transition: opacity 1.2s ease, transform 1.5s ease;
+}
 
-    /* PARTÍCULA DOURADA */
-    .spark{
-      position:absolute;
-      top:-10px;
-      width:4px;
-      height:4px;
-      background:var(--dourado);
-      border-radius:50%;
-      opacity:.9;
-      box-shadow:0 0 8px var(--dourado);
-      animation:fall linear forwards;
-    }
+/* Estado inicial */
+.carta-aberta {
+  opacity: 0;
+  transform: scale(0.95);
+}
 
-    /* ANIMAÇÃO DE QUEDA */
-    @keyframes fall{
-      to{
-        transform:translateY(110vh);
-        opacity:0;
-      }
-    }
+/* Quando abre */
+.carta-container.aberta .carta-fechada {
+  opacity: 0;
+  transform: scale(0.9);
+}
 
-    /* LEVE TEXTURA PARA NÃO FICAR "LISO" */
-    body::after{
-      content:"";
-      position:fixed;
-      inset:0;
-      background:
-        radial-gradient(circle at 20% 30%, rgba(255,255,255,0.04), transparent 40%),
-        radial-gradient(circle at 80% 70%, rgba(255,255,255,0.03), transparent 45%);
-      pointer-events:none;
-    }
-  </style>
+.carta-container.aberta .carta-aberta {
+  opacity: 1;
+  transform: scale(1);
+}
+
+/* Fumaça */
+.fumaca {
+  position: absolute;
+  bottom: 20%;
+  left: 50%;
+  width: 120px;
+  opacity: 0;
+  transform: translateX(-50%) scale(0.8);
+  animation: fumaçaSubindo 3s ease-out forwards;
+  pointer-events: none;
+}
+
+.carta-container.aberta .fumaca {
+  opacity: 1;
+}
+
+/* Animação da fumaça */
+@keyframes fumaçaSubindo {
+  0% {
+    opacity: 0;
+    transform: translate(-50%, 20px) scale(0.7);
+  }
+  30% {
+    opacity: 0.8;
+  }
+  100% {
+    opacity: 0;
+    transform: translate(-50%, -120px) scale(1.2);
+  }
+}
+</style>
 </head>
 
 <body>
 
-  <div id="particles"></div>
+<div class="carta-container" id="carta">
+  <img src="assets/carta-fechada.png" class="carta-fechada" alt="Carta Fechada">
+  <img src="assets/carta-aberta.png" class="carta-aberta" alt="Carta Aberta">
+  <img src="assets/fumaca.png" class="fumaca" alt="Fumaça">
+</div>
 
-  <script>
-    const container = document.getElementById('particles');
+<script>
+const carta = document.getElementById('carta');
 
-    function createSpark(){
-      const s = document.createElement('div');
-      s.className = 'spark';
-      s.style.left = Math.random()*100 + 'vw';
-      s.style.animationDuration = (4 + Math.random()*4) + 's';
-      s.style.opacity = 0.5 + Math.random()*0.5;
-      s.style.transform = `translateX(${Math.random()*20 - 10}px)`;
-      container.appendChild(s);
+carta.addEventListener('click', () => {
+  carta.classList.add('aberta');
 
-      setTimeout(()=>s.remove(),9000);
-    }
-
-    setInterval(createSpark,180);
-  </script>
+  // Após a animação, ir para o convite oficial
+  setTimeout(() => {
+    window.location.href = "convite.html";
+  }, 3200);
+});
+</script>
 
 </body>
 </html>

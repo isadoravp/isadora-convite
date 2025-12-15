@@ -291,6 +291,7 @@ window.addEventListener('load', () => {
       smoke.style.setProperty('--x', `${Math.random()*largura/2 - largura/4}px`);
       const size = largura*0.1 + Math.random()*largura*0.15;
       smoke.style.width = smoke.style.height = size + 'px';
+      smoke.style.opacity = 0.55 + Math.random()*0.25;
       fumaca.appendChild(smoke);
       setTimeout(()=>smoke.remove(),4200);
     }, i*100);

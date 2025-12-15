@@ -7,7 +7,7 @@
 
 <style>
 :root{
-  --azul:#1f3f73;
+  --azul:#003087;  /* Mais azul */
   --roxo:#4a3b6e;
   --vermelho:#7a2c2c;
   --dourado:#f2c94c;
@@ -26,10 +26,11 @@ body{
   background:
     linear-gradient(
       180deg,
-      var(--azul) 0%,
-      var(--roxo) 35%,
-      var(--vermelho) 65%,
-      #c98b2b 100%
+      var(--azul) 0%,   /* Azul predominante */
+      var(--azul) 50%,   /* Azul mais forte no centro */
+      var(--roxo) 70%, 
+      var(--vermelho) 90%, 
+      #c98b2b 100%       /* Final dourado suave */
     );
   position:relative;
 }

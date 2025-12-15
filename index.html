@@ -3,333 +3,100 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>15 Anos Isadora</title>
+<title>Fundo Convite</title>
+
 <style>
-@import url('https://fonts.googleapis.com/css2?family=Great+Vibes&family=Poppins:wght@300;500;700&display=swap');
-
-/* --- BODY E FUNDO --- */
-body {
-  margin: 0;
-  font-family: 'Poppins', sans-serif;
-  background: linear-gradient(to bottom right, #0d1b4c, #1a2a6c);
-  color: #f5d76e;
-  overflow: hidden;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
-  text-align: center;
-  position: relative;
+:root{
+  --azul:#1f3f73;
+  --roxo:#4a3b6e;
+  --vermelho:#7a2c2c;
+  --dourado:#f2c94c;
 }
 
-/* Fundo animado */
-body::before {
-  content: "";
-  position: absolute;
-  top: 0; left: 0;
-  width: 100%; height: 100%;
-  background: url("https://static.vecteezy.com/ti/vetor-gratis/p1/15396203-design-luxuoso-e-elegante-fundo-azul-marinho-de-luxo-com-glitter-dourado-vetor.jpg");
-  background-size: cover;
-  opacity: 0.5;
-  z-index: 0;
-  animation: stars 60s linear infinite;
+html,body{
+  margin:0;
+  padding:0;
+  width:100%;
+  height:100%;
+  overflow:hidden;
 }
 
-@keyframes stars {
-  from { background-position: 0 0; }
-  to { background-position: 10000px 10000px; }
+/* FUNDO GRADIENTE */
+body{
+  background:
+    linear-gradient(
+      180deg,
+      var(--azul) 0%,
+      var(--roxo) 35%,
+      var(--vermelho) 65%,
+      #c98b2b 100%
+    );
+  position:relative;
 }
 
-/* --- HEADER --- */
-header {
-  z-index: 1;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 10px;
+/* CAMADA DE PARTÍCULAS */
+#particles{
+  position:fixed;
+  inset:0;
+  pointer-events:none;
+  overflow:hidden;
 }
 
-header h1 {
-  font-family: 'Great Vibes', cursive;
-  font-size: 2.5em;
-  margin: 0;
-  color: #f5d76e;
-  text-shadow: 0 0 12px rgba(255,215,0,0.6);
+/* PARTÍCULA DOURADA */
+.spark{
+  position:absolute;
+  top:-10px;
+  width:4px;
+  height:4px;
+  background:var(--dourado);
+  border-radius:50%;
+  opacity:.9;
+  box-shadow:0 0 8px var(--dourado);
+  animation:fall linear forwards;
 }
 
-header p {
-  margin: 0;
-  font-size: 1.1em;
-  font-style: italic;
-  color: #fff5cc;
+/* ANIMAÇÃO DE QUEDA */
+@keyframes fall{
+  to{
+    transform:translateY(110vh);
+    opacity:0;
+  }
 }
 
-/* --- CONTADOR --- */
-#contador {
-  margin: 15px 0;
-  display: flex;
-  justify-content: center;
-  gap: 10px;
-  z-index: 1;
-  flex-wrap: wrap;
-}
-
-.tempo {
-  background: rgba(13, 27, 76, 0.7);
-  border: 2px solid #f5d76e;
-  border-radius: 12px;
-  padding: 8px 12px;
-  min-width: 60px;
-  box-shadow: 0 0 10px rgba(245, 215, 110, 0.3);
-}
-
-.tempo h2 {
-  margin: 0;
-  font-size: 1.5em;
-  color: #f5d76e;
-}
-
-.tempo span {
-  font-size: 0.8em;
-  color: #fff;
-}
-
-/* --- SEÇÃO INFO --- */
-.info {
-  z-index: 1;
-  max-width: 90%;
-  background: rgba(13, 27, 76, 0.7);
-  border-radius: 15px;
-  border: 2px solid #f5d76e;
-  padding: 15px;
-  margin: 10px 0;
-  box-shadow: 0 0 15px rgba(245, 215, 110, 0.3);
-}
-
-.info h2 {
-  font-size: 1.5em;
-  margin-bottom: 10px;
-  color: #f5d76e;
-}
-
-.info p {
-  font-size: 1em;
-  margin: 5px 0;
-  color: #fff;
-}
-
-/* --- BOTÕES --- */
-.btns {
-  display: flex;
-  justify-content: center;
-  gap: 10px;
-  flex-wrap: wrap;
-  margin-top: 10px;
-}
-
-.btns a {
-  background: #f5d76e;
-  color: #0d1b4c;
-  padding: 8px 14px;
-  border-radius: 25px;
-  text-decoration: none;
-  font-size: 0.9em;
-  font-weight: 600;
-  box-shadow: 0 3px 8px rgba(0,0,0,0.3);
-  transition: transform 0.3s, box-shadow 0.3s;
-  display: flex;
-  align-items: center;
-}
-
-.btns a:hover {
-  transform: scale(1.05);
-  box-shadow: 0 5px 12px rgba(0,0,0,0.5);
-}
-
-.btns img {
-  width: 20px;
-  height: 20px;
-  margin-right: 6px;
-  vertical-align: middle;
-}
-
-/* Botão da Lista de Presentes */
-#lista-btn {
-  margin-top: 10px;
-  cursor: pointer;
-  background: #f5d76e;
-  color: #0d1b4c;
-  padding: 8px 16px;
-  border-radius: 25px;
-  font-weight: 600;
-  display: inline-block;
-  box-shadow: 0 3px 8px rgba(0,0,0,0.3);
-  transition: transform 0.3s, box-shadow 0.3s;
-}
-#lista-btn:hover {
-  transform: scale(1.05);
-  box-shadow: 0 5px 12px rgba(0,0,0,0.5);
-}
-
-/* --- MODAL LISTA DE PRESENTES --- */
-#lista-modal {
-  display: none;
-  position: fixed;
-  top:0; left:0;
-  width:100vw; height:100vh;
-  background: rgba(0,0,0,0.7);
-  z-index: 20;
-  justify-content: center;
-  align-items: center;
-}
-
-.modal-content {
-  background: rgba(255,223,0,0.95);
-  padding: 20px 25px;
-  border-radius: 15px;
-  border: 3px solid #B8860B;
-  max-width: 90%;
-  max-height: 80%;
-  overflow-y: auto;
-  text-align: left;
-  color: #3e2f0b;
-  position: relative;
-  transform: scale(0.7);
-  animation: zoomIn 0.5s ease forwards;
-}
-
-.modal-content h2 {
-  text-align: center;
-  font-family: 'Great Vibes', cursive;
-  font-size: 2em;
-  margin-bottom: 12px;
-}
-
-.modal-content ul {
-  padding-left: 20px;
-}
-
-.modal-content li {
-  margin-bottom: 8px;
-}
-
-.modal-content .fechar {
-  position: absolute;
-  top: 15px;
-  right: 20px;
-  font-size: 1.5em;
-  font-weight: bold;
-  cursor: pointer;
-  color: #3e2f0b;
-}
-
-@keyframes zoomIn {
-  from { transform: scale(0.7); opacity:0; }
-  to { transform: scale(1); opacity:1; }
-}
-
-/* --- RODAPÉ --- */
-footer {
-  font-size: 0.8em;
-  color: #fff5cc;
-  z-index: 1;
-  margin-top: auto;
-  padding: 5px 10px;
-}
-
-/* --- RESPONSIVIDADE --- */
-@media (max-width: 480px) {
-  header h1 { font-size: 2em; }
-  header p { font-size: 0.9em; }
-  .tempo h2 { font-size: 1.2em; }
-  .tempo { padding: 5px 8px; min-width: 50px; }
-  .info h2 { font-size: 1.2em; }
-  .info p { font-size: 0.9em; }
-  .btns a { font-size: 0.8em; padding: 6px 12px; }
+/* LEVE TEXTURA PARA NÃO FICAR "LISO" */
+body::after{
+  content:"";
+  position:fixed;
+  inset:0;
+  background:
+    radial-gradient(circle at 20% 30%, rgba(255,255,255,0.04), transparent 40%),
+    radial-gradient(circle at 80% 70%, rgba(255,255,255,0.03), transparent 45%);
+  pointer-events:none;
 }
 </style>
 </head>
+
 <body>
-  <header>
-    <h1>15 Anos Isadora</h1>
-    <p>“Este é o dia que o Senhor fez; regozijemo-nos e alegremo-nos nele.” (Salmos 118:24)</p>
 
-    <div id="contador">
-      <div class="tempo"><h2 id="dias">0</h2><span>Dias</span></div>
-      <div class="tempo"><h2 id="horas">0</h2><span>Horas</span></div>
-      <div class="tempo"><h2 id="minutos">0</h2><span>Min</span></div>
-      <div class="tempo"><h2 id="segundos">0</h2><span>Seg</span></div>
-    </div>
-  </header>
+<div id="particles"></div>
 
-  <section class="info">
-    <h2>Você é nosso convidado especial!</h2>
-    <p><strong>Data:</strong> 23/01</p>
-    <p><strong>Horário:</strong> 21h até 4h</p>
-    <div class="btns">
-      <a href="https://wa.me/5551993223902" target="_blank">
-        <img src="https://img.cdndsgni.com/preview/10000404.jpg" alt="WhatsApp">
-        Confirmar Presença
-      </a>
-      <a href="https://maps.app.goo.gl/YbAJr3sXhotr2sFw5" target="_blank">
-        <img src="https://cdn-icons-png.flaticon.com/256/2642/2642502.png" alt="Maps">
-        Como Chegar
-      </a>
-    </div>
+<script>
+const container = document.getElementById('particles');
 
-    <!-- Botão Lista de Presentes -->
-    <div id="lista-btn">Ver Lista de Presentes</div>
-  </section>
+function createSpark(){
+  const s = document.createElement('div');
+  s.className = 'spark';
+  s.style.left = Math.random()*100 + 'vw';
+  s.style.animationDuration = (4 + Math.random()*4) + 's';
+  s.style.opacity = 0.5 + Math.random()*0.5;
+  s.style.transform = `translateX(${Math.random()*20 - 10}px)`;
+  container.appendChild(s);
 
-  <!-- Modal Lista de Presentes -->
-  <div id="lista-modal">
-    <div class="modal-content">
-      <span class="fechar">&times;</span>
-      <h2>Lista de Presentes</h2>
-      <ul>
-        <li>Livro de poesia</li>
-        <li>Flores decorativas</li>
-        <li>Perfume feminino</li>
-        <li>Bolsa elegante</li>
-        <li>Vouchers para experiências</li>
-        <li>Chocolate gourmet</li>
-        <li>Itens personalizados</li>
-      </ul>
-    </div>
-  </div>
+  setTimeout(()=>s.remove(),9000);
+}
 
-  <footer>
-    ✨ Conto com sua presença ✨
-  </footer>
+setInterval(createSpark,180);
+</script>
 
-  <script>
-    // Contador
-    const dataEvento = new Date("January 23, 2026 21:00:00").getTime();
-    const atualizarContador = () => {
-      const agora = new Date().getTime();
-      const distancia = dataEvento - agora;
-      if(distancia < 0) return;
-      const dias = Math.floor(distancia / (1000*60*60*24));
-      const horas = Math.floor((distancia % (1000*60*60*24)) / (1000*60*60));
-      const minutos = Math.floor((distancia % (1000*60*60)) / (1000*60));
-      const segundos = Math.floor((distancia % (1000*60)) / 1000);
-      document.getElementById("dias").textContent = dias;
-      document.getElementById("horas").textContent = horas;
-      document.getElementById("minutos").textContent = minutos;
-      document.getElementById("segundos").textContent = segundos;
-    };
-    setInterval(atualizarContador, 1000);
-
-    // Modal Lista de Presentes
-    const modal = document.getElementById("lista-modal");
-    const btn = document.getElementById("lista-btn");
-    const fechar = document.querySelector("#lista-modal .fechar");
-
-    btn.onclick = () => { modal.style.display = "flex"; }
-    fechar.onclick = () => { modal.style.display = "none"; }
-    window.onclick = (e) => { if(e.target === modal) modal.style.display = "none"; }
-  </script>
 </body>
 </html>

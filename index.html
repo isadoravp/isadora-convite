@@ -50,54 +50,43 @@ body::after{
    CENÁRIO CASTELO / ESCADA
 ===================== */
 
-.cenario-castelo{
-  position:fixed;
-  left:50%;
-  bottom:16%;
-  transform:translateX(-50%);
+@media (max-width: 768px){
 
-  width:125%;
-  max-width:1400px;
-  height:90vh;
+  .cenario-castelo{
+    bottom:8%;
+    height:60vh;
+    width:135%;
+    opacity:0.94;
 
-  background:url("assets/castelo1.png") center bottom no-repeat;
-  background-size:contain;
+    background-position:center bottom;
 
-  opacity:0.95;
+    filter:
+      drop-shadow(0 30px 90px rgba(0,0,0,0.38))
+      drop-shadow(0 0 80px rgba(130,180,255,0.35))
+      brightness(1.08)
+      contrast(1.05);
 
-  z-index:0;
-  pointer-events:none;
-
-  /* PROFUNDIDADE E ATMOSFERA */
-  filter:
-    drop-shadow(0 60px 140px rgba(0,0,0,0.45))
-    drop-shadow(0 0 120px rgba(120,170,255,0.28));
-
-  /* INTEGRAÇÃO COM O FUNDO */
-  mix-blend-mode:soft-light;
-
-  /* DESAPARECER BORDAS (ANTI-QUADRADO) */
     -webkit-mask-image:
-    radial-gradient(
-      ellipse at center bottom,
-      rgba(0,0,0,1) 0%,
-      rgba(0,0,0,0.95) 35%,
-      rgba(0,0,0,0.75) 55%,
-      rgba(0,0,0,0.35) 70%,
-      rgba(0,0,0,0.12) 82%,
-      transparent 95%
-    );
+      linear-gradient(
+        to top,
+        rgba(0,0,0,1) 0%,
+        rgba(0,0,0,0.92) 55%,
+        rgba(0,0,0,0.7) 70%,
+        rgba(0,0,0,0.3) 82%,
+        transparent 95%
+      );
 
-  mask-image:
-    radial-gradient(
-      ellipse at center bottom,
-      rgba(0,0,0,1) 0%,
-      rgba(0,0,0,0.95) 35%,
-      rgba(0,0,0,0.75) 55%,
-      rgba(0,0,0,0.35) 70%,
-      rgba(0,0,0,0.12) 82%,
-      transparent 95%
-    );
+    mask-image:
+      linear-gradient(
+        to top,
+        rgba(0,0,0,1) 0%,
+        rgba(0,0,0,0.92) 55%,
+        rgba(0,0,0,0.7) 70%,
+        rgba(0,0,0,0.3) 82%,
+        transparent 95%
+      );
+  }
+
 }
 
   .nevoa-cenario{

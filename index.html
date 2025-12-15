@@ -146,17 +146,18 @@ body::after{
 
   /* AZUL MARINHO MÁGICO */
   background:radial-gradient(
-    circle,
-    rgba(90,140,220,0.65) 0%,
-    rgba(60,100,190,0.45) 35%,
-    rgba(30,60,140,0.25) 60%,
-    rgba(20,40,100,0.08) 100%
-  );
+  circle,
+  rgba(55,95,160,0.55) 0%,
+  rgba(40,75,140,0.38) 35%,
+  rgba(25,50,105,0.22) 60%,
+  rgba(15,30,70,0.08) 100%
+);
 
-  filter:blur(22px);
-  box-shadow:
-    0 0 26px rgba(90,140,255,0.65),
-    0 0 52px rgba(50,90,200,0.45);
+filter:blur(24px);
+
+box-shadow:
+  0 0 26px rgba(70,120,200,0.45),
+  0 0 58px rgba(50,90,160,0.25);
 }
 
 @keyframes smokeUp{
@@ -186,19 +187,18 @@ body::after{
 
 @keyframes smokeGlow{
   from{
-    filter:blur(22px) brightness(1);
+    filter:blur(24px) brightness(1);
     box-shadow:
-      0 0 22px rgba(90,140,255,0.4),
-      0 0 44px rgba(50,90,200,0.25);
+      0 0 18px rgba(60,100,180,0.25),
+      0 0 36px rgba(40,80,150,0.15);
   }
   to{
-    filter:blur(24px) brightness(1.25);
+    filter:blur(26px) brightness(1.22);
     box-shadow:
-      0 0 36px rgba(120,180,255,0.85),
-      0 0 70px rgba(80,130,255,0.55);
+      0 0 32px rgba(90,140,220,0.55),
+      0 0 60px rgba(70,120,200,0.35);
   }
 }
-
 
   /* =====================
    GLITTER MÁGICO
@@ -314,12 +314,13 @@ window.addEventListener('load', () => {
   setTimeout(() => {
     carta.classList.add('aberta');
 
-    /* FUMAÇA DOURADA */
+
     for(let i=0;i<26;i++){
       setTimeout(()=>{
         const smoke = document.createElement('div');
         smoke.className = 'smoke';
         smoke.style.setProperty('--x', `${Math.random()*140 - 70}px`);
+        smoke.style.opacity = 0.55 + Math.random()*0.25;
         const size = 28 + Math.random()*45;
         smoke.style.width = smoke.style.height = size + 'px';
         fumaca.appendChild(smoke);

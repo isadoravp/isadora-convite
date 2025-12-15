@@ -45,25 +45,6 @@ body::after{
   pointer-events:none;
   z-index:-1;
 }
-
- @media (max-width: 768px){
-  .smoke{
-    filter:blur(18px);
-  }
-}
-
-  .cenario-castelo{
-    will-change:transform, opacity, filter;
-
-    filter:
-      drop-shadow(0 30px 70px rgba(0,0,0,0.35))
-      drop-shadow(0 0 60px rgba(120,170,255,0.22));
-
-    mix-blend-mode:normal;
-  }
-
-}
-
   
 /* =====================
    CENÁRIO CASTELO / ESCADA
@@ -340,9 +321,7 @@ function createSpark(){
   particleContainer.appendChild(s);
   setTimeout(()=>s.remove(),9000);
 }
-const isMobile = window.innerWidth <= 768;
-
-setInterval(createSpark, isMobile ? 420 : 180);
+setInterval(createSpark,180);
 
 /* CARTA + FUMAÇA + GLITTER */
 const carta = document.getElementById('carta');
@@ -355,7 +334,7 @@ window.addEventListener('load', () => {
   const largura = carta.offsetWidth;
 
   /* FUMAÇA AZUL */
- for(let i=0;i<(isMobile ? 14 : 30);i++){
+  for(let i=0;i<30;i++){
     setTimeout(()=>{
       const smoke = document.createElement('div');
       smoke.className = 'smoke';
@@ -369,7 +348,7 @@ window.addEventListener('load', () => {
   }
 
   /* GLITTER DOURADO */
-  for(let i=0;i<(isMobile ? 10 : 22);i++){
+  for(let i=0;i<22;i++){
     setTimeout(()=>{
       const g = document.createElement('div');
       g.className = 'magic-glitter';
@@ -387,7 +366,7 @@ window.addEventListener('load', () => {
     carta.classList.add('aberta');
 
 
-    for(let i=0;i<(isMobile ? 12 : 26);i++){
+    for(let i=0;i<26;i++){
       setTimeout(()=>{
         const smoke = document.createElement('div');
         smoke.className = 'smoke';
@@ -400,7 +379,7 @@ window.addEventListener('load', () => {
     }
 
     /* GLITTER MÁGICO */
-    for(let i=0;i<(isMobile ? 8 : 18);i++){
+    for(let i=0;i<18;i++){
       setTimeout(()=>{
         const g = document.createElement('div');
         g.className = 'magic-glitter';

@@ -51,30 +51,35 @@ body::after{
 
 .cenario-castelo{
   position:fixed;
-  inset:0;
-  display:flex;
-  justify-content:center;
-  align-items:flex-end;
+  left:50%;
+  bottom:16%;
+  transform:translateX(-50%);
 
-  background:
-    linear-gradient(
-      to top,
-      rgba(15,20,45,0.55) 0%,
-      rgba(15,20,45,0.25) 35%,
-      rgba(15,20,45,0.05) 60%,
-      transparent 100%
-    ),
-    url("assets/castelo1.png");
+  width:125%;
+  max-width:1400px;
+  height:90vh;
 
-  background-repeat:no-repeat;
-  background-position:center bottom;
-  background-size:cover;
+  background:url("assets/castelo1.png") center bottom no-repeat;
+  background-size:contain;
 
-  opacity:0.95;
+  opacity:0.92;
 
   z-index:0;
   pointer-events:none;
+
+  filter:
+    drop-shadow(0 0 80px rgba(120,170,255,0.25))
+    drop-shadow(0 40px 120px rgba(0,0,0,0.35));
+
+  mask-image:linear-gradient(
+    to top,
+    transparent 0%,
+    rgba(0,0,0,0.35) 12%,
+    rgba(0,0,0,0.85) 28%,
+    rgba(0,0,0,1) 45%
+  );
 }
+  
 /* =====================
    PARTÍCULAS DOURADAS
 ===================== */

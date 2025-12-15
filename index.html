@@ -125,43 +125,48 @@ body::after{
 
 .smoke{
   position:absolute;
-  bottom:22%;
+  bottom:12%;   
   left:50%;
   border-radius:50%;
   animation:smokeUp 3.6s ease-out forwards;
+  
+}
 
 @keyframes smokeUp{
   0%{
     transform:translate(-50%,0) scale(0.6);
     opacity:0;
   }
-  15%{
-    opacity:.8;
+  20%{
+    opacity:.85;
   }
   100%{
     transform:
       translate(
         calc(-50% + var(--x)),
-        -180px
+        -200px
       )
-      scale(1.6);
+      scale(1.7);
     opacity:0;
   }
 }
 
+
   /* MAGIA */
-  background:radial-gradient(
-    circle,
-    rgba(255,215,100,0.55) 0%,
-    rgba(255,200,80,0.35) 35%,
-    rgba(255,170,50,0.15) 60%,
-    rgba(255,170,50,0.05) 100%
-  );
-  filter:blur(18px);
-  box-shadow:
-    0 0 20px rgba(255,215,120,0.6),
-    0 0 40px rgba(255,200,80,0.35);
-}
+ background:radial-gradient(
+  circle,
+  rgba(170,210,255,0.55) 0%,
+  rgba(120,170,240,0.35) 35%,
+  rgba(80,130,210,0.18) 60%,
+  rgba(80,130,210,0.05) 100%
+);
+
+filter:blur(20px);
+
+box-shadow:
+  0 0 22px rgba(150,200,255,0.55),
+  0 0 44px rgba(100,160,255,0.35);
+
 
   /* =====================
    GLITTER MÁGICO

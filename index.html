@@ -114,7 +114,7 @@ body::after{
 }
 
 /* =====================
-   FUMAÇA EM CSS
+   FUMAÇA DOURADA MÁGICA
 ===================== */
 
 .fumaca-container{
@@ -127,11 +127,8 @@ body::after{
   position:absolute;
   bottom:22%;
   left:50%;
-  background:rgba(255,255,255,0.45);
   border-radius:50%;
-  filter:blur(18px);
   animation:smokeUp 3.6s ease-out forwards;
-}
 
 @keyframes smokeUp{
   0%{
@@ -150,6 +147,20 @@ body::after{
       scale(1.6);
     opacity:0;
   }
+}
+
+  /* MAGIA */
+  background:radial-gradient(
+    circle,
+    rgba(255,215,100,0.55) 0%,
+    rgba(255,200,80,0.35) 35%,
+    rgba(255,170,50,0.15) 60%,
+    rgba(255,170,50,0.05) 100%
+  );
+  filter:blur(18px);
+  box-shadow:
+    0 0 20px rgba(255,215,120,0.6),
+    0 0 40px rgba(255,200,80,0.35);
 }
 </style>
 </head>
@@ -188,17 +199,22 @@ const fumaca = document.getElementById('fumaca');
 carta.addEventListener('click',()=>{
   carta.classList.add('aberta');
 
-  for(let i=0;i<24;i++){
-    setTimeout(()=>{
-      const smoke = document.createElement('div');
-      smoke.className = 'smoke';
-      smoke.style.setProperty('--x', `${Math.random()*120 - 60}px`);
-      const size = 30 + Math.random()*40;
-      smoke.style.width = smoke.style.height = size + 'px';
-      fumaca.appendChild(smoke);
-      setTimeout(()=>smoke.remove(),4000);
-    }, i*120);
-  }
+  for(let i=0;i<28;i++){
+  setTimeout(()=>{
+    const smoke = document.createElement('div');
+    smoke.className = 'smoke';
+    smoke.style.setProperty('--x', `${Math.random()*140 - 70}px`);
+
+    const size = 28 + Math.random()*45;
+    smoke.style.width = smoke.style.height = size + 'px';
+
+    // leve variação de brilho
+    smoke.style.opacity = 0.6 + Math.random()*0.4;
+
+    fumaca.appendChild(smoke);
+    setTimeout(()=>smoke.remove(),4200);
+  }, i*110);
+}
 
   setTimeout(()=>{
     window.location.href = 'convite.html';

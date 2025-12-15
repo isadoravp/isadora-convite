@@ -46,6 +46,37 @@ body::after{
 }
 
 /* =====================
+   CENÁRIO CASTELO / ESCADA
+===================== */
+
+.cenario-castelo{
+  position:fixed;
+  left:50%;
+  bottom:35%;
+  transform:translateX(-50%);
+  
+  width:100%;
+  max-width:900px;
+  height:70vh;
+
+  background:url("assets/castelo1.png") center bottom no-repeat;
+  background-size:contain;
+
+  opacity:0.85;
+
+  z-index:0;
+
+  pointer-events:none;
+
+  mask-image:linear-gradient(
+    to top,
+    transparent 0%,
+    rgba(0,0,0,0.6) 18%,
+    rgba(0,0,0,1) 35%
+  );
+}
+
+/* =====================
    PARTÍCULAS DOURADAS
 ===================== */
 
@@ -247,7 +278,10 @@ box-shadow:
 </head>
 
 <body>
-
+  
+<!-- CENÁRIO CASTELO -->
+<div class="cenario-castelo"></div>
+  
 <!-- Partículas -->
 <div id="particles"></div>
 

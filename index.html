@@ -320,7 +320,6 @@ window.addEventListener('load', () => {
         const smoke = document.createElement('div');
         smoke.className = 'smoke';
         smoke.style.setProperty('--x', `${Math.random()*140 - 70}px`);
-        smoke.style.opacity = 0.55 + Math.random()*0.25;
         const size = 28 + Math.random()*45;
         smoke.style.width = smoke.style.height = size + 'px';
         fumaca.appendChild(smoke);

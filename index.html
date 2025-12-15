@@ -324,6 +324,43 @@ box-shadow:
   }
 }
 
+/* =====================
+   AJUSTES MOBILE – CASTELO
+===================== */
+
+@media (max-width: 768px){
+
+  .cenario-castelo{
+    bottom:8%;
+    height:60vh;
+    width:135%;
+    opacity:0.88;
+
+    background-position:center bottom;
+
+    -webkit-mask-image:
+      linear-gradient(
+        to top,
+        rgba(0,0,0,1) 0%,
+        rgba(0,0,0,0.9) 55%,
+        rgba(0,0,0,0.6) 70%,
+        rgba(0,0,0,0.25) 82%,
+        transparent 95%
+      );
+
+    mask-image:
+      linear-gradient(
+        to top,
+        rgba(0,0,0,1) 0%,
+        rgba(0,0,0,0.9) 55%,
+        rgba(0,0,0,0.6) 70%,
+        rgba(0,0,0,0.25) 82%,
+        transparent 95%
+      );
+  }
+
+}
+  
 </style>
 </head>
 

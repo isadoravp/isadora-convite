@@ -382,6 +382,8 @@ box-shadow:
 </head>
 
 <body>
+<!-- MÚSICA -->
+<audio id="bgMusic" src="assets/audio/musica.mp3" loop></audio>
   
 <!-- CENÁRIO CASTELO -->
 <div class="cenario-castelo"></div>
@@ -399,6 +401,10 @@ box-shadow:
 </div>
 
 <script>
+/* MÚSICA */
+const music = document.getElementById("bgMusic");
+music.volume = 0.5;
+  
 /* PARTÍCULAS DOURADAS DO FUNDO */
 const particleContainer = document.getElementById('particles');
 
@@ -436,6 +442,10 @@ window.addEventListener('load', () => {
       setTimeout(()=>smoke.remove(),4200);
     }, i*100);
   }
+
+  carta.addEventListener("click", () => {
+  music.play();
+});
 
   /* GLITTER DOURADO */
   for(let i=0;i<22;i++){
@@ -483,9 +493,10 @@ window.addEventListener('load', () => {
   }, 1000);
 
   /* IR PARA A PÁGINA 2 */
-  setTimeout(() => {
-    window.location.href = 'convite.html';
-  }, 5200);
+ setTimeout(() => {
+  localStorage.setItem("musicTime", music.currentTime);
+  window.location.href = 'convite.html';
+}, 5200);
 
 });
 </script>

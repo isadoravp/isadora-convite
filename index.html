@@ -404,22 +404,18 @@ box-shadow:
 
 <script>
 /* ================= MÚSICA ================= */
-const music = new Audio('assets/audio/musica.mp3');
-music.loop = true;
+const music = document.getElementById('bgMusic');
 music.volume = 0.5;
 
-const savedTime = localStorage.getItem('musicTime');
-if (savedTime) music.currentTime = parseFloat(savedTime);
-
-const overlay = document.getElementById("audioOverlay");
-
-function startMusic(){
+// Marca que houve interação
+function startMusic() {
   music.play().catch(()=>console.log("Música só tocará após interação"));
+  localStorage.setItem('musicStarted', 'true'); // sinal para página 2
   overlay.remove();
 }
 
-overlay.addEventListener("click", startMusic, { once: true });
-overlay.addEventListener("touchstart", startMusic, { once: true });
+overlay.addEventListener("click", startMusic, { once:true });
+overlay.addEventListener("touchstart", startMusic, { once:true });
   
 /* PARTÍCULAS DOURADAS DO FUNDO */
 const particleContainer = document.getElementById('particles');
@@ -507,10 +503,11 @@ window.addEventListener('load', () => {
   }, 1000);
 
 // IR PARA A PÁGINA 2
-setTimeout(() => {
-  localStorage.setItem('musicTime', music.currentTime);
-  window.location.href = 'convite.html';
-}, 5200);
+window.addEventListener('load', () => {
+  setTimeout(() => {
+    localStorage.setItem('musicTime', music.currentTime);
+    window.location.href = 'convite.html';
+  }, 5200);
 
 });
 </script>

@@ -147,18 +147,26 @@ li {
 .spark{
   position: absolute;
   bottom: -10px;
-  width: 4px;
-  height: 4px;
-  background: #ffd700;
+  width: 6px;
+  height: 6px;
+  background: radial-gradient(circle, rgba(255,245,200,1) 0%, rgba(255,200,0,0.3) 60%, transparent 100%);
   border-radius: 50%;
-  box-shadow: 0 0 8px #ffd700;
-  animation: rise linear forwards; 
-  opacity: 0.8;
+  filter: blur(2px);
+  opacity: 0.7;
+  animation: riseMagic linear forwards;
 }
 
-@keyframes rise{
-  to{
-    transform: translateY(-110vh); 
+/* animação de subida com leve oscilação horizontal */
+@keyframes riseMagic {
+  0%{
+    transform: translateX(0px) translateY(0px) scale(0.6);
+    opacity: 0;
+  }
+  30%{
+    opacity: 1;
+  }
+  100%{
+    transform: translateX(var(--drift)) translateY(-120vh) scale(1.2);
     opacity: 0;
   }
 }
@@ -249,13 +257,13 @@ function createSpark(){
   const s = document.createElement('div');
   s.className = 'spark';
   s.style.left = Math.random() * 100 + 'vw';
-  s.style.animationDuration = (4 + Math.random() * 4) + 's';
-  s.style.opacity = 0.5 + Math.random() * 0.5;
+  s.style.animationDuration = (5 + Math.random() * 4) + 's'; // duração variável
+  s.style.opacity = 0.4 + Math.random() * 0.6; // opacidade aleatória
+  s.style.setProperty('--drift', (Math.random()*80-40)+'px'); // leve desvio horizontal
   particleContainer.appendChild(s);
-  setTimeout(()=>s.remove(), 9000);
+  setTimeout(()=>s.remove(), (5 + Math.random() * 4)*1000);
 }
-setInterval(createSpark, 180);
-
+  
 /* ================= MODAIS ================= */
 const modalPrincipal = document.getElementById("modalPrincipal");
 
@@ -273,6 +281,8 @@ window.onclick = e => {
   document.querySelectorAll(".modal, .sub-modal").forEach(m => { if(e.target === m) m.style.display = "none"; });
 };
 
+setInterval(createSpark, 200);  
+  
 </script>
 </body>
 </html>

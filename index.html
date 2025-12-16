@@ -334,9 +334,6 @@ const entrada = new Audio('assets/audio/entrada.mp3');
 entrada.volume = 0.7;
 entrada.preload = 'auto';
 
-const savedTime = localStorage.getItem('musicTime');
-if (savedTime) entrada.currentTime = parseFloat(savedTime);
-
 const overlay = document.getElementById('audioOverlay');
 
 function startMusic() {
@@ -345,8 +342,8 @@ function startMusic() {
   overlay.remove();
 }
 
-overlay.addEventListener('click', startMusic, { once: true });
-overlay.addEventListener('touchstart', startMusic, { once: true });
+const carta = document.getElementById('carta');
+const fumaca = document.getElementById('fumaca');
 
 carta.addEventListener('click', startMusic, { once: true });
 carta.addEventListener('touchstart', startMusic, { once: true });
@@ -400,10 +397,9 @@ window.addEventListener('load', () => {
   }, 1000);
 
   /* ====== IR PARA PÁGINA 2 ====== */
-  setTimeout(() => {
-    localStorage.setItem('musicTime', entrada.currentTime);
-    window.location.href = 'convite.html';
-  }, 5200);
+setTimeout(() => {
+  window.location.href = 'convite.html';
+}, 5200);
 
 });
 

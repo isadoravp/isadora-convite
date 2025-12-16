@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Meus 15</title>
+<title>Convite 15 Anos</title>
 
 <style>
 :root{
@@ -377,20 +377,11 @@ box-shadow:
   }
 
 }
-
-#audioOverlay{
-  position: fixed;
-  inset: 0;
-  z-index: 9999;
-  cursor: pointer;
-}
   
 </style>
 </head>
 
 <body>
-<!-- MÚSICA -->
-<div id="audioOverlay"></div>
   
 <!-- CENÁRIO CASTELO -->
 <div class="cenario-castelo"></div>
@@ -408,25 +399,6 @@ box-shadow:
 </div>
 
 <script>
-/* ================= MÚSICA ================= */
-const music = new Audio('assets/audio/musica.mp3');
-music.loop = true;
-music.volume = 0.5;
-
-const overlay = document.getElementById('audioOverlay');
-
-function startMusic() {
-  music.play().catch(err => {
-    console.log('Tentativa de play falhou:', err);
-  });
-
-  overlay.remove();
-}
-
-// toca música no primeiro toque ou click
-overlay.addEventListener('click', startMusic, { once: true });
-overlay.addEventListener('touchstart', startMusic, { once: true });
-  
 /* PARTÍCULAS DOURADAS DO FUNDO */
 const particleContainer = document.getElementById('particles');
 
@@ -510,15 +482,13 @@ window.addEventListener('load', () => {
 
   }, 1000);
 
-// IR PARA A PÁGINA 2
-setTimeout(() => {
-  localStorage.setItem('musicTime', music.currentTime);
-  window.location.href = 'convite.html';
-}, 5200);
+  /* IR PARA A PÁGINA 2 */
+  setTimeout(() => {
+    window.location.href = 'convite.html';
+  }, 5200);
 
 });
 </script>
-
 
 </body>
 </html>

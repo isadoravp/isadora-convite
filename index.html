@@ -244,7 +244,12 @@ html,body{
 
 <div class="sub-modal" id="modalPresentes">
   <div class="sub-modal-content">
-    <p>Perfumes, joias, roupas, acessórios</p>
+    <ul>
+  <li>Perfume</li>
+  <li>Brinco / Colar / Pulseira</li>
+  <li>Roupas Renner</li>
+  <li>Acessórios</li>
+</ul>
   </div>
 </div>
 
@@ -291,23 +296,23 @@ setTimeout(()=>{
 
 /* TRANSIÇÃO */
 setTimeout(()=>{
-  page1.style.display="none";
-  page2.style.display="flex";
+  document.getElementById("page1").style.display="none";
+  document.getElementById("page2").style.display="flex";
 },5200);
 
 /* MODAIS */
 document.getElementById("btnInfo").onclick=()=>{
-  modalPrincipal.style.display="flex";
+  document.getElementById("modalPrincipal").style.display="flex";
 };
 
-dressCode.onclick=()=>modalDress.style.display="flex";
-presentear.onclick=()=>modalPresentes.style.display="flex";
+document.getElementById("dressCode").onclick=()=>document.getElementById("modalDress").style.display="flex";
+document.getElementById("presentear").onclick=()=>document.getElementById("modalPresentes").style.display="flex";
 
-verRota.onclick=()=>{
+document.getElementById("verRota").onclick=()=>{
   window.open("https://maps.app.goo.gl/9Ujs9UPoccGrVMJb8","_blank");
 };
 
-confirmePresenca.onclick=()=>{
+document.getElementById("confirmePresenca").onclick=()=>{
   window.open("https://wa.me/5551992226662","_blank");
 };
 

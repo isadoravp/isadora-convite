@@ -329,12 +329,13 @@ body::after{
 
 <script>
 /* ====== MÚSICA ====== */
-/* ====== MÚSICA ====== */
 const entrada = new Audio('assets/audio/entrada.mp3');
 entrada.volume = 0.7;
 entrada.preload = 'auto';
 
 const overlay = document.getElementById('audioOverlay');
+const carta   = document.getElementById('carta');
+const fumaca  = document.getElementById('fumaca');
 
 function startMusic() {
   entrada.currentTime = 0;
@@ -342,14 +343,13 @@ function startMusic() {
   overlay.remove();
 }
 
-const carta = document.getElementById('carta');
-const fumaca = document.getElementById('fumaca');
-
-carta.addEventListener('click', startMusic, { once: true });
-carta.addEventListener('touchstart', startMusic, { once: true });
+/* clique seguro para liberar áudio */
+overlay.addEventListener('click', startMusic, { once: true });
+overlay.addEventListener('touchstart', startMusic, { once: true });
 
 /* ====== PARTÍCULAS ====== */
 const particleContainer = document.getElementById('particles');
+
 setInterval(() => {
   const s = document.createElement('div');
   s.className = 'spark';
@@ -360,9 +360,6 @@ setInterval(() => {
 }, 300);
 
 /* ====== CARTA + FUMAÇA + GLITTER ====== */
-const carta = document.getElementById('carta');
-const fumaca = document.getElementById('fumaca');
-
 window.addEventListener('load', () => {
 
   setTimeout(() => {
@@ -375,9 +372,14 @@ window.addEventListener('load', () => {
       setTimeout(() => {
         const smoke = document.createElement('div');
         smoke.className = 'smoke';
-        smoke.style.setProperty('--x', `${Math.random() * largura / 2 - largura / 4}px`);
+        smoke.style.setProperty(
+          '--x',
+          `${Math.random() * largura / 2 - largura / 4}px`
+        );
+
         const size = largura * 0.1 + Math.random() * largura * 0.15;
         smoke.style.width = smoke.style.height = size + 'px';
+
         fumaca.appendChild(smoke);
         setTimeout(() => smoke.remove(), 4200);
       }, i * 100);
@@ -397,12 +399,10 @@ window.addEventListener('load', () => {
   }, 1000);
 
   /* ====== IR PARA PÁGINA 2 ====== */
-setTimeout(() => {
-  window.location.href = 'convite.html';
-}, 5200);
-
-});
-
+  setTimeout(() => {
+    window.location.href = 'convite.html';
+  }, 5200);
+});                     
 </script>
 
 </body>

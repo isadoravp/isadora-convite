@@ -280,6 +280,7 @@ html,body{
 /* AUDIO */
 const audio = document.getElementById("bgMusic");
 const overlay = document.getElementById("audioOverlay");
+
 overlay.onclick = () => {
   audio.muted = false;
   audio.play();
@@ -297,6 +298,10 @@ function startParticles(container){
     setTimeout(()=>s.remove(),9000);
   },180);
 }
+
+const particles1 = document.getElementById("particles1");
+const particles2 = document.getElementById("particles2");
+
 startParticles(particles1);
 startParticles(particles2);
 
@@ -306,7 +311,6 @@ setTimeout(()=>{
   document.getElementById("page2").style.display="flex";
 },5200);
 
-<script>
 /* ================= MODAIS ================= */
 const btnInfo = document.querySelector(".btn-modal");
 const modalPrincipal = document.getElementById("modalPrincipal");
@@ -346,7 +350,6 @@ window.addEventListener("click", e => {
     if (e.target === m) m.style.display = "none";
   });
 });
-   
 </script>
 
 </body>

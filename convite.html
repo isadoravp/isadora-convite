@@ -111,14 +111,18 @@ li {
 }
 
 /* ================= PARTÍCULAS DOURADAS (PÁG. 2) ================= */
-#particles{
-  position: fixed;
-  inset: 0;
-  pointer-events: none;
-  overflow: hidden;
-  z-index: 1;
+.spark{
+  position: absolute;
+  top: -10px;
+  width: 4px;
+  height: 4px;
+  background: #ffd700;
+  border-radius: 50%;
+  box-shadow: 0 0 8px #ffd700;
+  animation: fall linear forwards;
+  opacity: 0.8;
 }
-
+  
 @keyframes fall{
   to{
     transform: translateY(110vh);

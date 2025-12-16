@@ -146,19 +146,19 @@ li {
 
 .spark{
   position: absolute;
-  top: -10px;
+  bottom: -10px;
   width: 4px;
   height: 4px;
   background: #ffd700;
   border-radius: 50%;
   box-shadow: 0 0 8px #ffd700;
-  animation: fall linear forwards;
+  animation: rise linear forwards; 
   opacity: 0.8;
 }
 
-@keyframes fall{
+@keyframes rise{
   to{
-    transform: translateY(110vh);
+    transform: translateY(-110vh); 
     opacity: 0;
   }
 }
@@ -252,10 +252,9 @@ function createSpark(){
   s.style.animationDuration = (4 + Math.random() * 4) + 's';
   s.style.opacity = 0.5 + Math.random() * 0.5;
   particleContainer.appendChild(s);
-  setTimeout(()=>s.remove(),9000);
+  setTimeout(()=>s.remove(), 9000);
 }
-
-setInterval(createSpark,180);
+setInterval(createSpark, 180);
 
 /* ================= MODAIS ================= */
 const modalPrincipal = document.getElementById("modalPrincipal");

@@ -21,26 +21,21 @@ html,body{
   overflow:hidden;
 }
 
-/* AUDIO */
+/* ================= AUDIO OVERLAY ================= */
 #audioOverlay{
   position:fixed;
   inset:0;
   z-index:9999;
   cursor:pointer;
+  background:transparent;
 }
 
 /* ================= PAGE 1 ================= */
 #page1{
   position:fixed;
   inset:0;
-  background:linear-gradient(
-    45deg,
-    var(--azul),
-    var(--roxo),
-    var(--vermelho),
-    #c98b2b
-  );
-  font-family: Georgia, serif;
+  background:linear-gradient(45deg,var(--azul),var(--roxo),var(--vermelho),#c98b2b);
+  font-family:Georgia,serif;
   z-index:2;
 }
 
@@ -65,12 +60,12 @@ html,body{
   transform:translateX(-50%);
   width:140%;
   height:70vh;
-  background:radial-gradient(ellipse, rgba(40,70,130,.35), transparent 90%);
-  filter:blur(40px);
+  background:radial-gradient(ellipse, rgba(60,120,220,.45), transparent 85%);
+  filter:blur(45px);
   z-index:1;
 }
 
-/* PARTÍCULAS */
+/* ================= PARTÍCULAS ================= */
 #particles1,#particles2{
   position:fixed;
   inset:0;
@@ -92,14 +87,14 @@ html,body{
   to{ transform:translateY(110vh); opacity:0; }
 }
 
-/* CARTA */
+/* ================= CARTA ================= */
 .carta-container{
   position:absolute;
   top:50%;
   left:50%;
   transform:translate(-50%,-50%);
   width:320px;
-  z-index:3;
+  z-index:5;
 }
 
 .carta-container img{
@@ -119,23 +114,34 @@ html,body{
   opacity:1;
 }
 
-/* FUMAÇA DA CARTA */
+/* ================= FUMAÇA AZUL ================= */
 .fumaca{
   position:absolute;
   left:50%;
   bottom:40px;
-  width:200px;
-  height:200px;
-  background:radial-gradient(circle, rgba(255,255,255,.45), transparent 70%);
+  width:240px;
+  height:240px;
   transform:translateX(-50%);
-  filter:blur(25px);
-  animation:fumaça 3s ease-out forwards;
+  background:radial-gradient(circle,
+    rgba(120,180,255,.75),
+    rgba(80,140,255,.45),
+    transparent 70%
+  );
+  filter:blur(30px);
+  animation:fumaça 3.2s ease-out forwards;
   pointer-events:none;
+  z-index:20;
 }
 
 @keyframes fumaça{
-  from{ opacity:0; transform:translate(-50%,0) scale(.6); }
-  to{ opacity:0; transform:translate(-50%,-160px) scale(1.4); }
+  from{
+    opacity:0;
+    transform:translate(-50%,20px) scale(.6);
+  }
+  to{
+    opacity:0;
+    transform:translate(-50%,-180px) scale(1.5);
+  }
 }
 
 /* ================= PAGE 2 ================= */
@@ -158,7 +164,7 @@ html,body{
   position:fixed;
   bottom:20px;
   right:20px;
-  z-index:5;
+  z-index:50;
   background:#f17ea1;
   color:#fff;
   border:none;
@@ -167,13 +173,13 @@ html,body{
   cursor:pointer;
 }
 
-/* MODAIS */
+/* ================= MODAIS ================= */
 .modal,.sub-modal{
   display:none;
   position:fixed;
   inset:0;
   background:rgba(0,0,0,.6);
-  z-index:10;
+  z-index:100;
   align-items:center;
   justify-content:center;
 }
@@ -218,16 +224,38 @@ html,body{
 <section id="page2">
   <div id="particles2"></div>
   <img src="assets/convite.png" class="carta">
-  <button class="btn-modal">Informações</button>
+  <button class="btn-modal" id="btnInfo">Informações</button>
 </section>
+
+<div class="modal" id="modalPrincipal">
+  <div class="modal-content">
+    <button class="modal-button" id="dressCode">👗 Dress Code</button>
+    <button class="modal-button" id="verRota">📍 Ver Rota</button>
+    <button class="modal-button" id="confirmePresenca">✅ Confirmar Presença</button>
+    <button class="modal-button" id="presentear">🎁 Presentear</button>
+  </div>
+</div>
+
+<div class="sub-modal" id="modalDress">
+  <div class="sub-modal-content">
+    <p>Esporte fino</p>
+  </div>
+</div>
+
+<div class="sub-modal" id="modalPresentes">
+  <div class="sub-modal-content">
+    <p>Perfumes, joias, roupas, acessórios</p>
+  </div>
+</div>
 
 <script>
 /* AUDIO */
 const audio=document.getElementById("bgMusic");
-document.getElementById("audioOverlay").onclick=()=>{
+const overlay=document.getElementById("audioOverlay");
+overlay.onclick=()=>{
   audio.muted=false;
   audio.play();
-  audioOverlay.remove();
+  overlay.remove();
 };
 
 /* PARTÍCULAS */
@@ -244,13 +272,13 @@ function startParticles(c){
 startParticles(particles1);
 startParticles(particles2);
 
-/* ABRIR CARTA + FUMAÇA */
+/* CARTA + FUMAÇA */
 setTimeout(()=>{
   carta.classList.add("aberta");
   const f=document.createElement("div");
   f.className="fumaca";
   carta.appendChild(f);
-  setTimeout(()=>f.remove(),3000);
+  setTimeout(()=>f.remove(),3200);
 },1200);
 
 /* TRANSIÇÃO */
@@ -258,6 +286,28 @@ setTimeout(()=>{
   page1.style.display="none";
   page2.style.display="flex";
 },5200);
+
+/* MODAIS */
+document.getElementById("btnInfo").onclick=()=>{
+  modalPrincipal.style.display="flex";
+};
+
+dressCode.onclick=()=>modalDress.style.display="flex";
+presentear.onclick=()=>modalPresentes.style.display="flex";
+
+verRota.onclick=()=>{
+  window.open("https://maps.app.goo.gl/9Ujs9UPoccGrVMJb8","_blank");
+};
+
+confirmePresenca.onclick=()=>{
+  window.open("https://wa.me/5551992226662","_blank");
+};
+
+window.onclick=e=>{
+  document.querySelectorAll(".modal,.sub-modal").forEach(m=>{
+    if(e.target===m) m.style.display="none";
+  });
+};
 </script>
 
 </body>

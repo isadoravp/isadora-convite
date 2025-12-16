@@ -34,7 +34,6 @@ body{
   font-family: 'Georgia', serif;
 }
 
-/* TEXTURA */
 body::after{
   content:"";
   position:fixed;
@@ -45,10 +44,8 @@ body::after{
   pointer-events:none;
   z-index:-1;
 }
-  
-/* =====================
-   CENÁRIO CASTELO / ESCADA
-===================== */
+
+/* ================= CENÁRIO CASTELO ================= */
 .cenario-castelo{
   position:fixed;
   left:50%;
@@ -105,15 +102,14 @@ body::after{
   filter:blur(48px);
   z-index:-1;
 }
-  
-  .nevoa-cenario{
+
+.nevoa-cenario{
   position:fixed;
   left:50%;
   bottom:0;
   transform:translateX(-50%);
   width:140%;
   height:70vh;
-
   background:
     radial-gradient(
       ellipse at center,
@@ -123,15 +119,10 @@ body::after{
       rgba(15,30,70,0.1) 70%,
       transparent 90%
     );
-
   filter:blur(40px);
   z-index:1;
   pointer-events:none;
 }
-  
-/* =====================
-   PARTÍCULAS DOURADAS
-===================== */
 
 #particles{
   position:fixed;
@@ -158,10 +149,6 @@ body::after{
     opacity:0;
   }
 }
-
-/* =====================
-   CARTA
-===================== */
 
 .carta-container{
   position:absolute;
@@ -201,22 +188,12 @@ body::after{
   opacity:1;
   transform:scale(1);
 }
-  
-  @keyframes pulseGlow{
-  0%{
-    filter:drop-shadow(0 0 0 rgba(180,220,255,0));
-  }
-  40%{
-    filter:drop-shadow(0 0 28px rgba(180,220,255,0.8));
-  }
-  100%{
-    filter:drop-shadow(0 0 12px rgba(180,220,255,0.4));
-  }
-}
 
-/* =====================
-   FUMAÇA DOURADA MÁGICA
-===================== */
+@keyframes pulseGlow{
+  0%{ filter:drop-shadow(0 0 0 rgba(180,220,255,0)); }
+  40%{ filter:drop-shadow(0 0 28px rgba(180,220,255,0.8)); }
+  100%{ filter:drop-shadow(0 0 12px rgba(180,220,255,0.4)); }
+}
 
 .fumaca-container{
   position:absolute;
@@ -230,66 +207,39 @@ body::after{
   left:50%;
   border-radius:50%;
   animation:smokeUp 3.8s ease-out forwards;
-
-  /* AZUL MARINHO MÁGICO */
   background:radial-gradient(
-  circle,
-  rgba(55,95,160,0.55) 0%,
-  rgba(40,75,140,0.38) 35%,
-  rgba(25,50,105,0.22) 60%,
-  rgba(15,30,70,0.08) 100%
-);
-
-filter:blur(24px);
-
-box-shadow:
-  0 0 26px rgba(70,120,200,0.45),
-  0 0 58px rgba(50,90,160,0.25);
+    circle,
+    rgba(55,95,160,0.55) 0%,
+    rgba(40,75,140,0.38) 35%,
+    rgba(25,50,105,0.22) 60%,
+    rgba(15,30,70,0.08) 100%
+  );
+  filter:blur(24px);
+  box-shadow:
+    0 0 26px rgba(70,120,200,0.45),
+    0 0 58px rgba(50,90,160,0.25);
 }
 
 @keyframes smokeUp{
-  0%{
-    transform:translate(-50%,0) scale(0.6);
-    opacity:0;
-  }
-  25%{
-    opacity:.95;
-  }
-  100%{
-    transform:
-      translate(
-        calc(-50% + var(--x)),
-        -240px
-      )
-      scale(1.9);
-    opacity:0;
-  }
+  0%{ transform:translate(-50%,0) scale(0.6); opacity:0; }
+  25%{ opacity:.95; }
+  100%{ transform:translate(calc(-50% + var(--x)),-240px) scale(1.9); opacity:0; }
 }
-  
+
 .carta-container.aberta .smoke{
-  animation:
-    smokeUp 3.8s ease-out forwards,
-    smokeGlow 1.8s ease-in-out infinite alternate;
+  animation: smokeUp 3.8s ease-out forwards, smokeGlow 1.8s ease-in-out infinite alternate;
 }
 
 @keyframes smokeGlow{
   from{
     filter:blur(24px) brightness(1);
-    box-shadow:
-      0 0 18px rgba(60,100,180,0.25),
-      0 0 36px rgba(40,80,150,0.15);
+    box-shadow:0 0 18px rgba(60,100,180,0.25),0 0 36px rgba(40,80,150,0.15);
   }
   to{
     filter:blur(26px) brightness(1.22);
-    box-shadow:
-      0 0 32px rgba(90,140,220,0.55),
-      0 0 60px rgba(70,120,200,0.35);
+    box-shadow:0 0 32px rgba(90,140,220,0.55),0 0 60px rgba(70,120,200,0.35);
   }
 }
-
-  /* =====================
-   GLITTER MÁGICO
-===================== */
 
 .magic-glitter{
   position:absolute;
@@ -298,40 +248,19 @@ box-shadow:
   bottom:15%;
   left:50%;
   border-radius:50%;
-  background:radial-gradient(
-    circle,
-    #fff6c7 0%,
-    #ffd700 45%,
-    rgba(255,215,0,0.3) 70%,
-    transparent 100%
-  );
+  background:radial-gradient(circle,#fff6c7 0%,#ffd700 45%,rgba(255,215,0,0.3) 70%,transparent 100%);
   filter: blur(12px);
   box-shadow:0 0 14px rgba(255,215,120,0.9);
   animation:glitterUp 2.2s ease-out forwards;
 }
 
-
 @keyframes glitterUp{
-  0%{
-    opacity:0;
-    transform:translate(-50%,10px) scale(0.5);
-  }
-  30%{
-    opacity:1;
-  }
-  100%{
-    opacity:0;
-    transform:
-      translate(
-        calc(-50% + var(--gx)),
-        -140px
-      )
-      scale(1.3);
-  }
+  0%{ opacity:0; transform:translate(-50%,10px) scale(0.5); }
+  30%{ opacity:1; }
+  100%{ opacity:0; transform:translate(calc(-50% + var(--gx)),-140px) scale(1.3); }
 }
 
 @media (max-width:768px){
-
   .cenario-castelo{
     bottom:8%;
     height:60vh;
@@ -339,28 +268,9 @@ box-shadow:
     opacity:0.7;
     filter: brightness(1.18) contrast(1.1) saturate(1.08) drop-shadow(0 40px 90px rgba(0,0,0,0.45)) drop-shadow(0 0 140px rgba(150,200,255,0.55));
     background-position:center bottom;
-
-    -webkit-mask-image:
-      linear-gradient(
-        to top,
-        rgba(0,0,0,1) 0%,
-        rgba(0,0,0,0.9) 55%,
-        rgba(0,0,0,0.6) 70%,
-        rgba(0,0,0,0.25) 82%,
-        transparent 95%
-      );
-
-    mask-image:
-      linear-gradient(
-        to top,
-        rgba(0,0,0,1) 0%,
-        rgba(0,0,0,0.9) 55%,
-        rgba(0,0,0,0.6) 70%,
-        rgba(0,0,0,0.25) 82%,
-        transparent 95%
-      );
+    -webkit-mask-image: linear-gradient(to top, rgba(0,0,0,1) 0%, rgba(0,0,0,0.9) 55%, rgba(0,0,0,0.6) 70%, rgba(0,0,0,0.25) 82%, transparent 95%);
+    mask-image: linear-gradient(to top, rgba(0,0,0,1) 0%, rgba(0,0,0,0.9) 55%, rgba(0,0,0,0.6) 70%, rgba(0,0,0,0.25) 82%, transparent 95%);
   }
-
 }
 
 #audioOverlay{
@@ -369,19 +279,17 @@ box-shadow:
   z-index: 9999;
   cursor: pointer;
 }
-  
 </style>
 </head>
 
 <body>
-<!-- MÚSICA -->
+
+<!-- ÁUDIO -->
+<audio id="bgMusic" src="assets/audio/musica.mp3" loop></audio>
 <div id="audioOverlay"></div>
 
-<audio id="bgMusic" src="assets/audio/musica.mp3" loop></audio>
-  
 <!-- CENÁRIO CASTELO -->
 <div class="cenario-castelo"></div>
-
 <div class="nevoa-cenario"></div>
 
 <!-- Partículas -->
@@ -396,12 +304,11 @@ box-shadow:
 
 <script>
 /* ================= MÚSICA ================= */
-const music = document.getElementById('bgMusic') || new Audio('assets/audio/musica.mp3');
-music.loop = true;
+const music = document.getElementById('bgMusic');
 music.volume = 0.5;
 
 const savedTime = localStorage.getItem('musicTime');
-if (savedTime) music.currentTime = parseFloat(savedTime);
+if(savedTime) music.currentTime = parseFloat(savedTime);
 
 const overlay = document.getElementById("audioOverlay");
 
@@ -412,91 +319,59 @@ function startMusic(){
 
 overlay.addEventListener("click", startMusic, { once: true });
 overlay.addEventListener("touchstart", startMusic, { once: true });
-  
-/* PARTÍCULAS DOURADAS DO FUNDO */
-const particleContainer = document.getElementById('particles');
 
+/* ================= PARTÍCULAS ================= */
+const particleContainer = document.getElementById('particles');
 function createSpark(){
   const s = document.createElement('div');
-  s.className = 'spark';
-  s.style.left = Math.random()*100 + 'vw';
-  s.style.animationDuration = (3 + Math.random()*3) + 's';
-  s.style.opacity = 0.4 + Math.random()*0.4;
+  s.className='spark';
+  s.style.left = Math.random()*100+'vw';
+  s.style.animationDuration = (3+Math.random()*3)+'s';
+  s.style.opacity = 0.4+Math.random()*0.4;
   particleContainer.appendChild(s);
-  setTimeout(()=>s.remove(), 7000);
+  setTimeout(()=>s.remove(),7000);
 }
+setInterval(createSpark, window.innerWidth<768?300:180);
 
-const intervalTime = window.innerWidth < 768 ? 300 : 180;
-setInterval(createSpark, intervalTime);
-
-/* CARTA + FUMAÇA + GLITTER */
+/* ================= CARTA + FUMAÇA + GLITTER ================= */
 const carta = document.getElementById('carta');
 const fumaca = document.getElementById('fumaca');
 
 window.addEventListener('load', () => {
   setTimeout(() => {
-  carta.classList.add('aberta');
+    carta.classList.add('aberta');
+    
+    const largura = carta.offsetWidth;
 
-  const largura = carta.offsetWidth;
-
-  /* FUMAÇA AZUL */
-  for(let i=0;i<30;i++){
-    setTimeout(()=>{
-      const smoke = document.createElement('div');
-      smoke.className = 'smoke';
-      smoke.style.setProperty('--x', `${Math.random()*largura/2 - largura/4}px`);
-      const size = largura*0.1 + Math.random()*largura*0.15;
-      smoke.style.width = smoke.style.height = size + 'px';
-      smoke.style.opacity = 0.55 + Math.random()*0.25;
-      fumaca.appendChild(smoke);
-      setTimeout(()=>smoke.remove(),4200);
-    }, i*100);
-  }
-
-  /* GLITTER DOURADO */
-  for(let i=0;i<22;i++){
-    setTimeout(()=>{
-      const g = document.createElement('div');
-      g.className = 'magic-glitter';
-      g.style.setProperty('--gx', `${Math.random()*120 - 60}px`);
-      fumaca.appendChild(g);
-      setTimeout(()=>g.remove(),2200);
-    }, i*140);
-  }
-
-}, 1000);
-
-    for(let i=0;i<26;i++){
+    for(let i=0;i<30;i++){
       setTimeout(()=>{
-        const smoke = document.createElement('div');
-        smoke.className = 'smoke';
-        smoke.style.setProperty('--x', `${Math.random()*140 - 70}px`);
-        const size = 28 + Math.random()*45;
-        smoke.style.width = smoke.style.height = size + 'px';
+        const smoke=document.createElement('div');
+        smoke.className='smoke';
+        smoke.style.setProperty('--x',`${Math.random()*largura/2-largura/4}px`);
+        const size = largura*0.1 + Math.random()*largura*0.15;
+        smoke.style.width = smoke.style.height = size+'px';
+        smoke.style.opacity = 0.55+Math.random()*0.25;
         fumaca.appendChild(smoke);
         setTimeout(()=>smoke.remove(),4200);
-      }, i*110);
+      },i*100);
     }
 
-    /* GLITTER MÁGICO */
-    for(let i=0;i<18;i++){
+    for(let i=0;i<22;i++){
       setTimeout(()=>{
-        const g = document.createElement('div');
-        g.className = 'magic-glitter';
-        g.style.left = `calc(50% + ${Math.random()*120 - 60}px)`;
-        g.style.bottom = '28%';
+        const g=document.createElement('div');
+        g.className='magic-glitter';
+        g.style.setProperty('--gx',`${Math.random()*120-60}px`);
         fumaca.appendChild(g);
-        setTimeout(()=>g.remove(),2000);
-      }, i*160);
+        setTimeout(()=>g.remove(),2200);
+      },i*140);
     }
 
-  }, 1000);
+  },1000);
 
-// IR PARA A PÁGINA 2
-setTimeout(() => {
-  localStorage.setItem('musicTime', music.currentTime);
-  window.location.href = 'convite.html';
-}, 5200);
+  setTimeout(() => {
+    localStorage.setItem('musicTime', music.currentTime);
+    window.location.href='convite.html';
+  },5200);
 
 });
 </script>

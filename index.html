@@ -237,6 +237,45 @@ html,body{
   <button class="btn-modal">Informações</button>
 </section>
 
+<!-- ================= MODAL PRINCIPAL ================= -->
+<div class="modal" id="modalPrincipal">
+  <div class="modal-content">
+    <span class="close" data-close="modalPrincipal">&times;</span>
+    <button class="modal-button" id="dressCode">👗 Dress Code</button>
+    <button class="modal-button" id="verRota">📍 Ver Rota</button>
+    <button class="modal-button" id="confirmePresenca">✅ Confirmar Presença</button>
+    <button class="modal-button" id="presentear">🎁 Presentear</button>
+  </div>
+</div>
+
+<!-- ================= DRESS CODE ================= -->
+<div class="sub-modal" id="modalDress">
+  <div class="sub-modal-content">
+    <span class="close" data-close="modalDress">&times;</span>
+    <h3>Código de Vestimenta</h3>
+    <ul>
+      <li>Esporte fino</li>
+      <li>Vestidos longos</li>
+      <li>Ternos para rapazes</li>
+      <li>Acessórios elegantes</li>
+    </ul>
+  </div>
+</div>
+
+<!-- ================= PRESENTES ================= -->
+<div class="sub-modal" id="modalPresentes">
+  <div class="sub-modal-content">
+    <span class="close" data-close="modalPresentes">&times;</span>
+    <h3>Lista de Presentes</h3>
+    <ul>
+      <li>Perfume</li>
+      <li>Brinco / Colar / Pulseira</li>
+      <li>Roupas Renner</li>
+      <li>Acessórios</li>
+    </ul>
+  </div>
+</div>
+
 <script>
 /* AUDIO */
 const audio = document.getElementById("bgMusic");
@@ -266,6 +305,48 @@ setTimeout(()=>{
   document.getElementById("page1").style.display="none";
   document.getElementById("page2").style.display="flex";
 },5200);
+
+<script>
+/* ================= MODAIS ================= */
+const btnInfo = document.querySelector(".btn-modal");
+const modalPrincipal = document.getElementById("modalPrincipal");
+
+btnInfo.addEventListener("click", () => {
+  modalPrincipal.style.display = "flex";
+});
+
+document.getElementById("dressCode").onclick = () => {
+  document.getElementById("modalDress").style.display = "flex";
+};
+
+document.getElementById("presentear").onclick = () => {
+  document.getElementById("modalPresentes").style.display = "flex";
+};
+
+document.getElementById("verRota").onclick = () => {
+  window.open("https://maps.app.goo.gl/9Ujs9UPoccGrVMJb8", "_blank");
+};
+
+document.getElementById("confirmePresenca").onclick = () => {
+  window.open(
+    "https://wa.me/5551992226662?text=Olá,%20confirmo%20minha%20presença%20no%20evento!",
+    "_blank"
+  );
+};
+
+/* FECHAR MODAIS */
+document.querySelectorAll(".close").forEach(btn => {
+  btn.onclick = () => {
+    document.getElementById(btn.dataset.close).style.display = "none";
+  };
+});
+
+window.addEventListener("click", e => {
+  document.querySelectorAll(".modal, .sub-modal").forEach(m => {
+    if (e.target === m) m.style.display = "none";
+  });
+});
+   
 </script>
 
 </body>

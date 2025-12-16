@@ -307,18 +307,15 @@ body::after{
 const music = document.getElementById('bgMusic');
 music.volume = 0.5;
 
-const savedTime = localStorage.getItem('musicTime');
-if(savedTime) music.currentTime = parseFloat(savedTime);
+const overlay = document.getElementById('audioOverlay');
 
-const overlay = document.getElementById("audioOverlay");
-
-function startMusic(){
+function startMusic() {
   music.play().catch(()=>console.log("Música só tocará após interação"));
   overlay.remove();
 }
 
-overlay.addEventListener("click", startMusic, { once: true });
-overlay.addEventListener("touchstart", startMusic, { once: true });
+overlay.addEventListener("click", startMusic, { once:true });
+overlay.addEventListener("touchstart", startMusic, { once:true });
 
 /* ================= PARTÍCULAS ================= */
 const particleContainer = document.getElementById('particles');

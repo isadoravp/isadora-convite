@@ -412,16 +412,20 @@ box-shadow:
 const music = new Audio('assets/audio/musica.mp3');
 music.loop = true;
 music.volume = 0.5;
+music.playsInline = true; // essencial para iOS e Android
+music.preload = 'auto';
 
 const overlay = document.getElementById("audioOverlay");
 
-function startMusic(){
-  music.play();
+overlay.addEventListener("click", () => {
+  music.play().catch(()=>console.log("Som bloqueado, requer interação"));
   overlay.remove();
-}
+}, { once: true });
 
-overlay.addEventListener("click", startMusic, { once: true });
-overlay.addEventListener("touchstart", startMusic, { once: true });
+overlay.addEventListener("touchstart", () => {
+  music.play().catch(()=>console.log("Som bloqueado, requer interação"));
+  overlay.remove();
+}, { once: true });
   
 /* PARTÍCULAS DOURADAS DO FUNDO */
 const particleContainer = document.getElementById('particles');
@@ -505,6 +509,25 @@ window.addEventListener('load', () => {
     }
 
   }, 1000);
+
+// detectar mobile
+const isMobile = /Mobi|Android/i.test(navigator.userAgent);
+const particleInterval = isMobile ? 350 : 180; // menor frequência para mobile
+const maxParticles = isMobile ? 15 : 30;
+
+function createSpark(){
+  if(document.querySelectorAll('.spark').length >= maxParticles) return;
+
+  const s = document.createElement('div');
+  s.className = 'spark';
+  s.style.left = Math.random()*100 + 'vw';
+  s.style.animationDuration = (4 + Math.random()*4) + 's';
+  s.style.opacity = 0.5 + Math.random()*0.5;
+  particleContainer.appendChild(s);
+
+  setTimeout(()=>s.remove(),9000);
+}
+setInterval(createSpark, particleInterval);
 
 // IR PARA A PÁGINA 2
 setTimeout(() => {

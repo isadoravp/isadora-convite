@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Convite</title>
+
+<style>
+/* ================= BASE ================= */
+html, body {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  font-family: Arial, sans-serif;
+  background: linear-gradient(
+    45deg,
+    #ffc900,
+    rgba(168, 51, 33, 0.2),
+    #00498e
+  );
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+/* ================= CARTA ================= */
+.carta {
+  max-width: 88%;
+  max-height: 88%;
+  object-fit: contain;
+  z-index: 2;
+  cursor: pointer;
+}
+
+/* ================= ESTRELAS / FAÍSCAS ================= */
+.star {
+  position: absolute;
+  width: 2px;
+  height: 2px;
+  background: radial-gradient(circle, #ffd700, rgba(255,255,255,0));
+  border-radius: 50%;
+  pointer-events: none;
+  opacity: 0.8;
+  animation: moveStar linear infinite;
+}
+
+@keyframes moveStar {
+  from {
+    transform: translateY(100vh) scale(1);
+    opacity: 0;
+  }
+  10% { opacity: 1; }
+  to {
+    transform: translateY(-120vh) scale(0.6);
+    opacity: 0;
+  }
+}
+
+/* ================= BOTÃO INFO ================= */
+.btn-modal {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background: #f17ea1;
+  color: #fff;
+  border: none;
+  border-radius: 10px;
+  padding: 14px 20px;
+  font-size: 15px;
+  cursor: pointer;
+  z-index: 5;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+}
+
+/* ================= MODAIS ================= */
+.modal, .sub-modal {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.6);
+  z-index: 10;
+  align-items: center;
+  justify-content: center;
+}
+
+.modal-content, .sub-modal-content {
+  background: #fff;
+  border-radius: 14px;
+  padding: 22px;
+  width: 90%;
+  max-width: 420px;
+  max-height: 90vh;
+  overflow-y: auto;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.close {
+  position: absolute;
+  right: 14px;
+  top: 10px;
+  font-size: 26px;
+  cursor: pointer;
+}
+
+/* ================= BOTÕES MODAL ================= */
+.modal-button {
+  padding: 14px;
+  border: none;
+  border-radius: 10px;
+  background: #f17ea1;
+  color: #fff;
+  font-size: 16px;
+  text-align: left;
+  cursor: pointer;
+}
+
+.modal-button:hover {
+  background: #ffd700;
+  color: #000;
+}
+
+/* ================= LISTAS ================= */
+ul {
+  padding-left: 18px;
+}
+
+li {
+  margin-bottom: 6px;
+}
+</style>
+</head>
+
+<body>
+
+<!-- ================= MÚSICA ================= -->
+<audio id="bgMusic" src="assets/audio/musica.mp3" autoplay loop muted></audio>
+
+<!-- ================= CARTA ================= -->
+<img src="assets/convite.png" alt="Convite" class="carta">
+
+<!-- ================= BOTÃO ================= -->
+<button class="btn-modal">Informações</button>
+
+<!-- ================= MODAL PRINCIPAL ================= -->
+<div class="modal" id="modalPrincipal">
+  <div class="modal-content">
+    <span class="close" data-close="modalPrincipal">&times;</span>
+    <button class="modal-button" id="dressCode">👗 Dress Code</button>
+    <button class="modal-button" id="verRota">📍 Ver Rota</button>
+    <button class="modal-button" id="confirmePresenca">✅ Confirmar Presença</button>
+    <button class="modal-button" id="presentear">🎁 Presentear</button>
+  </div>
+</div>
+
+<!-- ================= DRESS CODE ================= -->
+<div class="sub-modal" id="modalDress">
+  <div class="sub-modal-content">
+    <span class="close" data-close="modalDress">&times;</span>
+    <h3>Código de Vestimenta</h3>
+    <ul>
+      <li>Esporte fino</li>
+      <li>Vestidos longos</li>
+      <li>Ternos para rapazes</li>
+      <li>Acessórios elegantes</li>
+    </ul>
+  </div>
+</div>
+
+<!-- ================= PRESENTES ================= -->
+<div class="sub-modal" id="modalPresentes">
+  <div class="sub-modal-content">
+    <span class="close" data-close="modalPresentes">&times;</span>
+    <h3>Lista de Presentes</h3>
+    <ul>
+      <li>Perfume</li>
+      <li>Brinco / Colar / Pulseira</li>
+      <li>Roupas Renner</li>
+      <li>Acessórios</li>
+    </ul>
+  </div>
+</div>
+
+<script>
+/* ================= MÚSICA ================= */
+window.addEventListener("DOMContentLoaded", () => {
+  const audio = document.getElementById("bgMusic");
+  setTimeout(() => {
+    audio.muted = false;
+    audio.volume = 0.5;
+  }, 600);
+});
+
+/* ================= ESTRELAS ================= */
+const totalStars = 160;
+for (let i = 0; i < totalStars; i++) {
+  const star = document.createElement("div");
+  star.className = "star";
+  star.style.left = Math.random() * 100 + "vw";
+  star.style.animationDuration = (3 + Math.random() * 4) + "s";
+  star.style.animationDelay = Math.random() * 5 + "s";
+  document.body.appendChild(star);
+}
+
+/* ================= MODAIS ================= */
+const modalPrincipal = document.getElementById("modalPrincipal");
+
+document.querySelector(".btn-modal").onclick = () => {
+  modalPrincipal.style.display = "flex";
+};
+
+document.getElementById("dressCode").onclick = () => {
+  document.getElementById("modalDress").style.display = "flex";
+};
+
+document.getElementById("presentear").onclick = () => {
+  document.getElementById("modalPresentes").style.display = "flex";
+};
+
+document.getElementById("verRota").onclick = () => {
+  window.open("https://maps.app.goo.gl/9Ujs9UPoccGrVMJb8", "_blank");
+};
+
+document.getElementById("confirmePresenca").onclick = () => {
+  window.open(
+    "https://wa.me/5551992226662?text=Olá,%20confirmo%20minha%20presença%20no%20evento!",
+    "_blank"
+  );
+};
+
+/* ================= FECHAR ================= */
+document.querySelectorAll(".close").forEach(btn => {
+  btn.onclick = () => {
+    document.getElementById(btn.dataset.close).style.display = "none";
+  };
+});
+
+window.onclick = e => {
+  document.querySelectorAll(".modal, .sub-modal").forEach(m => {
+    if (e.target === m) m.style.display = "none";
+  });
+};
+</script>
+
+</body>
+</html>

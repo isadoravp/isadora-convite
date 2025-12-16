@@ -198,6 +198,7 @@ li { margin-bottom: 6px; }
 const music = document.getElementById('bgMusic');
 music.volume = 0.5;
 
+// Recupera o tempo salvo da página anterior
 const savedTime = localStorage.getItem('musicTime');
 if(savedTime) music.currentTime = parseFloat(savedTime);
 
@@ -207,7 +208,6 @@ function startMusic(){
   music.play().catch(()=>console.log("Música só tocará após interação"));
   overlay.remove();
 }
-
 overlay.addEventListener("click", startMusic, { once:true });
 overlay.addEventListener("touchstart", startMusic, { once:true });
 

@@ -144,15 +144,15 @@ li {
 }
 
 .spark{
-  position: absolute;
-  top: -10px;
+  position:absolute;
+  top: -15vh;
   width: 4px;
   height: 4px;
   background: #ffd700;
   border-radius: 50%;
   box-shadow: 0 0 8px #ffd700;
   animation: fall linear forwards;
-  opacity: 0.8;
+  opacity: 0;
 }
 
 @keyframes fall{
@@ -180,7 +180,8 @@ li {
 
 
 <!-- ================= MÚSICA ================= -->
-<audio id="bgMusic" src="assets/audio/musica.mp3" autoplay loop muted></audio>
+<audio id="bgMusic" src="assets/audio/musica.mp3" loop muted></audio>
+<div id="audioOverlay"></div>
 
 <!-- ================= CARTA ================= -->
 <img src="assets/convite.png" alt="Convite" class="carta">
@@ -235,14 +236,29 @@ audio.muted = true;
 
 const overlay = document.getElementById("audioOverlay");
 
+/* recupera tempo salvo */
+const savedTime = localStorage.getItem("musicTime");
+
 function startMusic(){
   audio.muted = false;
+
+  if(savedTime){
+    audio.currentTime = parseFloat(savedTime);
+  }
+
   audio.play();
   overlay.remove();
 }
 
 overlay.addEventListener("click", startMusic);
 overlay.addEventListener("touchstart", startMusic, { once: true });
+
+/* continua salvando */
+setInterval(() => {
+  if(!audio.paused){
+    localStorage.setItem("musicTime", audio.currentTime);
+  }
+}, 500);
 
 
 /* ================= ESTRELAS ================= */
@@ -303,12 +319,12 @@ function createSpark(){
   s.className = 'spark';
   s.style.left = Math.random() * 100 + 'vw';
   s.style.animationDuration = (4 + Math.random() * 4) + 's';
-  s.style.opacity = 0.5 + Math.random() * 0.5;
+  s.style.animationDelay = Math.random() * 2 + 's';
   particleContainer.appendChild(s);
 
   setTimeout(() => s.remove(), 9000);
 }
-
+  
 setInterval(createSpark, 180);
   
 </script>

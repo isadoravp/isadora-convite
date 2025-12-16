@@ -329,37 +329,38 @@ body::after{
 
 <script>
 /* ====== MÚSICA ====== */
-const entrada = new Audio('assets/audio/entrada.mp3');
-entrada.volume = 0.7;
-entrada.preload = 'auto';
+const music = new Audio('assets/audio/musica.mp3');
+music.loop = true;
+music.volume = 0.5;
+
+const savedTime = localStorage.getItem('musicTime');
+if(savedTime) music.currentTime = parseFloat(savedTime);
 
 const overlay = document.getElementById('audioOverlay');
-const carta   = document.getElementById('carta');
-const fumaca  = document.getElementById('fumaca');
 
-function startMusic() {
-  entrada.currentTime = 0;
-  entrada.play().catch(() => {});
+function startMusic(){
+  music.play().catch(()=>{});
   overlay.remove();
 }
 
-/* clique seguro para liberar áudio */
-overlay.addEventListener('click', startMusic, { once: true });
-overlay.addEventListener('touchstart', startMusic, { once: true });
+overlay.addEventListener('click', startMusic, { once:true });
+overlay.addEventListener('touchstart', startMusic, { once:true });
 
 /* ====== PARTÍCULAS ====== */
 const particleContainer = document.getElementById('particles');
-
-setInterval(() => {
-  const s = document.createElement('div');
-  s.className = 'spark';
-  s.style.left = Math.random() * 100 + 'vw';
-  s.style.animationDuration = (3 + Math.random() * 3) + 's';
+setInterval(()=>{
+  const s=document.createElement('div');
+  s.className='spark';
+  s.style.left=Math.random()*100+'vw';
+  s.style.animationDuration=(3+Math.random()*3)+'s';
   particleContainer.appendChild(s);
-  setTimeout(() => s.remove(), 7000);
-}, 300);
+  setTimeout(()=>s.remove(),7000);
+},300);
 
 /* ====== CARTA + FUMAÇA + GLITTER ====== */
+const carta = document.getElementById('carta');
+const fumaca = document.getElementById('fumaca');
+
 window.addEventListener('load', () => {
 
   setTimeout(() => {
@@ -367,42 +368,40 @@ window.addEventListener('load', () => {
 
     const largura = carta.offsetWidth;
 
-    /* ====== FUMAÇA ====== */
-    for (let i = 0; i < 30; i++) {
-      setTimeout(() => {
+    /* ====== FUMAÇA AZUL ====== */
+    for(let i=0;i<30;i++){
+      setTimeout(()=>{
         const smoke = document.createElement('div');
         smoke.className = 'smoke';
-        smoke.style.setProperty(
-          '--x',
-          `${Math.random() * largura / 2 - largura / 4}px`
-        );
-
-        const size = largura * 0.1 + Math.random() * largura * 0.15;
+        smoke.style.setProperty('--x', `${Math.random()*largura/2 - largura/4}px`);
+        const size = largura*0.1 + Math.random()*largura*0.15;
         smoke.style.width = smoke.style.height = size + 'px';
-
         fumaca.appendChild(smoke);
-        setTimeout(() => smoke.remove(), 4200);
-      }, i * 100);
+        setTimeout(()=>smoke.remove(),4200);
+      }, i*100);
     }
 
-    /* ====== GLITTER ====== */
-    for (let i = 0; i < 22; i++) {
-      setTimeout(() => {
+    /* ====== GLITTER DOURADO ====== */
+    for(let i=0;i<22;i++){
+      setTimeout(()=>{
         const g = document.createElement('div');
         g.className = 'magic-glitter';
-        g.style.setProperty('--gx', `${Math.random() * 120 - 60}px`);
+        g.style.setProperty('--gx', `${Math.random()*120 - 60}px`);
         fumaca.appendChild(g);
-        setTimeout(() => g.remove(), 2200);
-      }, i * 140);
+        setTimeout(()=>g.remove(),2200);
+      }, i*140);
     }
 
   }, 1000);
 
   /* ====== IR PARA PÁGINA 2 ====== */
-  setTimeout(() => {
-    window.location.href = 'convite.html';
-  }, 5200);
-});                     
+  setTimeout(()=>{
+    localStorage.setItem('musicTime', music.currentTime);
+    window.location.href='convite.html';
+  },5200);
+
+});
+
 </script>
 
 </body>

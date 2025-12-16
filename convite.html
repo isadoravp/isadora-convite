@@ -226,22 +226,32 @@ li {
 
 <script>
 /* ================= MÚSICA ================= */
-const music = new Audio('assets/audio/musica.mp3');
-music.loop = true;
+const music = document.getElementById('bgMusic');
 music.volume = 0.5;
 
+// Recupera tempo salvo
 const savedTime = localStorage.getItem('musicTime');
-if (savedTime) music.currentTime = parseFloat(savedTime);
+if(savedTime) music.currentTime = parseFloat(savedTime);
 
-const overlay = document.getElementById("audioOverlay");
+// Verifica se houve interação na página 1
+const musicStarted = localStorage.getItem('musicStarted');
 
-function startMusic(){
+function startMusic() {
   music.play().catch(()=>console.log("Música só tocará após interação"));
   overlay.remove();
 }
 
-overlay.addEventListener("click", startMusic, { once: true });
-overlay.addEventListener("touchstart", startMusic, { once: true });
+// Se o usuário já clicou na página 1, tentar tocar imediatamente
+if (musicStarted) {
+  startMusic();
+} else {
+  // Caso contrário, aguarda primeiro toque do usuário
+  overlay.addEventListener("click", startMusic, { once:true });
+  overlay.addEventListener("touchstart", startMusic, { once:true });
+}
+
+// Limpa sinal para próximas visitas
+localStorage.removeItem('musicStarted');
 
 /* ================= ESTRELAS ================= */
 const totalStars = 160;

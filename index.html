@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Convite 15 Anos</title>
+<title>Meus 15</title>
 
 <style>
 :root{
@@ -510,10 +510,12 @@ window.addEventListener('load', () => {
 
   }, 1000);
 
-  /* IR PARA A PÁGINA 2 */
-  setTimeout(() => {
-    window.location.href = 'convite.html';
-  }, 5200);
+// IR PARA A PÁGINA 2
+setTimeout(() => {
+  // salva o tempo atual da música
+  localStorage.setItem('musicTime', music.currentTime);
+  window.location.href = 'convite.html';
+}, 5200);
 
 });
 </script>

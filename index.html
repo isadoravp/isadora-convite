@@ -6,9 +6,6 @@
 <title>Convite 15 Anos</title>
 
 <style>
-/* =====================================================
-   VARIÁVEIS GLOBAIS
-===================================================== */
 :root{
   --azul:#1f3f73;
   --roxo:#4a3b6e;
@@ -16,7 +13,6 @@
   --dourado:#f2c94c;
 }
 
-/* RESET */
 html,body{
   margin:0;
   padding:0;
@@ -25,9 +21,7 @@ html,body{
   overflow:hidden;
 }
 
-/* =====================================================
-   AUDIO
-===================================================== */
+/* AUDIO */
 #audioOverlay{
   position:fixed;
   inset:0;
@@ -35,58 +29,35 @@ html,body{
   cursor:pointer;
 }
 
-/* =====================================================
-   PÁGINA 1
-===================================================== */
+/* ================= PAGE 1 ================= */
 #page1{
   position:fixed;
   inset:0;
-  background:
-    linear-gradient(
-      45deg,
-      var(--azul) 0%,
-      var(--roxo) 35%,
-      var(--vermelho) 65%,
-      #c98b2b 100%
-    );
+  background:linear-gradient(
+    45deg,
+    var(--azul),
+    var(--roxo),
+    var(--vermelho),
+    #c98b2b
+  );
   font-family: Georgia, serif;
   z-index:2;
 }
 
-#page1::after{
-  content:"";
-  position:fixed;
-  inset:0;
-  background:
-    radial-gradient(circle at 20% 30%, rgba(255,255,255,0.04), transparent 40%),
-    radial-gradient(circle at 80% 70%, rgba(255,255,255,0.03), transparent 45%);
-  pointer-events:none;
-}
-
-/* CASTELO */
 .cenario-castelo{
   position:fixed;
   left:50%;
   bottom:16%;
   transform:translateX(-50%);
   width:125%;
-  max-width:1400px;
   height:90vh;
   background:url("assets/castelo1.png") center bottom no-repeat;
   background-size:contain;
-  opacity:0.95;
+  opacity:.95;
   pointer-events:none;
   z-index:0;
-  filter:
-    brightness(1.12)
-    contrast(1.08)
-    saturate(1.05)
-    drop-shadow(0 50px 120px rgba(0,0,0,0.45))
-    drop-shadow(0 0 160px rgba(130,180,255,0.45));
-  mask-image:radial-gradient(ellipse at center bottom, black 0%, transparent 95%);
 }
 
-/* NEVOA */
 .nevoa-cenario{
   position:fixed;
   left:50%;
@@ -94,18 +65,16 @@ html,body{
   transform:translateX(-50%);
   width:140%;
   height:70vh;
-  background:radial-gradient(ellipse, rgba(40,70,130,0.35), transparent 90%);
+  background:radial-gradient(ellipse, rgba(40,70,130,.35), transparent 90%);
   filter:blur(40px);
   z-index:1;
-  pointer-events:none;
 }
 
 /* PARTÍCULAS */
-#particles1, #particles2{
+#particles1,#particles2{
   position:fixed;
   inset:0;
   pointer-events:none;
-  overflow:hidden;
 }
 
 .spark{
@@ -130,7 +99,6 @@ html,body{
   left:50%;
   transform:translate(-50%,-50%);
   width:320px;
-  max-width:80vw;
   z-index:3;
 }
 
@@ -144,16 +112,33 @@ html,body{
 
 .carta-container.aberta .carta-fechada{
   opacity:0;
-  transform:scale(0.9);
+  transform:scale(.92);
 }
 
 .carta-container.aberta .carta-aberta{
   opacity:1;
 }
 
-/* =====================================================
-   PÁGINA 2
-===================================================== */
+/* FUMAÇA DA CARTA */
+.fumaca{
+  position:absolute;
+  left:50%;
+  bottom:40px;
+  width:200px;
+  height:200px;
+  background:radial-gradient(circle, rgba(255,255,255,.45), transparent 70%);
+  transform:translateX(-50%);
+  filter:blur(25px);
+  animation:fumaça 3s ease-out forwards;
+  pointer-events:none;
+}
+
+@keyframes fumaça{
+  from{ opacity:0; transform:translate(-50%,0) scale(.6); }
+  to{ opacity:0; transform:translate(-50%,-160px) scale(1.4); }
+}
+
+/* ================= PAGE 2 ================= */
 #page2{
   position:fixed;
   inset:0;
@@ -161,17 +146,14 @@ html,body{
   display:none;
   align-items:center;
   justify-content:center;
-  font-family:Arial,sans-serif;
   z-index:1;
 }
 
 .carta{
   max-width:88%;
   max-height:88%;
-  z-index:2;
 }
 
-/* BOTÃO */
 .btn-modal{
   position:fixed;
   bottom:20px;
@@ -202,36 +184,17 @@ html,body{
   border-radius:14px;
   width:90%;
   max-width:420px;
-
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-}
-   
-.modal-button {
-  width: 100%;
-  padding: 14px;
-  border: none;
-  border-radius: 10px;
-  background: #f17ea1;
-  color: #00498e;
-  font-size: 16px;
-  text-align: left;
-  cursor: pointer;
+  display:flex;
+  flex-direction:column;
+  gap:12px;
 }
 
-.modal-button:hover {
-  background: #ffd700;
-  color: #000;
-}
-
-/* ================= LISTAS ================= */
-ul {
-  padding-left: 18px;
-}
-
-li {
-  margin-bottom: 6px;
+.modal-button{
+  padding:14px;
+  border:none;
+  border-radius:10px;
+  background:#f17ea1;
+  cursor:pointer;
 }
 </style>
 </head>
@@ -241,7 +204,6 @@ li {
 <div id="audioOverlay"></div>
 <audio id="bgMusic" src="assets/audio/musica.mp3" autoplay loop muted></audio>
 
-<!-- ================= PAGE 1 ================= -->
 <section id="page1">
   <div class="cenario-castelo"></div>
   <div class="nevoa-cenario"></div>
@@ -253,123 +215,49 @@ li {
   </div>
 </section>
 
-<!-- ================= PAGE 2 ================= -->
 <section id="page2">
   <div id="particles2"></div>
   <img src="assets/convite.png" class="carta">
   <button class="btn-modal">Informações</button>
 </section>
 
-<!-- ================= MODAL PRINCIPAL ================= -->
-<div class="modal" id="modalPrincipal">
-  <div class="modal-content">
-    <span class="close" data-close="modalPrincipal">&times;</span>
-    <button class="modal-button" id="dressCode">👗 Dress Code</button>
-    <button class="modal-button" id="verRota">📍 Ver Rota</button>
-    <button class="modal-button" id="confirmePresenca">✅ Confirmar Presença</button>
-    <button class="modal-button" id="presentear">🎁 Presentear</button>
-  </div>
-</div>
-
-<!-- ================= DRESS CODE ================= -->
-<div class="sub-modal" id="modalDress">
-  <div class="sub-modal-content">
-    <span class="close" data-close="modalDress">&times;</span>
-    <h3>Código de Vestimenta</h3>
-    <ul>
-      <li>Esporte fino</li>
-    </ul>
-  </div>
-</div>
-
-<!-- ================= PRESENTES ================= -->
-<div class="sub-modal" id="modalPresentes">
-  <div class="sub-modal-content">
-    <span class="close" data-close="modalPresentes">&times;</span>
-    <h3>Lista de Presentes</h3>
-    <ul>
-      <li>Perfume</li>
-      <li>Brinco / Colar / Pulseira</li>
-      <li>Roupas Renner</li>
-      <li>Acessórios</li>
-    </ul>
-  </div>
-</div>
-
 <script>
 /* AUDIO */
-const audio = document.getElementById("bgMusic");
-const overlay = document.getElementById("audioOverlay");
-
-overlay.onclick = () => {
-  audio.muted = false;
+const audio=document.getElementById("bgMusic");
+document.getElementById("audioOverlay").onclick=()=>{
+  audio.muted=false;
   audio.play();
-  overlay.remove();
+  audioOverlay.remove();
 };
 
 /* PARTÍCULAS */
-function startParticles(container){
+function startParticles(c){
   setInterval(()=>{
     const s=document.createElement("div");
     s.className="spark";
     s.style.left=Math.random()*100+"vw";
     s.style.animationDuration=4+Math.random()*4+"s";
-    container.appendChild(s);
+    c.appendChild(s);
     setTimeout(()=>s.remove(),9000);
   },180);
 }
-
-const particles1 = document.getElementById("particles1");
-const particles2 = document.getElementById("particles2");
-
 startParticles(particles1);
 startParticles(particles2);
 
+/* ABRIR CARTA + FUMAÇA */
+setTimeout(()=>{
+  carta.classList.add("aberta");
+  const f=document.createElement("div");
+  f.className="fumaca";
+  carta.appendChild(f);
+  setTimeout(()=>f.remove(),3000);
+},1200);
+
 /* TRANSIÇÃO */
 setTimeout(()=>{
-  document.getElementById("page1").style.display="none";
-  document.getElementById("page2").style.display="flex";
+  page1.style.display="none";
+  page2.style.display="flex";
 },5200);
-
-/* ================= MODAIS ================= */
-const btnInfo = document.querySelector(".btn-modal");
-const modalPrincipal = document.getElementById("modalPrincipal");
-
-btnInfo.addEventListener("click", () => {
-  modalPrincipal.style.display = "flex";
-});
-
-document.getElementById("dressCode").onclick = () => {
-  document.getElementById("modalDress").style.display = "flex";
-};
-
-document.getElementById("presentear").onclick = () => {
-  document.getElementById("modalPresentes").style.display = "flex";
-};
-
-document.getElementById("verRota").onclick = () => {
-  window.open("https://maps.app.goo.gl/9Ujs9UPoccGrVMJb8", "_blank");
-};
-
-document.getElementById("confirmePresenca").onclick = () => {
-  window.open(
-    "https://wa.me/5551992226662?text=Olá,%20confirmo%20minha%20presença%20no%20seu%20aniversário!%20🎉",
-    "_blank"
-  );
-};
-
-/* FECHAR MODAIS */
-document.querySelectorAll(".close").forEach(btn => {
-  btn.onclick = () => {
-    document.getElementById(btn.dataset.close).style.display = "none";
-  };
-});
-
-window.addEventListener("click", e => {
-  document.querySelectorAll(".modal, .sub-modal").forEach(m => {
-    if (e.target === m) m.style.display = "none";
-  });
-});
 </script>
 
 </body>

@@ -180,7 +180,7 @@ li {
 
 
 <!-- ================= MÚSICA ================= -->
-<audio id="bgMusic" src="assets/audio/musica.mp3" loop></audio>
+<!-- <audio id="bgMusic" src="assets/audio/musica.mp3" loop></audio>-->
 
 <!-- ================= CARTA ================= -->
 <img src="assets/convite.png" alt="Convite" class="carta">
@@ -230,9 +230,9 @@ const music = new Audio('assets/audio/musica.mp3');
 music.loop = true;
 music.volume = 0.5;
 
-// verifica se existe tempo salvo da página 1
+// pega o tempo salvo da página 1
 const savedTime = localStorage.getItem('musicTime');
-if (savedTime) music.currentTime = parseFloat(savedTime);
+if(savedTime) music.currentTime = parseFloat(savedTime);
 
 const overlay = document.getElementById("audioOverlay");
 

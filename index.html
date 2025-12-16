@@ -3,315 +3,493 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Convite</title>
+<title>Convite 15 Anos</title>
 
 <style>
-/* ================= BASE ================= */
-html, body {
-  margin: 0;
-  padding: 0;
-  width: 100%;
-  height: 100%;
-  overflow: hidden;
-  font-family: Arial, sans-serif;
-  background: linear-gradient(
-    45deg,
-    #ffc900,
-    rgba(168, 51, 33, 0.2),
-    #00498e
-  );
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  position: relative;
+:root{
+  --azul:#1f3f73;
+  --roxo:#4a3b6e;
+  --vermelho:#7a2c2c;
+  --dourado:#f2c94c;
 }
 
-/* ================= CARTA ================= */
-.carta {
-  max-width: 88%;
-  max-height: 88%;
-  object-fit: contain;
-  z-index: 2;
-  cursor: pointer;
+html,body{
+  margin:0;
+  padding:0;
+  width:100%;
+  height:100%;
+  overflow:hidden;
 }
 
-/* ================= ESTRELAS / FAÍSCAS ================= */
-.star {
-  position: absolute;
-  width: 2px;
-  height: 2px;
-  background: radial-gradient(circle, #ffd700, rgba(255,255,255,0));
-  border-radius: 50%;
-  pointer-events: none;
-  opacity: 0.8;
-  animation: moveStar linear infinite;
+body{
+  background:
+    linear-gradient(
+      45deg,
+      var(--azul) 0%,
+      var(--roxo) 35%,
+      var(--vermelho) 65%,
+      #c98b2b 100%
+    );
+  position:relative;
+  font-family: 'Georgia', serif;
 }
 
-@keyframes moveStar {
-  from {
-    transform: translateY(100vh) scale(1);
-    opacity: 0;
-  }
-  10% { opacity: 1; }
-  to {
-    transform: translateY(-120vh) scale(0.6);
-    opacity: 0;
-  }
+/* TEXTURA */
+body::after{
+  content:"";
+  position:fixed;
+  inset:0;
+  background:
+    radial-gradient(circle at 20% 30%, rgba(255,255,255,0.04), transparent 40%),
+    radial-gradient(circle at 80% 70%, rgba(255,255,255,0.03), transparent 45%);
+  pointer-events:none;
+  z-index:-1;
+}
+  
+/* =====================
+   CENÁRIO CASTELO / ESCADA
+===================== */
+
+.cenario-castelo{
+  position:fixed;
+  left:50%;
+  bottom:16%;
+  transform:translateX(-50%);
+
+  width:125%;
+  max-width:1400px;
+  height:90vh;
+
+  background:url("assets/castelo1.png") center bottom no-repeat;
+  background-size:contain;
+
+  opacity:0.95;
+
+  z-index:0;
+  pointer-events:none;
+
+filter:
+  brightness(1.12)
+  contrast(1.08)
+  saturate(1.05)
+  drop-shadow(0 50px 120px rgba(0,0,0,0.45))
+  drop-shadow(0 0 160px rgba(130,180,255,0.45));
+
+    -webkit-mask-image:
+    radial-gradient(
+      ellipse at center bottom,
+      rgba(0,0,0,1) 0%,
+      rgba(0,0,0,0.95) 35%,
+      rgba(0,0,0,0.75) 55%,
+      rgba(0,0,0,0.35) 70%,
+      rgba(0,0,0,0.12) 82%,
+      transparent 95%
+    );
+
+  mask-image:
+    radial-gradient(
+      ellipse at center bottom,
+      rgba(0,0,0,1) 0%,
+      rgba(0,0,0,0.95) 35%,
+      rgba(0,0,0,0.75) 55%,
+      rgba(0,0,0,0.35) 70%,
+      rgba(0,0,0,0.12) 82%,
+      transparent 95%
+    );
+.cenario-castelo::after{
+  content:"";
+  position:absolute;
+  inset:-12% -10% -5% -10%;
+
+  background:
+    radial-gradient(
+      ellipse at center bottom,
+      rgba(160,210,255,0.38) 0%,
+      rgba(120,170,255,0.25) 30%,
+      rgba(80,130,220,0.12) 55%,
+      transparent 75%
+    );
+
+  filter:blur(48px);
+  z-index:-1;
+}
+  
 }
 
-/* ================= BOTÃO INFO ================= */
-.btn-modal {
-  position: fixed;
-  bottom: 20px;
-  right: 20px;
-  background: #f17ea1;
-  color: #fff;
-  border: none;
-  border-radius: 10px;
-  padding: 14px 20px;
-  font-size: 15px;
-  cursor: pointer;
-  z-index: 5;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.3);
-}
+  .nevoa-cenario{
+  position:fixed;
+  left:50%;
+  bottom:0;
+  transform:translateX(-50%);
+  width:140%;
+  height:70vh;
 
-/* ================= MODAIS ================= */
-.modal, .sub-modal {
-  display: none;
-  position: fixed;
-  inset: 0;
-  background: rgba(0,0,0,0.6);
-  z-index: 10;
-  align-items: center;
-  justify-content: center;
-}
+  background:
+    radial-gradient(
+      ellipse at center,
+      rgba(40,70,130,0.35) 0%,
+      rgba(30,55,110,0.28) 30%,
+      rgba(20,40,90,0.18) 55%,
+      rgba(15,30,70,0.1) 70%,
+      transparent 90%
+    );
 
-.modal-content, .sub-modal-content {
-  background: #00498e;
-  border-radius: 14px;
-  padding: 22px;
-  width: 90%;
-  max-width: 420px;
-  max-height: 90vh;
-  overflow-y: auto;
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
+  filter:blur(40px);
+  z-index:1;
+  pointer-events:none;
 }
+  
+/* =====================
+   PARTÍCULAS DOURADAS
+===================== */
 
-.close {
-  position: absolute;
-  right: 14px;
-  top: 10px;
-  font-size: 26px;
-  cursor: pointer;
-}
-
-/* ================= BOTÕES MODAL ================= */
-.modal-button {
-  padding: 14px;
-  border: none;
-  border-radius: 10px;
-  background: #f17ea1;
-  color: #00498e;
-  font-size: 16px;
-  text-align: left;
-  cursor: pointer;
-}
-
-.modal-button:hover {
-  background: #ffd700;
-  color: #000;
-}
-
-/* ================= LISTAS ================= */
-ul {
-  padding-left: 18px;
-}
-
-li {
-  margin-bottom: 6px;
-}
-
-/* ================= PARTÍCULAS DOURADAS (PÁG. 2) ================= */
 #particles{
-  position: fixed;
-  inset: 0;
-  pointer-events: none;
-  overflow: hidden;
-  z-index: 1;
+  position:fixed;
+  inset:0;
+  pointer-events:none;
+  overflow:hidden;
+  z-index:1;
 }
 
 .spark{
-  position: absolute;
-  top: -10px;
-  width: 4px;
-  height: 4px;
-  background: #ffd700;
-  border-radius: 50%;
-  box-shadow: 0 0 8px #ffd700;
-  animation: fall linear forwards;
-  opacity: 0.8;
+  position:absolute;
+  top:-10px;
+  width:4px;
+  height:4px;
+  background:var(--dourado);
+  border-radius:50%;
+  box-shadow:0 0 8px var(--dourado);
+  animation:fall linear forwards;
 }
 
 @keyframes fall{
   to{
-    transform: translateY(110vh);
-    opacity: 0;
+    transform:translateY(110vh);
+    opacity:0;
   }
 }
 
-#audioOverlay{
-  position: fixed;
-  inset: 0;
-  z-index: 9999;
-  cursor: pointer;
+/* =====================
+   CARTA
+===================== */
+
+.carta-container{
+  position:absolute;
+  top:50%;
+  left:50%;
+  transform:translate(-50%,-50%);
+  width:320px;
+  max-width:80vw;
+  cursor:pointer;
+  z-index:2;
+  filter:
+    drop-shadow(0 18px 40px rgba(0,0,0,0.55))
+    drop-shadow(0 0 22px rgba(180,220,255,0.35));
+}
+
+.carta-container img{
+  width:100%;
+  position:absolute;
+  top:0;
+  left:0;
+  transition:opacity 1.4s ease, transform 1.6s ease;
+}
+
+.carta-aberta{
+  opacity:0;
+  transform:scale(0.95);
+}
+
+.carta-container.aberta .carta-fechada{
+  animation:pulseGlow 2.8s ease-in-out forwards;
+  opacity:0;
+  transform:scale(0.9);
+}
+
+.carta-container.aberta .carta-aberta{
+  animation:pulseGlow 2.8s ease-in-out forwards;
+  opacity:1;
+  transform:scale(1);
+}
+  
+  @keyframes pulseGlow{
+  0%{
+    filter:drop-shadow(0 0 0 rgba(180,220,255,0));
+  }
+  40%{
+    filter:drop-shadow(0 0 28px rgba(180,220,255,0.8));
+  }
+  100%{
+    filter:drop-shadow(0 0 12px rgba(180,220,255,0.4));
+  }
+}
+
+/* =====================
+   FUMAÇA DOURADA MÁGICA
+===================== */
+
+.fumaca-container{
+  position:absolute;
+  inset:0;
+  pointer-events:none;
+}
+
+.smoke{
+  position:absolute;
+  bottom:13%;
+  left:50%;
+  border-radius:50%;
+  animation:smokeUp 3.8s ease-out forwards;
+
+  /* AZUL MARINHO MÁGICO */
+  background:radial-gradient(
+  circle,
+  rgba(55,95,160,0.55) 0%,
+  rgba(40,75,140,0.38) 35%,
+  rgba(25,50,105,0.22) 60%,
+  rgba(15,30,70,0.08) 100%
+);
+
+filter:blur(24px);
+
+box-shadow:
+  0 0 26px rgba(70,120,200,0.45),
+  0 0 58px rgba(50,90,160,0.25);
+}
+
+@keyframes smokeUp{
+  0%{
+    transform:translate(-50%,0) scale(0.6);
+    opacity:0;
+  }
+  25%{
+    opacity:.95;
+  }
+  100%{
+    transform:
+      translate(
+        calc(-50% + var(--x)),
+        -240px
+      )
+      scale(1.9);
+    opacity:0;
+  }
+}
+  
+.carta-container.aberta .smoke{
+  animation:
+    smokeUp 3.8s ease-out forwards,
+    smokeGlow 1.8s ease-in-out infinite alternate;
+}
+
+@keyframes smokeGlow{
+  from{
+    filter:blur(24px) brightness(1);
+    box-shadow:
+      0 0 18px rgba(60,100,180,0.25),
+      0 0 36px rgba(40,80,150,0.15);
+  }
+  to{
+    filter:blur(26px) brightness(1.22);
+    box-shadow:
+      0 0 32px rgba(90,140,220,0.55),
+      0 0 60px rgba(70,120,200,0.35);
+  }
+}
+
+  /* =====================
+   GLITTER MÁGICO
+===================== */
+
+.magic-glitter{
+  position:absolute;
+  width:6px;
+  height:6px;
+  bottom:15%;
+  left:50%;
+  border-radius:50%;
+  background:radial-gradient(
+    circle,
+    #fff6c7 0%,
+    #ffd700 45%,
+    rgba(255,215,0,0.3) 70%,
+    transparent 100%
+  );
+  filter:blur(1px);
+  box-shadow:0 0 14px rgba(255,215,120,0.9);
+  animation:glitterUp 2.2s ease-out forwards;
+}
+
+
+@keyframes glitterUp{
+  0%{
+    opacity:0;
+    transform:translate(-50%,10px) scale(0.5);
+  }
+  30%{
+    opacity:1;
+  }
+  100%{
+    opacity:0;
+    transform:
+      translate(
+        calc(-50% + var(--gx)),
+        -140px
+      )
+      scale(1.3);
+  }
+}
+
+@media (max-width: 768px){
+
+  .cenario-castelo{
+    bottom:8%;
+    height:60vh;
+    width:135%;
+    opacity:0.7;
+    filter:
+    brightness(1.18)
+    contrast(1.1)
+    saturate(1.08)
+    drop-shadow(0 40px 90px rgba(0,0,0,0.45))
+    drop-shadow(0 0 140px rgba(150,200,255,0.55));
+    background-position:center bottom;
+
+    -webkit-mask-image:
+      linear-gradient(
+        to top,
+        rgba(0,0,0,1) 0%,
+        rgba(0,0,0,0.9) 55%,
+        rgba(0,0,0,0.6) 70%,
+        rgba(0,0,0,0.25) 82%,
+        transparent 95%
+      );
+
+    mask-image:
+      linear-gradient(
+        to top,
+        rgba(0,0,0,1) 0%,
+        rgba(0,0,0,0.9) 55%,
+        rgba(0,0,0,0.6) 70%,
+        rgba(0,0,0,0.25) 82%,
+        transparent 95%
+      );
+  }
+
 }
   
 </style>
 </head>
 
 <body>
-<div id="audioOverlay"></div>
+  
+<!-- CENÁRIO CASTELO -->
+<div class="cenario-castelo"></div>
 
-  <!-- Partículas douradas -->
+<div class="nevoa-cenario"></div>
+
+<!-- Partículas -->
 <div id="particles"></div>
 
-
-<!-- ================= MÚSICA ================= -->
-<audio id="bgMusic" src="assets/audio/musica.mp3" autoplay loop muted></audio>
-
-<!-- ================= CARTA ================= -->
-<img src="assets/convite.png" alt="Convite" class="carta">
-
-<!-- ================= BOTÃO ================= -->
-<button class="btn-modal">Informações</button>
-
-<!-- ================= MODAL PRINCIPAL ================= -->
-<div class="modal" id="modalPrincipal">
-  <div class="modal-content">
-    <span class="close" data-close="modalPrincipal">&times;</span>
-    <button class="modal-button" id="dressCode">👗 Dress Code</button>
-    <button class="modal-button" id="verRota">📍 Ver Rota</button>
-    <button class="modal-button" id="confirmePresenca">✅ Confirmar Presença</button>
-    <button class="modal-button" id="presentear">🎁 Presentear</button>
-  </div>
-</div>
-
-<!-- ================= DRESS CODE ================= -->
-<div class="sub-modal" id="modalDress">
-  <div class="sub-modal-content">
-    <span class="close" data-close="modalDress">&times;</span>
-    <h3>Código de Vestimenta</h3>
-    <ul>
-      <li>Esporte fino</li>
-      <li>Vestidos longos</li>
-      <li>Ternos para rapazes</li>
-      <li>Acessórios elegantes</li>
-    </ul>
-  </div>
-</div>
-
-<!-- ================= PRESENTES ================= -->
-<div class="sub-modal" id="modalPresentes">
-  <div class="sub-modal-content">
-    <span class="close" data-close="modalPresentes">&times;</span>
-    <h3>Lista de Presentes</h3>
-    <ul>
-      <li>Perfume</li>
-      <li>Brinco / Colar / Pulseira</li>
-      <li>Roupas Renner</li>
-      <li>Acessórios</li>
-    </ul>
-  </div>
+<!-- Carta -->
+<div class="carta-container" id="carta">
+  <img src="assets/carta-fechada.png" class="carta-fechada" alt="">
+  <img src="assets/carta-aberta.png" class="carta-aberta" alt="">
+  <div class="fumaca-container" id="fumaca"></div>
 </div>
 
 <script>
-/* ================= MÚSICA ================= */
-const audio = document.getElementById("bgMusic");
-audio.volume = 0.5;
-audio.muted = true;
-
-const overlay = document.getElementById("audioOverlay");
-
-function startMusic(){
-  audio.muted = false;
-  audio.play();
-  overlay.remove();
-}
-
-overlay.addEventListener("click", startMusic);
-overlay.addEventListener("touchstart", startMusic, { once: true });
-
-
-/* ================= ESTRELAS ================= */
-const totalStars = 160;
-for (let i = 0; i < totalStars; i++) {
-  const star = document.createElement("div");
-  star.className = "star";
-  star.style.left = Math.random() * 100 + "vw";
-  star.style.animationDuration = (3 + Math.random() * 4) + "s";
-  star.style.animationDelay = Math.random() * 5 + "s";
-  document.body.appendChild(star);
-}
-
-/* ================= MODAIS ================= */
-const modalPrincipal = document.getElementById("modalPrincipal");
-
-document.querySelector(".btn-modal").onclick = () => {
-  modalPrincipal.style.display = "flex";
-};
-
-document.getElementById("dressCode").onclick = () => {
-  document.getElementById("modalDress").style.display = "flex";
-};
-
-document.getElementById("presentear").onclick = () => {
-  document.getElementById("modalPresentes").style.display = "flex";
-};
-
-document.getElementById("verRota").onclick = () => {
-  window.open("https://maps.app.goo.gl/9Ujs9UPoccGrVMJb8", "_blank");
-};
-
-document.getElementById("confirmePresenca").onclick = () => {
-  window.open(
-    "https://wa.me/5551992226662?text=Olá,%20confirmo%20minha%20presença%20no%20evento!",
-    "_blank"
-  );
-};
-
-/* ================= FECHAR ================= */
-document.querySelectorAll(".close").forEach(btn => {
-  btn.onclick = () => {
-    document.getElementById(btn.dataset.close).style.display = "none";
-  };
-});
-
-window.onclick = e => {
-  document.querySelectorAll(".modal, .sub-modal").forEach(m => {
-    if (e.target === m) m.style.display = "none";
-  });
-};
-
-/* ================= PARTÍCULAS DOURADAS ================= */
+/* PARTÍCULAS DOURADAS DO FUNDO */
 const particleContainer = document.getElementById('particles');
 
 function createSpark(){
   const s = document.createElement('div');
   s.className = 'spark';
-  s.style.left = Math.random() * 100 + 'vw';
-  s.style.animationDuration = (4 + Math.random() * 4) + 's';
-  s.style.opacity = 0.5 + Math.random() * 0.5;
+  s.style.left = Math.random()*100 + 'vw';
+  s.style.animationDuration = (4 + Math.random()*4) + 's';
+  s.style.opacity = 0.5 + Math.random()*0.5;
   particleContainer.appendChild(s);
-
-  setTimeout(() => s.remove(), 9000);
+  setTimeout(()=>s.remove(),9000);
 }
+setInterval(createSpark,180);
 
-setInterval(createSpark, 180);
-  
+/* CARTA + FUMAÇA + GLITTER */
+const carta = document.getElementById('carta');
+const fumaca = document.getElementById('fumaca');
+
+window.addEventListener('load', () => {
+  setTimeout(() => {
+  carta.classList.add('aberta');
+
+  const largura = carta.offsetWidth;
+
+  /* FUMAÇA AZUL */
+  for(let i=0;i<30;i++){
+    setTimeout(()=>{
+      const smoke = document.createElement('div');
+      smoke.className = 'smoke';
+      smoke.style.setProperty('--x', `${Math.random()*largura/2 - largura/4}px`);
+      const size = largura*0.1 + Math.random()*largura*0.15;
+      smoke.style.width = smoke.style.height = size + 'px';
+      smoke.style.opacity = 0.55 + Math.random()*0.25;
+      fumaca.appendChild(smoke);
+      setTimeout(()=>smoke.remove(),4200);
+    }, i*100);
+  }
+
+  /* GLITTER DOURADO */
+  for(let i=0;i<22;i++){
+    setTimeout(()=>{
+      const g = document.createElement('div');
+      g.className = 'magic-glitter';
+      g.style.setProperty('--gx', `${Math.random()*120 - 60}px`);
+      fumaca.appendChild(g);
+      setTimeout(()=>g.remove(),2200);
+    }, i*140);
+  }
+
+}, 1000);
+
+
+  /* espera 1s antes de iniciar */
+  setTimeout(() => {
+    carta.classList.add('aberta');
+
+
+    for(let i=0;i<26;i++){
+      setTimeout(()=>{
+        const smoke = document.createElement('div');
+        smoke.className = 'smoke';
+        smoke.style.setProperty('--x', `${Math.random()*140 - 70}px`);
+        const size = 28 + Math.random()*45;
+        smoke.style.width = smoke.style.height = size + 'px';
+        fumaca.appendChild(smoke);
+        setTimeout(()=>smoke.remove(),4200);
+      }, i*110);
+    }
+
+    /* GLITTER MÁGICO */
+    for(let i=0;i<18;i++){
+      setTimeout(()=>{
+        const g = document.createElement('div');
+        g.className = 'magic-glitter';
+        g.style.left = `calc(50% + ${Math.random()*120 - 60}px)`;
+        g.style.bottom = '28%';
+        fumaca.appendChild(g);
+        setTimeout(()=>g.remove(),2000);
+      }, i*160);
+    }
+
+  }, 1000);
+
+  /* IR PARA A PÁGINA 2 */
+  setTimeout(() => {
+    window.location.href = 'convite.html';
+  }, 5200);
+
+});
 </script>
+
 
 </body>
 </html>

@@ -217,33 +217,33 @@ html,body{
   position: fixed;
   inset: 0;
   pointer-events: none;
-  z-index: 1;
+  z-index: 3; 
   overflow: hidden;
 }
 
 .smoke {
   position: absolute;
-  bottom: -200px;
-  width: 300px;
-  height: 300px;
+  bottom: -120px;
+  width: 320px;
+  height: 320px;
   background: radial-gradient(
     circle,
-    rgba(30, 60, 120, 0.35),
-    rgba(30, 60, 120, 0.15),
+    rgba(120,180,255,0.45),
+    rgba(80,140,255,0.25),
     transparent 70%
   );
-  filter: blur(50px);
+  filter: blur(55px);
   animation: smokeMove linear infinite;
 }
 
 @keyframes smokeMove {
   from {
-    transform: translateY(0) translateX(0) scale(1);
+    transform: translateY(0) translateX(0) scale(0.9);
     opacity: 0;
   }
-  20% { opacity: 0.6; }
+  25% { opacity: 0.7; }
   to {
-    transform: translateY(-140vh) translateX(120px) scale(1.6);
+    transform: translateY(-130vh) translateX(80px) scale(1.5);
     opacity: 0;
   }
 }
@@ -352,7 +352,7 @@ verRota.onclick=()=>{
 };
 
 confirmePresenca.onclick=()=>{
-  window.open("https://wa.me/5551992226662","_blank");
+  window.open("https://wa.me/5551992226662?text=Olá,%20confirmo%20minha%20presença%20no%20seu%20aniversário!%20🎉"","_blank");
 };
 
 window.onclick=e=>{

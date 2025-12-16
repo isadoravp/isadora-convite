@@ -21,57 +21,76 @@ html,body{
   width:100%;
   height:100%;
   overflow:hidden;
-  font-family: Georgia, serif;
+  font-family: Arial, sans-serif;
 }
 
-/* ================= SEÇÕES ================= */
-section{
+/* ================= CENA 1 ================= */
+#scene1{
   position:fixed;
   inset:0;
-  transition:opacity 1.2s ease;
+  background:
+    linear-gradient(
+      45deg,
+      var(--azul) 0%,
+      var(--roxo) 35%,
+      var(--vermelho) 65%,
+      #c98b2b 100%
+    );
+  transition:opacity .6s ease;
+  z-index:5;
 }
 
-.hidden{
+#scene1.fade-out{
   opacity:0;
   pointer-events:none;
 }
 
-/* ================= PAGE 1 ================= */
-#page1{
-  background:linear-gradient(
-    45deg,
-    var(--azul),
-    var(--roxo),
-    var(--vermelho),
-    #c98b2b
-  );
+/* TEXTURA */
+#scene1::after{
+  content:"";
+  position:fixed;
+  inset:0;
+  background:
+    radial-gradient(circle at 20% 30%, rgba(255,255,255,0.04), transparent 40%),
+    radial-gradient(circle at 80% 70%, rgba(255,255,255,0.03), transparent 45%);
+  pointer-events:none;
 }
 
-/* CASTELO */
+/* ================= CASTELO ================= */
 .cenario-castelo{
   position:fixed;
   left:50%;
   bottom:16%;
   transform:translateX(-50%);
   width:125%;
+  max-width:1400px;
   height:90vh;
   background:url("assets/castelo1.png") center bottom no-repeat;
   background-size:contain;
-  filter:
-    brightness(1.15)
-    drop-shadow(0 60px 140px rgba(0,0,0,.5));
+  opacity:0.95;
   pointer-events:none;
+  filter:
+    drop-shadow(0 60px 140px rgba(0,0,0,0.45))
+    drop-shadow(0 0 120px rgba(120,170,255,0.28));
+  mix-blend-mode:soft-light;
+  -webkit-mask-image:
+    radial-gradient(ellipse at center bottom, rgba(0,0,0,1) 0%, transparent 95%);
+  mask-image:
+    radial-gradient(ellipse at center bottom, rgba(0,0,0,1) 0%, transparent 95%);
 }
 
-/* PARTÍCULAS */
-#particles1, #particles2{
+/* ================= PARTÍCULAS ================= */
+#particles{
   position:fixed;
   inset:0;
   pointer-events:none;
+  overflow:hidden;
+  z-index:2;
 }
 
 .spark{
   position:absolute;
+  top:-10px;
   width:4px;
   height:4px;
   background:var(--dourado);
@@ -81,39 +100,35 @@ section{
 }
 
 @keyframes fall{
-  to{ transform:translateY(120vh); opacity:0; }
+  to{
+    transform:translateY(110vh);
+    opacity:0;
+  }
 }
 
-/* CARTA */
+/* ================= CARTA ================= */
 .carta-container{
   position:absolute;
   top:50%;
   left:50%;
   transform:translate(-50%,-50%);
   width:320px;
+  max-width:80vw;
   cursor:pointer;
-  z-index:5;
+  z-index:3;
 }
 
 .carta-container img{
   width:100%;
   position:absolute;
-  transition:opacity 1.4s, transform 1.4s;
 }
 
 .carta-aberta{ opacity:0; }
 
-.carta-container.aberta .carta-fechada{
-  opacity:0;
-  transform:scale(.9);
-}
+.carta-container.aberta .carta-fechada{ opacity:0; }
+.carta-container.aberta .carta-aberta{ opacity:1; }
 
-.carta-container.aberta .carta-aberta{
-  opacity:1;
-  transform:scale(1);
-}
-
-/* FUMAÇA */
+/* ================= FUMAÇA ================= */
 .fumaca-container{
   position:absolute;
   inset:0;
@@ -122,176 +137,201 @@ section{
 
 .smoke{
   position:absolute;
-  bottom:15%;
+  bottom:13%;
   left:50%;
-  width:60px;
-  height:60px;
   border-radius:50%;
-  background:radial-gradient(circle,
-    rgba(60,100,180,.5),
-    transparent 70%);
-  filter:blur(26px);
-  animation:smokeUp 4s forwards;
+  animation:smokeUp 3.8s ease-out forwards;
+  background:radial-gradient(circle, rgba(55,95,160,0.55), transparent);
+  filter:blur(24px);
 }
 
 @keyframes smokeUp{
-  from{ transform:translate(-50%,0) scale(.6); opacity:0; }
-  30%{ opacity:1; }
   to{
-    transform:translate(calc(-50% + var(--x)),-260px) scale(2);
+    transform:translate(-50%,-240px) scale(1.9);
     opacity:0;
   }
 }
 
-/* ================= PAGE 2 ================= */
-#page2{
-  background:linear-gradient(
-    45deg,
-    #ffc900,
-    rgba(168,51,33,.2),
-    #00498e
-  );
-  display:flex;
+/* ================= GLITTER ================= */
+.magic-glitter{
+  position:absolute;
+  width:6px;
+  height:6px;
+  border-radius:50%;
+  background:radial-gradient(circle,#ffd700,transparent);
+  animation:glitterUp 2.2s ease-out forwards;
+}
+
+@keyframes glitterUp{
+  to{
+    transform:translate(-50%,-140px);
+    opacity:0;
+  }
+}
+
+/* ================= CENA 2 ================= */
+#scene2{
+  position:fixed;
+  inset:0;
+  background:linear-gradient(45deg,#ffc900,rgba(168,51,33,.2),#00498e);
+  display:none;
   align-items:center;
   justify-content:center;
 }
 
-.carta-final{
-  max-width:88%;
-  max-height:88%;
-  cursor:pointer;
-  z-index:2;
+#scene2.active{
+  display:flex;
 }
 
-/* BOTÃO */
-.btn-modal{
-  position:fixed;
-  bottom:20px;
-  right:20px;
-  padding:14px 20px;
-  border:none;
-  border-radius:10px;
-  background:#f17ea1;
-  color:#fff;
-  z-index:10;
-  cursor:pointer;
-}
-
-/* MODAIS */
-.modal{
+/* ================= MODAIS ================= */
+.modal,.sub-modal{
   display:none;
   position:fixed;
   inset:0;
   background:rgba(0,0,0,.6);
-  z-index:20;
+  z-index:10;
   align-items:center;
   justify-content:center;
 }
 
-.modal-content{
+.modal-content,.sub-modal-content{
   background:#00498e;
-  padding:22px;
   border-radius:14px;
+  padding:22px;
   width:90%;
   max-width:420px;
 }
 
-.close{
-  font-size:24px;
-  cursor:pointer;
+.btn-modal{
+  position:fixed;
+  bottom:20px;
+  right:20px;
+  z-index:6;
+}
+
+/* ================= AUDIO ================= */
+#audioOverlay{
+  position:fixed;
+  inset:0;
+  z-index:9999;
 }
 </style>
 </head>
 
 <body>
 
-<!-- ================= ÁUDIO ÚNICO ================= -->
-<audio id="bgMusic" src="assets/audio/musica.mp3" loop></audio>
-<div id="audioOverlay" style="position:fixed;inset:0;z-index:9999"></div>
+<div id="audioOverlay"></div>
+<audio id="bgMusic" loop muted>
+  <source src="assets/audio/musica.mp3" type="audio/mpeg">
+</audio>
 
-<!-- ================= PAGE 1 ================= -->
-<section id="page1">
+<!-- ================= CENA 1 ================= -->
+<div id="scene1">
   <div class="cenario-castelo"></div>
-  <div id="particles1"></div>
+  <div id="particles"></div>
 
   <div class="carta-container" id="carta">
     <img src="assets/carta-fechada.png" class="carta-fechada">
     <img src="assets/carta-aberta.png" class="carta-aberta">
     <div class="fumaca-container" id="fumaca"></div>
   </div>
-</section>
+</div>
 
-<!-- ================= PAGE 2 ================= -->
-<section id="page2" class="hidden">
-  <div id="particles2"></div>
-  <img src="assets/convite.png" class="carta-final">
-  <button class="btn-modal" id="btnInfo">Informações</button>
-</section>
+<!-- ================= CENA 2 ================= -->
+<div id="scene2">
+  <img src="assets/convite.png" class="carta">
+  <button class="btn-modal">Informações</button>
 
-<!-- ================= MODAL ================= -->
-<div class="modal" id="modal">
-  <div class="modal-content">
-    <span class="close" id="closeModal">&times;</span>
-    <p>Conteúdo do convite</p>
+  <div class="modal" id="modalPrincipal">
+    <div class="modal-content">
+      <span class="close" data-close="modalPrincipal">&times;</span>
+      <button class="modal-button" id="dressCode">👗 Dress Code</button>
+      <button class="modal-button" id="verRota">📍 Ver Rota</button>
+      <button class="modal-button" id="confirmePresenca">✅ Confirmar Presença</button>
+      <button class="modal-button" id="presentear">🎁 Presentear</button>
+    </div>
+  </div>
+
+  <div class="sub-modal" id="modalDress">
+    <div class="sub-modal-content">
+      <span class="close" data-close="modalDress">&times;</span>
+      <h3>Código de Vestimenta</h3>
+      <ul>
+        <li>Esporte fino</li>
+        <li>Vestidos longos</li>
+        <li>Ternos para rapazes</li>
+        <li>Acessórios elegantes</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="sub-modal" id="modalPresentes">
+    <div class="sub-modal-content">
+      <span class="close" data-close="modalPresentes">&times;</span>
+      <h3>Lista de Presentes</h3>
+      <ul>
+        <li>Perfume</li>
+        <li>Brinco / Colar / Pulseira</li>
+        <li>Roupas Renner</li>
+        <li>Acessórios</li>
+      </ul>
+    </div>
   </div>
 </div>
 
 <script>
-/* ================= MÚSICA ================= */
-const audio = document.getElementById("bgMusic");
-audio.volume = .5;
-
-document.getElementById("audioOverlay").onclick = () => {
+/* ================= AUDIO ================= */
+const audio=document.getElementById("bgMusic");
+const overlay=document.getElementById("audioOverlay");
+overlay.addEventListener("click",()=>{
+  audio.muted=false;
   audio.play();
-  document.getElementById("audioOverlay").remove();
-};
+  overlay.remove();
+});
 
 /* ================= PARTÍCULAS ================= */
-function startParticles(container){
-  setInterval(()=>{
-    const s=document.createElement("div");
-    s.className="spark";
-    s.style.left=Math.random()*100+"vw";
-    s.style.animationDuration=4+Math.random()*4+"s";
-    container.appendChild(s);
-    setTimeout(()=>s.remove(),8000);
-  },180);
-}
-
-startParticles(document.getElementById("particles1"));
-startParticles(document.getElementById("particles2"));
-
-/* ================= CARTA + FUMAÇA ================= */
-const carta=document.getElementById("carta");
-const fumaca=document.getElementById("fumaca");
-
-setTimeout(()=>{
-  carta.classList.add("aberta");
-
-  for(let i=0;i<30;i++){
-    setTimeout(()=>{
-      const s=document.createElement("div");
-      s.className="smoke";
-      s.style.setProperty("--x",Math.random()*160-80+"px");
-      fumaca.appendChild(s);
-      setTimeout(()=>s.remove(),4000);
-    },i*100);
-  }
-},1000);
+setInterval(()=>{
+  const s=document.createElement("div");
+  s.className="spark";
+  s.style.left=Math.random()*100+"vw";
+  s.style.animationDuration=4+Math.random()*4+"s";
+  particles.appendChild(s);
+  setTimeout(()=>s.remove(),9000);
+},180);
 
 /* ================= TRANSIÇÃO ================= */
 setTimeout(()=>{
-  document.getElementById("page1").classList.add("hidden");
-  document.getElementById("page2").classList.remove("hidden");
+  document.getElementById("scene1").classList.add("fade-out");
+  setTimeout(()=>{
+    document.getElementById("scene1").style.display="none";
+    document.getElementById("scene2").classList.add("active");
+  },600);
 },5200);
 
-/* ================= MODAL ================= */
-document.getElementById("btnInfo").onclick=()=>{
-  document.getElementById("modal").style.display="flex";
+/* ================= MODAIS ================= */
+document.querySelector(".btn-modal").onclick=()=>{
+  modalPrincipal.style.display="flex";
 };
-document.getElementById("closeModal").onclick=()=>{
-  document.getElementById("modal").style.display="none";
+
+document.getElementById("dressCode").onclick=()=>{
+  modalDress.style.display="flex";
 };
+
+document.getElementById("presentear").onclick=()=>{
+  modalPresentes.style.display="flex";
+};
+
+document.getElementById("verRota").onclick=()=>{
+  window.open("https://maps.app.goo.gl/9Ujs9UPoccGrVMJb8","_blank");
+};
+
+document.getElementById("confirmePresenca").onclick=()=>{
+  window.open("https://wa.me/5551992226662?text=Olá,%20confirmo%20minha%20presença%20no%20evento!","_blank");
+};
+
+document.querySelectorAll(".close").forEach(btn=>{
+  btn.onclick=()=>document.getElementById(btn.dataset.close).style.display="none";
+});
 </script>
 
 </body>

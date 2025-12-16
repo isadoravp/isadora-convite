@@ -359,8 +359,6 @@ setInterval(()=>{
 /* ====== CARTA + FUMAÇA + GLITTER ====== */
 const carta = document.getElementById('carta');
 const fumaca = document.getElementById('fumaca');
-const isMobile = window.innerWidth <= 768;
-const quantidadeFumaca = isMobile ? 20 : 30;
 
 window.addEventListener('load', () => {
 
@@ -370,7 +368,7 @@ window.addEventListener('load', () => {
     const largura = carta.offsetWidth;
 
     /* ====== FUMAÇA AZUL ====== */
-    for(let i=0;i<quantidadeFumaca;i++){
+    for(let i=0;i<30;i++){
       setTimeout(()=>{
         const smoke = document.createElement('div');
         smoke.className = 'smoke';

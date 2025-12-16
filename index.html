@@ -408,7 +408,6 @@ box-shadow:
 </div>
 
 <script>
-
 /* ================= MÚSICA ================= */
 const music = new Audio('assets/audio/musica.mp3');
 music.loop = true;
@@ -417,7 +416,7 @@ music.volume = 0.5;
 const overlay = document.getElementById("audioOverlay");
 
 function startMusic(){
-  music.play();   
+  music.play();
   overlay.remove();
 }
 

@@ -156,9 +156,9 @@ filter:
   top:-10px;
   width:2px;
   height:2px;
+  box-shadow: 0 0 4px #ffd700;
   background:var(--dourado);
   border-radius:50%;
-  box-shadow: 0 0 4px #ffd700;
   animation:fall linear forwards;
 }
 
@@ -340,19 +340,14 @@ box-shadow:
   }
 }
 
-@media (max-width: 768px){
+@media (max-width:768px){
 
   .cenario-castelo{
     bottom:8%;
     height:60vh;
     width:135%;
     opacity:0.7;
-    filter:
-    brightness(1.18)
-    contrast(1.1)
-    saturate(1.08)
-    drop-shadow(0 40px 90px rgba(0,0,0,0.45))
-    drop-shadow(0 0 140px rgba(150,200,255,0.55));
+    filter: brightness(1.18) contrast(1.1) saturate(1.08) drop-shadow(0 40px 90px rgba(0,0,0,0.45)) drop-shadow(0 0 140px rgba(150,200,255,0.55));
     background-position:center bottom;
 
     -webkit-mask-image:
@@ -412,7 +407,7 @@ box-shadow:
 const music = new Audio('assets/audio/musica.mp3');
 music.loop = true;
 music.volume = 0.5;
-  
+
 const savedTime = localStorage.getItem('musicTime');
 if (savedTime) music.currentTime = parseFloat(savedTime);
 
@@ -433,7 +428,7 @@ function createSpark(){
   const s = document.createElement('div');
   s.className = 'spark';
   s.style.left = Math.random()*100 + 'vw';
-  s.style.animationDuration = (3 + Math.random()*3) + 's'; 
+  s.style.animationDuration = (3 + Math.random()*3) + 's';
   s.style.opacity = 0.4 + Math.random()*0.4;
   particleContainer.appendChild(s);
   setTimeout(()=>s.remove(), 7000);
@@ -441,7 +436,6 @@ function createSpark(){
 
 const intervalTime = window.innerWidth < 768 ? 300 : 180;
 setInterval(createSpark, intervalTime);
-
 
 /* CARTA + FUMAÇA + GLITTER */
 const carta = document.getElementById('carta');

@@ -377,21 +377,11 @@ box-shadow:
   }
 
 }
-
-#audioOverlay{
-  position: fixed;
-  inset: 0;
-  z-index: 9999;
-}
   
 </style>
 </head>
 
 <body>
-
-<audio id="bgMusic" src="assets/audio/musica.mp3" loop muted></audio>
-<div id="audioOverlay"></div>
-
   
 <!-- CENÁRIO CASTELO -->
 <div class="cenario-castelo"></div>
@@ -498,28 +488,6 @@ window.addEventListener('load', () => {
   }, 5200);
 
 });
-
-const audio = document.getElementById("bgMusic");
-const overlay = document.getElementById("audioOverlay");
-
-audio.volume = 0.5;
-audio.muted = true;
-
-function startMusic(){
-  audio.muted = false;
-  audio.play();
-  overlay.remove();
-}
-
-overlay.addEventListener("click", startMusic);
-overlay.addEventListener("touchstart", startMusic, { once: true });
-
-// 👉 ao clicar na carta
-document.querySelector('.carta').addEventListener('click', () => {
-  localStorage.setItem("musicTime", audio.currentTime);
-  window.location.href = "convite.html";
-});
-  
 </script>
 
 

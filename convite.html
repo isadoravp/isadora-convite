@@ -238,18 +238,18 @@ const music = new Audio('assets/audio/musica.mp3');
 music.loop = true;
 music.volume = 0.5;
 
-// pega o tempo salvo da página 1
-const savedTime = localStorage.getItem('musicTime');
-if(savedTime) music.currentTime = parseFloat(savedTime);
+const overlay = document.getElementById('audioOverlay');
 
-const overlay = document.getElementById("audioOverlay");
-function startMusic(){
-  music.play();
+function startMusic() {
+  music.play().catch(err => {
+    console.log('Tentativa de play falhou:', err);
+  });
+
   overlay.remove();
 }
 
-overlay.addEventListener("click", startMusic, { once: true });
-overlay.addEventListener("touchstart", startMusic, { once: true });
+overlay.addEventListener('click', startMusic, { once: true });
+overlay.addEventListener('touchstart', startMusic, { once: true });
 
 /* ================= PARTÍCULAS DOURADAS ================= */
 const particleContainer = document.getElementById('particles');
@@ -258,18 +258,14 @@ function createSpark(){
   const s = document.createElement('div');
   s.className = 'spark';
   
-  // posição horizontal aleatória
   s.style.left = Math.random() * 100 + 'vw';
   
-  // duração aleatória de subida
   const duration = 4 + Math.random()*3;
   s.style.animationDuration = duration + 's';
-  
-  // escala inicial
+
   const scale = 0.6 + Math.random()*0.4;
   s.style.transform = `scale(${scale})`;
   
-  // opacidade inicial aleatória
   s.style.opacity = 0.4 + Math.random() * 0.6;
   
   // variação de cor leve (branco, azul, dourado)

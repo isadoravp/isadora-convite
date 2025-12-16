@@ -43,15 +43,15 @@ body::after{
   position:fixed;
   left:50%;
   bottom:16%;
-  transform:translateX(-50%);
-  width:125%;
+  transform: translateX(-50%) translateY(6%);
+  width:110%;
   max-width:1400px;
   height:90vh;
   background:url("assets/castelo1.png") center bottom no-repeat;
   background-size:contain;
   z-index:0;
   pointer-events:none;
-  opacity:0.95;
+  opacity:0.75;
   filter:brightness(1.12) contrast(1.08) saturate(1.05);
   mask-image:radial-gradient(ellipse at center bottom,black 0%,transparent 95%);
 }
@@ -85,6 +85,58 @@ body::after{
 
 @keyframes fall{
   to{transform:translateY(110vh);opacity:0;}
+}
+
+/* =====================
+   FUMAÇA AZUL
+===================== */
+#smoke-bg{
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  overflow: hidden;
+  z-index: 0;
+}
+
+.smoke-bg-puff{
+  position: absolute;
+  bottom: -120px;
+  left: 50%;
+  width: 280px;
+  height: 280px;
+  border-radius: 50%;
+
+  background: radial-gradient(
+    circle,
+    rgba(60,110,190,0.35) 0%,
+    rgba(45,85,155,0.25) 40%,
+    rgba(30,60,120,0.15) 65%,
+    transparent 80%
+  );
+
+  filter: blur(40px);
+  opacity: 0.6;
+
+  animation: smokeBgUp 14s linear forwards;
+}
+
+@keyframes smokeBgUp{
+  from{
+    transform: translate(-50%, 0) scale(1);
+    opacity: 0;
+  }
+  15%{
+    opacity: 0.6;
+  }
+  to{
+    transform:
+      translate(
+        calc(-50% + var(--sx)),
+        -120vh
+      )
+      scale(1.6);
+    opacity: 0;
+  }
 }
 
 /* CARTA */
@@ -130,7 +182,9 @@ body::after{
 <div id="audioOverlay"></div>
 
 <div class="cenario-castelo"></div>
+  
 <div id="particles"></div>
+<div id="smoke-bg"></div>
 
 <div class="carta-container" id="carta">
   <img src="assets/carta-fechada.png" class="carta-fechada">
@@ -138,6 +192,7 @@ body::after{
 </div>
 
 <script>
+/* ================= MÚSICA ================= */
 const music = new Audio('assets/audio/musica.mp3');
 music.loop = true;
 music.volume = 0.5;
@@ -154,7 +209,8 @@ function startMusic(){
 
 overlay.addEventListener('click', startMusic, { once:true });
 overlay.addEventListener('touchstart', startMusic, { once:true });
-
+  
+/* ================= PARTÍCULAS ================= */
 const particleContainer = document.getElementById('particles');
 setInterval(()=>{
   const s=document.createElement('div');
@@ -164,6 +220,26 @@ setInterval(()=>{
   particleContainer.appendChild(s);
   setTimeout(()=>s.remove(),7000);
 },300);
+
+/* ================= FUMAÇA AZUL FUNDO ================= */
+const smokeBg = document.getElementById('smoke-bg');
+
+function createSmokeBg(){
+  const puff = document.createElement('div');
+  puff.className = 'smoke-bg-puff';
+
+  puff.style.left = Math.random() * 100 + 'vw';
+  puff.style.setProperty('--sx', `${Math.random()*300 - 150}px`);
+
+  const size = 220 + Math.random()*180;
+  puff.style.width = puff.style.height = size + 'px';
+
+  smokeBg.appendChild(puff);
+
+  setTimeout(() => puff.remove(), 15000);
+}
+
+setInterval(createSmokeBg, 1800);
 
 window.addEventListener('load',()=>{
   setTimeout(()=>document.getElementById('carta').classList.add('aberta'),1000);

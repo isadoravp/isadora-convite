@@ -417,12 +417,15 @@ music.volume = 0.5;
 const overlay = document.getElementById("audioOverlay");
 
 function startMusic(){
+  const music = new Audio('assets/audio/musica.mp3'); // criar no clique
+  music.loop = true;
+  music.volume = 0.5;
   music.play();
   overlay.remove();
 }
 
-overlay.addEventListener("click", startMusic);
-overlay.addEventListener("touchstart", startMusic, { once: true });  
+overlay.addEventListener("click", startMusic, { once: true });
+overlay.addEventListener("touchstart", startMusic, { once: true });
   
 /* PARTÍCULAS DOURADAS DO FUNDO */
 const particleContainer = document.getElementById('particles');

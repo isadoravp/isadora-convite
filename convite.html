@@ -36,6 +36,30 @@ html, body {
   transform: translate(-50%, -50%); 
 }
 
+/* ================= ESTRELAS / FAÍSCAS ================= */
+.star {
+  position: absolute;
+  width: 2px;
+  height: 2px;
+  background: radial-gradient(circle, #ffd700, rgba(255,255,255,0));
+  border-radius: 50%;
+  pointer-events: none;
+  opacity: 0.8;
+  animation: moveStar linear infinite;
+}
+
+@keyframes moveStar {
+  from {
+    transform: translateY(100vh) scale(1);
+    opacity: 0;
+  }
+  10% { opacity: 1; }
+  to {
+    transform: translateY(-120vh) scale(0.6);
+    opacity: 0;
+  }
+}
+
 /* ================= BOTÃO INFO ================= */
 .btn-modal {
   position: fixed;
@@ -111,46 +135,44 @@ li {
   margin-bottom: 6px;
 }
 
-/* ================= PARTÍCULAS CRISTAL ================= */
-.spark{
+/* ================= PARTÍCULAS CRISTAIS ================= */
+.spark {
   position: absolute;
   bottom: -10px;
-  width: 8px;
-  height: 8px;
-  background: linear-gradient(135deg, #ffffffaa, #aee1ff55);
-  clip-path: polygon(
-    50% 0%, 80% 20%, 100% 50%, 80% 80%, 50% 100%, 20% 80%, 0% 50%, 20% 20%
-  );
-  opacity: 0.6;
-  animation: riseRotateGlow linear forwards;
-  filter: drop-shadow(0 0 6px rgba(255,255,255,0.5));
+  width: 6px;
+  height: 6px;
+  background: linear-gradient(45deg, rgba(255,255,255,0.8), rgba(173,216,230,0.3));
+  clip-path: polygon(50% 0%, 100% 25%, 75% 100%, 25% 100%, 0% 25%);
+  opacity: 0.7;
+  animation: riseRotateCrystal linear forwards;
+  filter: drop-shadow(0 0 8px rgba(255,255,255,0.6));
 }
 
-/* animação de subida + rotação + pulsar brilho */
-@keyframes riseRotateGlow{
-  0%{
-    transform: translateY(0) rotate(0deg) scale(0.7);
-    opacity:0;
+/* animação de subida + rotação + brilho */
+@keyframes riseRotateCrystal {
+  0% {
+    transform: translateY(0) rotate(0deg) scale(0.6);
+    opacity: 0;
     filter: drop-shadow(0 0 4px rgba(255,255,255,0.3));
   }
-  20%{
-    opacity:0.8;
-    filter: drop-shadow(0 0 8px rgba(255,255,255,0.8));
+  20% {
+    opacity: 0.8;
+    filter: drop-shadow(0 0 10px rgba(255,255,255,0.8));
   }
-  50%{
-    filter: drop-shadow(0 0 10px rgba(255,255,255,1));
+  50% {
+    filter: drop-shadow(0 0 12px rgba(255,255,255,1));
   }
-  80%{
-    filter: drop-shadow(0 0 6px rgba(255,255,255,0.7));
+  80% {
+    filter: drop-shadow(0 0 8px rgba(255,255,255,0.7));
   }
-  100%{
+  100% {
     transform: translateY(-110vh) rotate(360deg) scale(1.2);
-    opacity:0;
+    opacity: 0;
     filter: drop-shadow(0 0 4px rgba(255,255,255,0.2));
   }
 }
 
-#audioOverlay{
+#audioOverlay {
   position: fixed;
   inset: 0;
   z-index: 9999;
@@ -160,14 +182,13 @@ li {
 * {
   user-select: none;
 }
-  
 </style>
 </head>
 
 <body>
 <div id="audioOverlay"></div>
 
-<!-- Partículas cristal -->
+<!-- Partículas cristais -->
 <div id="particles"></div>
 
 <!-- ================= CARTA ================= -->
@@ -216,7 +237,6 @@ const music = new Audio('assets/audio/musica.mp3');
 music.loop = true;
 music.volume = 0.5;
 
-// pega o tempo salvo da página 1
 const savedTime = localStorage.getItem('musicTime');
 if(savedTime) music.currentTime = parseFloat(savedTime);
 
@@ -229,29 +249,36 @@ function startMusic(){
 overlay.addEventListener("click", startMusic, { once: true });
 overlay.addEventListener("touchstart", startMusic, { once: true });
 
-/* ================= PARTÍCULAS ================= */
+/* ================= PARTICULAS CRISTAIS ================= */
 const particleContainer = document.getElementById('particles');
 
-function createSpark(){
+function createSpark() {
   const s = document.createElement('div');
   s.className = 'spark';
   
   s.style.left = Math.random() * 100 + 'vw';
-  
-  const duration = 4 + Math.random()*3;
+  const duration = 4 + Math.random() * 3;
   s.style.animationDuration = duration + 's';
   
-  const scale = 0.5 + Math.random()*0.5;
+  const scale = 0.6 + Math.random() * 0.6;
   s.style.transform = `scale(${scale})`;
   
-  s.style.opacity = 0.4 + Math.random() * 0.6;
-
+  s.style.opacity = 0.3 + Math.random() * 0.7;
+  
+  const colors = [
+    'rgba(255,255,255,0.8)',
+    'rgba(173,216,230,0.5)',
+    'rgba(255,223,186,0.6)'
+  ];
+  
+  s.style.background = `linear-gradient(45deg, ${colors[Math.floor(Math.random()*colors.length)]}, rgba(255,255,255,0.1))`;
+  
   particleContainer.appendChild(s);
   
-  setTimeout(()=>s.remove(), duration*1000);
+  setTimeout(() => s.remove(), duration * 1000);
 }
 
-setInterval(createSpark, 200);
+setInterval(createSpark, 180);
 
 /* ================= MODAIS ================= */
 const modalPrincipal = document.getElementById("modalPrincipal");
@@ -269,7 +296,7 @@ document.querySelectorAll(".close").forEach(btn => {
 window.onclick = e => {
   document.querySelectorAll(".modal, .sub-modal").forEach(m => { if(e.target === m) m.style.display = "none"; });
 };
-  
+
 </script>
 </body>
 </html>

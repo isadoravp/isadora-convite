@@ -161,11 +161,19 @@ li {
     opacity: 0;
   }
 }
+
+#audioOverlay{
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  cursor: pointer;
+}
   
 </style>
 </head>
 
 <body>
+<div id="audioOverlay"></div>
 
   <!-- Partículas douradas -->
 <div id="particles"></div>
@@ -221,25 +229,21 @@ li {
 
 <script>
 /* ================= MÚSICA ================= */
-window.addEventListener("load", () => {
-  const audio = document.getElementById("bgMusic");
+const audio = document.getElementById("bgMusic");
+audio.volume = 0.5;
+audio.muted = true;
 
-  audio.volume = 0.5;
+const overlay = document.getElementById("audioOverlay");
+
+function startMusic(){
   audio.muted = false;
+  audio.play();
+  overlay.remove();
+}
 
-  const playPromise = audio.play();
+overlay.addEventListener("click", startMusic);
+overlay.addEventListener("touchstart", startMusic, { once: true });
 
-  if (playPromise !== undefined) {
-    playPromise.catch(() => {
-      /* fallback: toca no primeiro toque do usuário */
-      document.body.addEventListener(
-        "touchstart",
-        () => audio.play(),
-        { once: true }
-      );
-    });
-  }
-});
 
 /* ================= ESTRELAS ================= */
 const totalStars = 160;

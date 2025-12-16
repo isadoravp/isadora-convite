@@ -48,7 +48,7 @@ body::after{
   max-width:1400px;
   height:90vh;
   background:url("assets/castelo1.png") center bottom no-repeat;
-  background-size:contain;
+  background-size: 100% auto;
   z-index:0;
   pointer-events:none;
   opacity:0.95;
@@ -77,15 +77,16 @@ body::after{
   position:absolute;
   left:0;
   right:0;
-  bottom:-40px;
-  height:220px;
+  bottom:-60px;
+  height:260px;
   background:linear-gradient(
     to top,
-    rgba(30,55,110,0.45),
-    rgba(30,55,110,0.15),
+    rgba(31,63,115,0.65),
+    rgba(31,63,115,0.35),
+    rgba(31,63,115,0.15),
     transparent
   );
-  filter:blur(38px);
+  filter:blur(48px);
   pointer-events:none;
 }
   

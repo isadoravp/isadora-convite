@@ -202,10 +202,57 @@ html,body{
   background:#f17ea1;
   cursor:pointer;
 }
+
+#modalPresentes ul {
+  list-style: none;
+  padding-left: 0;
+}
+
+#modalPresentes li {
+  margin-bottom: 10px;
+  font-size: 15px;
+}
+
+.smoke-container {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 1;
+  overflow: hidden;
+}
+
+.smoke {
+  position: absolute;
+  bottom: -200px;
+  width: 300px;
+  height: 300px;
+  background: radial-gradient(
+    circle,
+    rgba(30, 60, 120, 0.35),
+    rgba(30, 60, 120, 0.15),
+    transparent 70%
+  );
+  filter: blur(50px);
+  animation: smokeMove linear infinite;
+}
+
+@keyframes smokeMove {
+  from {
+    transform: translateY(0) translateX(0) scale(1);
+    opacity: 0;
+  }
+  20% { opacity: 0.6; }
+  to {
+    transform: translateY(-140vh) translateX(120px) scale(1.6);
+    opacity: 0;
+  }
+}
+  
 </style>
 </head>
 
 <body>
+<div class="smoke-container"></div>
 
 <div id="audioOverlay"></div>
 <audio id="bgMusic" src="assets/audio/musica.mp3" autoplay loop muted></audio>
@@ -244,7 +291,12 @@ html,body{
 
 <div class="sub-modal" id="modalPresentes">
   <div class="sub-modal-content">
-    <p>Perfumes, joias, roupas, acessórios</p>
+    <ul>
+  <li>Perfume</li>
+  <li>Brinco / Colar / Pulseira</li>
+  <li>Roupas Renner</li>
+  <li>Acessórios</li>
+</ul>
   </div>
 </div>
 
@@ -308,6 +360,24 @@ window.onclick=e=>{
     if(e.target===m) m.style.display="none";
   });
 };
+
+const smokeContainer = document.querySelector(".smoke-container");
+
+function createSmoke() {
+  const smoke = document.createElement("div");
+  smoke.className = "smoke";
+
+  smoke.style.left = Math.random() * 100 + "vw";
+  smoke.style.animationDuration = (18 + Math.random() * 10) + "s";
+
+  smokeContainer.appendChild(smoke);
+
+  setTimeout(() => smoke.remove(), 30000);
+}
+
+// quantidade equilibrada
+setInterval(createSmoke, 2500);
+
 </script>
 
 </body>

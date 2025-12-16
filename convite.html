@@ -133,10 +133,43 @@ ul {
 li {
   margin-bottom: 6px;
 }
+
+/* ================= PARTÍCULAS DOURADAS (PÁG. 2) ================= */
+#particles{
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  overflow: hidden;
+  z-index: 1;
+}
+
+.spark{
+  position: absolute;
+  top: -10px;
+  width: 4px;
+  height: 4px;
+  background: #ffd700;
+  border-radius: 50%;
+  box-shadow: 0 0 8px #ffd700;
+  animation: fall linear forwards;
+  opacity: 0.8;
+}
+
+@keyframes fall{
+  to{
+    transform: translateY(110vh);
+    opacity: 0;
+  }
+}
+  
 </style>
 </head>
 
 <body>
+
+  <!-- Partículas douradas -->
+<div id="particles"></div>
+
 
 <!-- ================= MÚSICA ================= -->
 <audio id="bgMusic" src="assets/audio/musica.mp3" autoplay loop muted></audio>
@@ -188,12 +221,24 @@ li {
 
 <script>
 /* ================= MÚSICA ================= */
-window.addEventListener("DOMContentLoaded", () => {
+window.addEventListener("load", () => {
   const audio = document.getElementById("bgMusic");
-  setTimeout(() => {
-    audio.muted = false;
-    audio.volume = 0.5;
-  }, 600);
+
+  audio.volume = 0.5;
+  audio.muted = false;
+
+  const playPromise = audio.play();
+
+  if (playPromise !== undefined) {
+    playPromise.catch(() => {
+      /* fallback: toca no primeiro toque do usuário */
+      document.body.addEventListener(
+        "touchstart",
+        () => audio.play(),
+        { once: true }
+      );
+    });
+  }
 });
 
 /* ================= ESTRELAS ================= */
@@ -245,6 +290,23 @@ window.onclick = e => {
     if (e.target === m) m.style.display = "none";
   });
 };
+
+/* ================= PARTÍCULAS DOURADAS ================= */
+const particleContainer = document.getElementById('particles');
+
+function createSpark(){
+  const s = document.createElement('div');
+  s.className = 'spark';
+  s.style.left = Math.random() * 100 + 'vw';
+  s.style.animationDuration = (4 + Math.random() * 4) + 's';
+  s.style.opacity = 0.5 + Math.random() * 0.5;
+  particleContainer.appendChild(s);
+
+  setTimeout(() => s.remove(), 9000);
+}
+
+setInterval(createSpark, 180);
+  
 </script>
 
 </body>

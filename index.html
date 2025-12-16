@@ -384,15 +384,23 @@ box-shadow:
   z-index: 9999;
   cursor: pointer;
 }
-
+  
 </style>
 </head>
 
 <body>
+<!-- MÚSICA -->
 <div id="audioOverlay"></div>
+  
+<!-- CENÁRIO CASTELO -->
 <div class="cenario-castelo"></div>
+
 <div class="nevoa-cenario"></div>
+
+<!-- Partículas -->
 <div id="particles"></div>
+
+<!-- Carta -->
 <div class="carta-container" id="carta">
   <img src="assets/carta-fechada.png" class="carta-fechada" alt="">
   <img src="assets/carta-aberta.png" class="carta-aberta" alt="">
@@ -500,7 +508,7 @@ window.addEventListener('load', () => {
 
 // IR PARA A PÁGINA 2
 setTimeout(() => {
-  localStorage.setItem('musicTime', music.currentTime); // salva o ponto atual
+  localStorage.setItem('musicTime', music.currentTime);
   window.location.href = 'convite.html';
 }, 5200);
 

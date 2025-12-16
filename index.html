@@ -49,33 +49,26 @@ body::after{
 /* =====================
    CENÁRIO CASTELO / ESCADA
 ===================== */
-
 .cenario-castelo{
   position:fixed;
   left:50%;
   bottom:16%;
   transform:translateX(-50%);
-
   width:125%;
   max-width:1400px;
   height:90vh;
-
   background:url("assets/castelo1.png") center bottom no-repeat;
   background-size:contain;
-
   opacity:0.95;
-
   z-index:0;
   pointer-events:none;
-
-filter:
-  brightness(1.12)
-  contrast(1.08)
-  saturate(1.05)
-  drop-shadow(0 50px 120px rgba(0,0,0,0.45))
-  drop-shadow(0 0 160px rgba(130,180,255,0.45));
-
-    -webkit-mask-image:
+  filter:
+    brightness(1.12)
+    contrast(1.08)
+    saturate(1.05)
+    drop-shadow(0 50px 120px rgba(0,0,0,0.45))
+    drop-shadow(0 0 160px rgba(130,180,255,0.45));
+  -webkit-mask-image:
     radial-gradient(
       ellipse at center bottom,
       rgba(0,0,0,1) 0%,
@@ -85,7 +78,6 @@ filter:
       rgba(0,0,0,0.12) 82%,
       transparent 95%
     );
-
   mask-image:
     radial-gradient(
       ellipse at center bottom,
@@ -96,11 +88,12 @@ filter:
       rgba(0,0,0,0.12) 82%,
       transparent 95%
     );
+}
+
 .cenario-castelo::after{
   content:"";
   position:absolute;
   inset:-12% -10% -5% -10%;
-
   background:
     radial-gradient(
       ellipse at center bottom,
@@ -109,13 +102,10 @@ filter:
       rgba(80,130,220,0.12) 55%,
       transparent 75%
     );
-
   filter:blur(48px);
   z-index:-1;
 }
   
-}
-
   .nevoa-cenario{
   position:fixed;
   left:50%;
@@ -386,6 +376,8 @@ box-shadow:
 <body>
 <!-- MÚSICA -->
 <div id="audioOverlay"></div>
+
+<audio id="bgMusic" src="assets/audio/musica.mp3" loop></audio>
   
 <!-- CENÁRIO CASTELO -->
 <div class="cenario-castelo"></div>
@@ -404,7 +396,7 @@ box-shadow:
 
 <script>
 /* ================= MÚSICA ================= */
-const music = new Audio('assets/audio/musica.mp3');
+const music = document.getElementById('bgMusic') || new Audio('assets/audio/musica.mp3');
 music.loop = true;
 music.volume = 0.5;
 
@@ -473,12 +465,6 @@ window.addEventListener('load', () => {
   }
 
 }, 1000);
-
-
-  /* espera 1s antes de iniciar */
-  setTimeout(() => {
-    carta.classList.add('aberta');
-
 
     for(let i=0;i<26;i++){
       setTimeout(()=>{

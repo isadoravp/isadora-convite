@@ -180,7 +180,7 @@ li {
 
 
 <!-- ================= MÚSICA ================= -->
-<audio id="bgMusic" src="assets/audio/musica.mp3" autoplay loop muted></audio>
+<audio id="bgMusic" src="musica.mp3" preload="auto"></audio>
 
 <!-- ================= CARTA ================= -->
 <img src="assets/convite.png" alt="Convite" class="carta">
@@ -308,6 +308,26 @@ function createSpark(){
 
 setInterval(createSpark, 180);
   
+</script>
+
+<script>
+const music = document.getElementById("bgMusic");
+
+// tempo salvo ou fallback
+const savedTime = parseFloat(localStorage.getItem("musicTime"));
+const startTime = isNaN(savedTime) ? 12 : savedTime;
+
+music.currentTime = startTime;
+
+// força play ao carregar
+window.addEventListener("load", () => {
+  music.play().catch(()=>{
+    // fallback: toca no primeiro toque
+    document.addEventListener("click", () => {
+      music.play();
+    }, { once:true });
+  });
+});
 </script>
 
 </body>

@@ -244,9 +244,10 @@ overlay.addEventListener("touchstart", () => {
   overlay.remove();
 }, { once: true });
 
-// detectar mobile
+
+// MOBILE
 const isMobile = /Mobi|Android/i.test(navigator.userAgent);
-const particleInterval = isMobile ? 350 : 180; // menor frequência para mobile
+const particleInterval = isMobile ? 350 : 180; 
 const maxParticles = isMobile ? 15 : 30;
 
 function createSpark(){
@@ -262,7 +263,6 @@ function createSpark(){
   setTimeout(()=>s.remove(),9000);
 }
 setInterval(createSpark, particleInterval);
-
 
 /* ================= ESTRELAS ================= */
 const totalStars = 160;

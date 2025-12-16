@@ -68,15 +68,13 @@ body::after{
   z-index:0;
   pointer-events:none;
 
-  /* PROFUNDIDADE E ATMOSFERA */
-  filter:
-    drop-shadow(0 60px 140px rgba(0,0,0,0.45))
-    drop-shadow(0 0 120px rgba(120,170,255,0.28));
+filter:
+  brightness(1.12)
+  contrast(1.08)
+  saturate(1.05)
+  drop-shadow(0 50px 120px rgba(0,0,0,0.45))
+  drop-shadow(0 0 160px rgba(130,180,255,0.45));
 
-  /* INTEGRAÇÃO COM O FUNDO */
-  mix-blend-mode:soft-light;
-
-  /* DESAPARECER BORDAS (ANTI-QUADRADO) */
     -webkit-mask-image:
     radial-gradient(
       ellipse at center bottom,
@@ -98,6 +96,24 @@ body::after{
       rgba(0,0,0,0.12) 82%,
       transparent 95%
     );
+.cenario-castelo::after{
+  content:"";
+  position:absolute;
+  inset:-12% -10% -5% -10%;
+
+  background:
+    radial-gradient(
+      ellipse at center bottom,
+      rgba(160,210,255,0.38) 0%,
+      rgba(120,170,255,0.25) 30%,
+      rgba(80,130,220,0.12) 55%,
+      transparent 75%
+    );
+
+  filter:blur(48px);
+  z-index:-1;
+}
+  
 }
 
   .nevoa-cenario{
@@ -330,8 +346,13 @@ box-shadow:
     bottom:8%;
     height:60vh;
     width:135%;
-    opacity:0.88;
-
+    opacity:0.7;
+    filter:
+    brightness(1.18)
+    contrast(1.1)
+    saturate(1.08)
+    drop-shadow(0 40px 90px rgba(0,0,0,0.45))
+    drop-shadow(0 0 140px rgba(150,200,255,0.55));
     background-position:center bottom;
 
     -webkit-mask-image:

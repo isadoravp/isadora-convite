@@ -30,7 +30,10 @@ html, body {
   object-fit: contain;
   z-index: 2;
   cursor: pointer;
-  position: relative;
+  position: absolute; 
+  top: 50%; 
+  left: 50%; 
+  transform: translate(-50%, -50%); 
 }
 
 /* ================= ESTRELAS / FAÍSCAS ================= */
@@ -167,6 +170,10 @@ li {
   cursor: pointer;
 }
 
+* {
+  user-select: none;
+}
+  
 </style>
 </head>
 

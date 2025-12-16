@@ -37,6 +37,9 @@ html,body{
   background:linear-gradient(45deg,var(--azul),var(--roxo),var(--vermelho),#c98b2b);
   font-family:Georgia,serif;
   z-index:2;
+  display:flex;
+  justify-content:center;
+  align-items:center;
 }
 
 .cenario-castelo{
@@ -326,33 +329,33 @@ startParticles(particles2);
 
 /* CARTA + FUMAÇA */
 setTimeout(()=>{
-  carta.classList.add("aberta");
+  document.getElementById("carta").classList.add("aberta");
   const f=document.createElement("div");
   f.className="fumaca";
-  carta.appendChild(f);
+  document.getElementById("carta").appendChild(f);
   setTimeout(()=>f.remove(),3200);
 },1200);
 
 /* TRANSIÇÃO */
 setTimeout(()=>{
-  page1.style.display="none";
-  page2.style.display="flex";
+  document.getElementById("page1").style.display="none";
+  document.getElementById("page2").style.display="flex";
 },5200);
 
 /* MODAIS */
 document.getElementById("btnInfo").onclick=()=>{
-  modalPrincipal.style.display="flex";
+  document.getElementById("modalPrincipal").style.display="flex";
 };
 
-dressCode.onclick=()=>modalDress.style.display="flex";
-presentear.onclick=()=>modalPresentes.style.display="flex";
+document.getElementById("dressCode").onclick=()=>document.getElementById("modalDress").style.display="flex";
+document.getElementById("presentear").onclick=()=>document.getElementById("modalPresentes").style.display="flex";
 
-verRota.onclick=()=>{
+document.getElementById("verRota").onclick=()=>{
   window.open("https://maps.app.goo.gl/9Ujs9UPoccGrVMJb8","_blank");
 };
 
-confirmePresenca.onclick=()=>{
-  window.open("https://wa.me/5551992226662?text=Olá,%20confirmo%20minha%20presença%20no%20seu%20aniversário!%20🎉"","_blank");
+document.getElementById("confirmePresenca").onclick=()=>{
+  window.open("https://wa.me/5551992226662?text=Olá,%20confirmo%20minha%20presença%20no%20seu%20aniversário!%20🎉","_blank");
 };
 
 window.onclick=e=>{
@@ -366,18 +369,14 @@ const smokeContainer = document.querySelector(".smoke-container");
 function createSmoke() {
   const smoke = document.createElement("div");
   smoke.className = "smoke";
-
   smoke.style.left = Math.random() * 100 + "vw";
   smoke.style.animationDuration = (18 + Math.random() * 10) + "s";
-
   smokeContainer.appendChild(smoke);
-
   setTimeout(() => smoke.remove(), 30000);
 }
 
 // quantidade equilibrada
 setInterval(createSmoke, 2500);
-
 </script>
 
 </body>

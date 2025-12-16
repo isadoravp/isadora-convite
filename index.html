@@ -53,17 +53,41 @@ body::after{
   pointer-events:none;
   opacity:0.95;
   filter:brightness(1.12) contrast(1.08) saturate(1.05);
-  mask-image:radial-gradient(ellipse at center bottom,black 0%,transparent 95%);
-}
+  mask-image: linear-gradient(
+  to top,
+  transparent 0%,
+  rgba(0,0,0,0.25) 12%,
+  rgba(0,0,0,0.6) 28%,
+  rgba(0,0,0,0.9) 45%,
+  black 65%
+);
+
+-webkit-mask-image: linear-gradient(
+  to top,
+  transparent 0%,
+  rgba(0,0,0,0.25) 12%,
+  rgba(0,0,0,0.6) 28%,
+  rgba(0,0,0,0.9) 45%,
+  black 65%
+);
 
 .cenario-castelo::after{
   content:"";
   position:absolute;
-  inset:-12% -10% -5% -10%;
-  background:radial-gradient(ellipse at center bottom,rgba(160,210,255,.38),transparent 75%);
-  filter:blur(48px);
+  left:0;
+  right:0;
+  bottom:-40px;
+  height:220px;
+  background:linear-gradient(
+    to top,
+    rgba(30,55,110,0.45),
+    rgba(30,55,110,0.15),
+    transparent
+  );
+  filter:blur(38px);
+  pointer-events:none;
 }
-
+  
 /* ====== PARTÍCULAS ====== */
 #particles{
   position:fixed;

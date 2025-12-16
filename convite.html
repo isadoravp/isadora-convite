@@ -20,9 +20,6 @@ html, body {
     rgba(168, 51, 33, 0.2),
     #00498e
   );
-  display: flex;
-  align-items: center;
-  justify-content: center;
   position: relative;
 }
 
@@ -33,6 +30,31 @@ html, body {
   object-fit: contain;
   z-index: 2;
   cursor: pointer;
+  position: relative;
+}
+
+/* ================= ESTRELAS / FAÍSCAS ================= */
+.star {
+  position: absolute;
+  width: 2px;
+  height: 2px;
+  background: radial-gradient(circle, #ffd700, rgba(255,255,255,0));
+  border-radius: 50%;
+  pointer-events: none;
+  opacity: 0.8;
+  animation: moveStar linear infinite;
+}
+
+@keyframes moveStar {
+  from {
+    transform: translateY(100vh) scale(1);
+    opacity: 0;
+  }
+  10% { opacity: 1; }
+  to {
+    transform: translateY(-120vh) scale(0.6);
+    opacity: 0;
+  }
 }
 
 /* ================= BOTÃO INFO ================= */
@@ -144,7 +166,7 @@ li {
   z-index: 9999;
   cursor: pointer;
 }
-  
+
 </style>
 </head>
 
@@ -153,9 +175,6 @@ li {
 
 <!-- Partículas douradas -->
 <div id="particles"></div>
-
-<!-- ================= MÚSICA ================= -->
-<!-- <audio id="bgMusic" src="assets/audio/musica.mp3" loop></audio>-->
 
 <!-- ================= CARTA ================= -->
 <img src="assets/convite.png" alt="Convite" class="carta">
@@ -203,7 +222,7 @@ const music = new Audio('assets/audio/musica.mp3');
 music.loop = true;
 music.volume = 0.5;
 
-// tempo salvo da página 1
+// pega o tempo salvo da página 1
 const savedTime = localStorage.getItem('musicTime');
 if(savedTime) music.currentTime = parseFloat(savedTime);
 
@@ -216,44 +235,6 @@ function startMusic(){
 overlay.addEventListener("click", startMusic, { once: true });
 overlay.addEventListener("touchstart", startMusic, { once: true });
 
-/* ================= MODAIS ================= */
-const modalPrincipal = document.getElementById("modalPrincipal");
-
-document.querySelector(".btn-modal").onclick = () => {
-  modalPrincipal.style.display = "flex";
-};
-
-document.getElementById("dressCode").onclick = () => {
-  document.getElementById("modalDress").style.display = "flex";
-};
-
-document.getElementById("presentear").onclick = () => {
-  document.getElementById("modalPresentes").style.display = "flex";
-};
-
-document.getElementById("verRota").onclick = () => {
-  window.open("https://maps.app.goo.gl/9Ujs9UPoccGrVMJb8", "_blank");
-};
-
-document.getElementById("confirmePresenca").onclick = () => {
-  window.open(
-    "https://wa.me/5551992226662?text=Olá,%20confirmo%20minha%20presença%20no%20seu%20aniversário!", "_blank"
-  );
-};
-
-/* ================= FECHAR ================= */
-document.querySelectorAll(".close").forEach(btn => {
-  btn.onclick = () => {
-    document.getElementById(btn.dataset.close).style.display = "none";
-  };
-});
-
-window.onclick = e => {
-  document.querySelectorAll(".modal, .sub-modal").forEach(m => {
-    if (e.target === m) m.style.display = "none";
-  });
-};
-
 /* ================= PARTÍCULAS DOURADAS ================= */
 const particleContainer = document.getElementById('particles');
 
@@ -264,15 +245,28 @@ function createSpark(){
   s.style.animationDuration = (4 + Math.random() * 4) + 's';
   s.style.opacity = 0.5 + Math.random() * 0.5;
   particleContainer.appendChild(s);
-
-  // remove depois do tempo da animação
-  setTimeout(()=>s.remove(), 9000);
+  setTimeout(()=>s.remove(),9000);
 }
 
-// Intervalo igual ao da página 1
-setInterval(createSpark, 180);
+setInterval(createSpark,180);
+
+/* ================= MODAIS ================= */
+const modalPrincipal = document.getElementById("modalPrincipal");
+
+document.querySelector(".btn-modal").onclick = () => { modalPrincipal.style.display = "flex"; };
+document.getElementById("dressCode").onclick = () => { document.getElementById("modalDress").style.display = "flex"; };
+document.getElementById("presentear").onclick = () => { document.getElementById("modalPresentes").style.display = "flex"; };
+document.getElementById("verRota").onclick = () => { window.open("https://maps.app.goo.gl/9Ujs9UPoccGrVMJb8", "_blank"); };
+document.getElementById("confirmePresenca").onclick = () => { window.open("https://wa.me/5551992226662?text=Olá,%20confirmo%20minha%20presença%20no%20seu%20aniversário!", "_blank"); };
+
+document.querySelectorAll(".close").forEach(btn => {
+  btn.onclick = () => { document.getElementById(btn.dataset.close).style.display = "none"; };
+});
+
+window.onclick = e => {
+  document.querySelectorAll(".modal, .sub-modal").forEach(m => { if(e.target === m) m.style.display = "none"; });
+};
 
 </script>
-
 </body>
 </html>

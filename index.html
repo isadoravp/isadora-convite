@@ -95,7 +95,7 @@ body::after{
   inset: 0;
   pointer-events: none;
   overflow: hidden;
-  z-index: 0;
+  z-index: 1;
 }
 
 .smoke-bg-puff{
@@ -105,7 +105,6 @@ body::after{
   width: 280px;
   height: 280px;
   border-radius: 50%;
-
   background: radial-gradient(
     circle,
     rgba(60,110,190,0.35) 0%,
@@ -113,10 +112,8 @@ body::after{
     rgba(30,60,120,0.15) 65%,
     transparent 80%
   );
-
   filter: blur(40px);
-  opacity: 0.6;
-
+  opacity: 0;
   animation: smokeBgUp 14s linear forwards;
 }
 
@@ -231,7 +228,7 @@ function createSmokeBg(){
   puff.style.left = Math.random() * 100 + 'vw';
   puff.style.setProperty('--sx', `${Math.random()*300 - 150}px`);
 
-  const size = 220 + Math.random()*180;
+  const size = 160 + Math.random()*120;
   puff.style.width = puff.style.height = size + 'px';
 
   smokeBg.appendChild(puff);

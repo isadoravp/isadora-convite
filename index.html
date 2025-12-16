@@ -53,12 +53,12 @@ body::after{
 .cenario-castelo{
   position:fixed;
   left:50%;
-  bottom:16%;
+  bottom:20%;
   transform:translateX(-50%);
 
   width:125%;
   max-width:1400px;
-  height:90vh;
+  height:80vh;
 
   background:url("assets/castelo1.png") center bottom no-repeat;
   background-size:contain;
@@ -68,24 +68,15 @@ body::after{
   z-index:0;
   pointer-events:none;
 
-filter:
-  brightness(1.12)
-  contrast(1.08)
-  saturate(1.05)
-  drop-shadow(0 50px 120px rgba(0,0,0,0.45))
-  drop-shadow(0 0 160px rgba(130,180,255,0.45));
+  /* PROFUNDIDADE E ATMOSFERA */
+  filter:
+    drop-shadow(0 60px 140px rgba(0,0,0,0.45))
+    drop-shadow(0 0 120px rgba(120,170,255,0.28));
 
-    -webkit-mask-image:
-    radial-gradient(
-      ellipse at center bottom,
-      rgba(0,0,0,1) 0%,
-      rgba(0,0,0,0.95) 35%,
-      rgba(0,0,0,0.75) 55%,
-      rgba(0,0,0,0.35) 70%,
-      rgba(0,0,0,0.12) 82%,
-      transparent 95%
-    );
+  /* INTEGRAÇÃO COM O FUNDO */
+  mix-blend-mode:soft-light;
 
+  /* DESAPARECER BORDAS (ANTI-QUADRADO) */
   mask-image:
     radial-gradient(
       ellipse at center bottom,
@@ -96,47 +87,6 @@ filter:
       rgba(0,0,0,0.12) 82%,
       transparent 95%
     );
-.cenario-castelo::after{
-  content:"";
-  position:absolute;
-  inset:-12% -10% -5% -10%;
-
-  background:
-    radial-gradient(
-      ellipse at center bottom,
-      rgba(160,210,255,0.38) 0%,
-      rgba(120,170,255,0.25) 30%,
-      rgba(80,130,220,0.12) 55%,
-      transparent 75%
-    );
-
-  filter:blur(48px);
-  z-index:-1;
-}
-  
-}
-
-  .nevoa-cenario{
-  position:fixed;
-  left:50%;
-  bottom:0;
-  transform:translateX(-50%);
-  width:140%;
-  height:70vh;
-
-  background:
-    radial-gradient(
-      ellipse at center,
-      rgba(40,70,130,0.35) 0%,
-      rgba(30,55,110,0.28) 30%,
-      rgba(20,40,90,0.18) 55%,
-      rgba(15,30,70,0.1) 70%,
-      transparent 90%
-    );
-
-  filter:blur(40px);
-  z-index:1;
-  pointer-events:none;
 }
   
 /* =====================
@@ -343,61 +293,56 @@ box-shadow:
 @media (max-width: 768px){
 
   .cenario-castelo{
-    bottom:8%;
-    height:60vh;
-    width:135%;
-    opacity:0.7;
-    filter:
-    brightness(1.18)
-    contrast(1.1)
-    saturate(1.08)
-    drop-shadow(0 40px 90px rgba(0,0,0,0.45))
-    drop-shadow(0 0 140px rgba(150,200,255,0.55));
+    bottom:6%;
+    height:48vh;
+    width:120%;
+    opacity:0.92;
+
     background-position:center bottom;
+
+    filter:
+      drop-shadow(0 30px 70px rgba(0,0,0,0.35))
+      drop-shadow(0 0 60px rgba(120,170,255,0.22));
+
+    mix-blend-mode:normal;
 
     -webkit-mask-image:
       linear-gradient(
         to top,
         rgba(0,0,0,1) 0%,
-        rgba(0,0,0,0.9) 55%,
-        rgba(0,0,0,0.6) 70%,
-        rgba(0,0,0,0.25) 82%,
-        transparent 95%
+        rgba(0,0,0,0.85) 45%,
+        rgba(0,0,0,0.55) 65%,
+        rgba(0,0,0,0.25) 78%,
+        transparent 92%
       );
 
     mask-image:
       linear-gradient(
         to top,
         rgba(0,0,0,1) 0%,
-        rgba(0,0,0,0.9) 55%,
-        rgba(0,0,0,0.6) 70%,
-        rgba(0,0,0,0.25) 82%,
-        transparent 95%
+        rgba(0,0,0,0.85) 45%,
+        rgba(0,0,0,0.55) 65%,
+        rgba(0,0,0,0.25) 78%,
+        transparent 92%
       );
   }
-
+}
+  
+@media (max-width: 768px){
+  .smoke{
+    filter:blur(18px);
+  }
 }
 
-#audioOverlay{
-  position: fixed;
-  inset: 0;
-  z-index: 9999;
-}
   
 </style>
 </head>
 
 <body>
-
-<audio id="bgMusic" src="assets/audio/musica.mp3" loop muted></audio>
-<div id="audioOverlay"></div>
-
   
 <!-- CENÁRIO CASTELO -->
 <div class="cenario-castelo"></div>
-
-<div class="nevoa-cenario"></div>
-
+  
 <!-- Partículas -->
 <div id="particles"></div>
 
@@ -409,6 +354,9 @@ box-shadow:
 </div>
 
 <script>
+const isMobile = window.innerWidth <= 768;
+
+  
 /* PARTÍCULAS DOURADAS DO FUNDO */
 const particleContainer = document.getElementById('particles');
 
@@ -421,7 +369,7 @@ function createSpark(){
   particleContainer.appendChild(s);
   setTimeout(()=>s.remove(),9000);
 }
-setInterval(createSpark,180);
+setInterval(createSpark, isMobile ? 420 : 180);
 
 /* CARTA + FUMAÇA + GLITTER */
 const carta = document.getElementById('carta');
@@ -434,7 +382,7 @@ window.addEventListener('load', () => {
   const largura = carta.offsetWidth;
 
   /* FUMAÇA AZUL */
-  for(let i=0;i<30;i++){
+  for(let i=0;i<(isMobile ? 14 : 30);i++){
     setTimeout(()=>{
       const smoke = document.createElement('div');
       smoke.className = 'smoke';
@@ -466,7 +414,7 @@ window.addEventListener('load', () => {
     carta.classList.add('aberta');
 
 
-    for(let i=0;i<26;i++){
+    for(let i=0;i<(isMobile ? 12 : 26);i++){
       setTimeout(()=>{
         const smoke = document.createElement('div');
         smoke.className = 'smoke';
@@ -498,28 +446,6 @@ window.addEventListener('load', () => {
   }, 5200);
 
 });
-
-const audio = document.getElementById("bgMusic");
-const overlay = document.getElementById("audioOverlay");
-
-audio.volume = 0.5;
-audio.muted = true;
-
-function startMusic(){
-  audio.muted = false;
-  audio.play();
-  overlay.remove();
-}
-
-overlay.addEventListener("click", startMusic);
-overlay.addEventListener("touchstart", startMusic, { once: true });
-
-// 👉 ao clicar na carta
-document.querySelector('.carta').addEventListener('click', () => {
-  localStorage.setItem("musicTime", audio.currentTime);
-  window.location.href = "convite.html";
-});
-  
 </script>
 
 

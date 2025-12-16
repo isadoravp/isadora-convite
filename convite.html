@@ -226,7 +226,8 @@ li {
 
 <script>
 /* ================= MÚSICA ================= */
-const music = new Audio('assets/audio/musica.mp3');
+// Seleciona o audio existente no DOM
+const music = document.getElementById('bgMusic') || new Audio('assets/audio/musica.mp3');
 music.loop = true;
 music.volume = 0.5;
 

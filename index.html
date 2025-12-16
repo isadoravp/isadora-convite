@@ -401,10 +401,6 @@ box-shadow:
 </div>
 
 <script>
-/* MÚSICA */
-const music = document.getElementById("bgMusic");
-music.volume = 0.5;
-  
 /* PARTÍCULAS DOURADAS DO FUNDO */
 const particleContainer = document.getElementById('particles');
 
@@ -433,23 +429,6 @@ carta.addEventListener("click", () => {
     musicStarted = true;
   }
 });
-
-
-window.addEventListener('load', () => {
-  setTimeout(() => {
-  carta.classList.add('aberta');
-
-  const largura = carta.offsetWidth;
-
-  let musicStarted = false;
-
-carta.addEventListener("click", () => {
-  if (!musicStarted) {
-    music.play();
-    musicStarted = true;
-  }
-});
-
 
   /* FUMAÇA AZUL */
   for(let i=0;i<30;i++){

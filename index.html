@@ -38,7 +38,7 @@ body::after{
   z-index:-1;
 }
 
-/* CENÁRIO CASTELO */
+/* ====== CENÁRIO CASTELO ====== */
 .cenario-castelo{
   position:fixed;
   left:50%;
@@ -64,7 +64,7 @@ body::after{
   filter:blur(48px);
 }
 
-/* PARTÍCULAS */
+/* ====== PARTÍCULAS ====== */
 #particles{
   position:fixed;
   inset:0;
@@ -87,7 +87,9 @@ body::after{
   to{transform:translateY(110vh);opacity:0;}
 }
 
-/* CARTA */
+
+/* ====== CARTA ====== */
+
 .carta-container{
   position:absolute;
   top:50%;
@@ -95,27 +97,193 @@ body::after{
   transform:translate(-50%,-50%);
   width:320px;
   max-width:80vw;
+  cursor:pointer;
   z-index:2;
+  filter:
+    drop-shadow(0 18px 40px rgba(0,0,0,0.55))
+    drop-shadow(0 0 22px rgba(180,220,255,0.35));
 }
 
 .carta-container img{
   width:100%;
   position:absolute;
+  top:0;
+  left:0;
   transition:opacity 1.4s ease, transform 1.6s ease;
 }
 
-.carta-aberta{opacity:0;}
+.carta-aberta{
+  opacity:0;
+  transform:scale(0.95);
+}
 
 .carta-container.aberta .carta-fechada{
+  animation:pulseGlow 2.8s ease-in-out forwards;
   opacity:0;
-  transform:scale(.9);
+  transform:scale(0.9);
 }
 
 .carta-container.aberta .carta-aberta{
+  animation:pulseGlow 2.8s ease-in-out forwards;
   opacity:1;
+  transform:scale(1);
+}
+  
+  @keyframes pulseGlow{
+  0%{
+    filter:drop-shadow(0 0 0 rgba(180,220,255,0));
+  }
+  40%{
+    filter:drop-shadow(0 0 28px rgba(180,220,255,0.8));
+  }
+  100%{
+    filter:drop-shadow(0 0 12px rgba(180,220,255,0.4));
+  }
 }
 
-/* AUDIO OVERLAY */
+/* ====== FUMAÇA DOURADA MÁGICA ====== */
+
+.fumaca-container{
+  position:absolute;
+  inset:0;
+  pointer-events:none;
+}
+
+.smoke{
+  position:absolute;
+  bottom:13%;
+  left:50%;
+  border-radius:50%;
+  animation:smokeUp 3.8s ease-out forwards;
+
+  /* ====== AZUL MARINHO MÁGICO ====== */
+  background:radial-gradient(
+  circle,
+  rgba(55,95,160,0.55) 0%,
+  rgba(40,75,140,0.38) 35%,
+  rgba(25,50,105,0.22) 60%,
+  rgba(15,30,70,0.08) 100%
+);
+
+filter:blur(24px);
+
+box-shadow:
+  0 0 26px rgba(70,120,200,0.45),
+  0 0 58px rgba(50,90,160,0.25);
+}
+
+@keyframes smokeUp{
+  0%{
+    transform:translate(-50%,0) scale(0.6);
+    opacity:0;
+  }
+  25%{
+    opacity:.95;
+  }
+  100%{
+    transform:
+      translate(
+        calc(-50% + var(--x)),
+        -240px
+      )
+      scale(1.9);
+    opacity:0;
+  }
+}
+  
+.carta-container.aberta .smoke{
+  animation:
+    smokeUp 3.8s ease-out forwards,
+    smokeGlow 1.8s ease-in-out infinite alternate;
+}
+
+@keyframes smokeGlow{
+  from{
+    filter:blur(24px) brightness(1);
+    box-shadow:
+      0 0 18px rgba(60,100,180,0.25),
+      0 0 36px rgba(40,80,150,0.15);
+  }
+  to{
+    filter:blur(26px) brightness(1.22);
+    box-shadow:
+      0 0 32px rgba(90,140,220,0.55),
+      0 0 60px rgba(70,120,200,0.35);
+  }
+}
+
+ /*====== GLITTER MÁGICO ====== */
+.magic-glitter{
+  position:absolute;
+  width:6px;
+  height:6px;
+  bottom:15%;
+  left:50%;
+  border-radius:50%;
+  background:radial-gradient(
+    circle,
+    #fff6c7 0%,
+    #ffd700 45%,
+    rgba(255,215,0,0.3) 70%,
+    transparent 100%
+  );
+  filter: blur(12px);
+  box-shadow:0 0 14px rgba(255,215,120,0.9);
+  animation:glitterUp 2.2s ease-out forwards;
+}
+
+@keyframes glitterUp{
+  0%{
+    opacity:0;
+    transform:translate(-50%,10px) scale(0.5);
+  }
+  30%{
+    opacity:1;
+  }
+  100%{
+    opacity:0;
+    transform:
+      translate(
+        calc(-50% + var(--gx)),
+        -140px
+      )
+      scale(1.3);
+  }
+}
+
+@media (max-width:768px){
+
+  .cenario-castelo{
+    bottom:8%;
+    height:60vh;
+    width:135%;
+    opacity:0.7;
+    filter: brightness(1.18) contrast(1.1) saturate(1.08) drop-shadow(0 40px 90px rgba(0,0,0,0.45)) drop-shadow(0 0 140px rgba(150,200,255,0.55));
+    background-position:center bottom;
+
+    -webkit-mask-image:
+      linear-gradient(
+        to top,
+        rgba(0,0,0,1) 0%,
+        rgba(0,0,0,0.9) 55%,
+        rgba(0,0,0,0.6) 70%,
+        rgba(0,0,0,0.25) 82%,
+        transparent 95%
+      );
+
+    mask-image:
+      linear-gradient(
+        to top,
+        rgba(0,0,0,1) 0%,
+        rgba(0,0,0,0.9) 55%,
+        rgba(0,0,0,0.6) 70%,
+        rgba(0,0,0,0.25) 82%,
+        transparent 95%
+      );
+  }
+}
+
+/* ====== AUDIO OVERLAY ====== */
 #audioOverlay{
   position:fixed;
   inset:0;
@@ -131,13 +299,15 @@ body::after{
 
 <div class="cenario-castelo"></div>
 <div id="particles"></div>
-
+  
 <div class="carta-container" id="carta">
   <img src="assets/carta-fechada.png" class="carta-fechada">
   <img src="assets/carta-aberta.png" class="carta-aberta">
+  <div class="fumaca-container" id="fumaca"></div>
 </div>
 
 <script>
+/* ====== MÚSICA ====== */
 const music = new Audio('assets/audio/musica.mp3');
 music.loop = true;
 music.volume = 0.5;
@@ -155,6 +325,7 @@ function startMusic(){
 overlay.addEventListener('click', startMusic, { once:true });
 overlay.addEventListener('touchstart', startMusic, { once:true });
 
+/* ====== PARTÍCULAS ====== */
 const particleContainer = document.getElementById('particles');
 setInterval(()=>{
   const s=document.createElement('div');
@@ -165,6 +336,73 @@ setInterval(()=>{
   setTimeout(()=>s.remove(),7000);
 },300);
 
+/* ====== CARTA + FUMAÇA + GLITTER ====== */
+const carta = document.getElementById('carta');
+const fumaca = document.getElementById('fumaca');
+
+window.addEventListener('load', () => {
+  setTimeout(() => {
+  carta.classList.add('aberta');
+
+  const largura = carta.offsetWidth;
+
+  /* ====== FUMAÇA AZUL ====== */
+  for(let i=0;i<30;i++){
+    setTimeout(()=>{
+      const smoke = document.createElement('div');
+      smoke.className = 'smoke';
+      smoke.style.setProperty('--x', `${Math.random()*largura/2 - largura/4}px`);
+      const size = largura*0.1 + Math.random()*largura*0.15;
+      smoke.style.width = smoke.style.height = size + 'px';
+      smoke.style.opacity = 0.55 + Math.random()*0.25;
+      fumaca.appendChild(smoke);
+      setTimeout(()=>smoke.remove(),4200);
+    }, i*100);
+  }
+
+/* ====== GLITTER DOURADO ====== */
+  for(let i=0;i<22;i++){
+    setTimeout(()=>{
+      const g = document.createElement('div');
+      g.className = 'magic-glitter';
+      g.style.setProperty('--gx', `${Math.random()*120 - 60}px`);
+      fumaca.appendChild(g);
+      setTimeout(()=>g.remove(),2200);
+    }, i*140);
+  }
+
+}, 1000);
+
+  setTimeout(() => {
+    carta.classList.add('aberta');
+
+
+    for(let i=0;i<26;i++){
+      setTimeout(()=>{
+        const smoke = document.createElement('div');
+        smoke.className = 'smoke';
+        smoke.style.setProperty('--x', `${Math.random()*140 - 70}px`);
+        const size = 28 + Math.random()*45;
+        smoke.style.width = smoke.style.height = size + 'px';
+        fumaca.appendChild(smoke);
+        setTimeout(()=>smoke.remove(),4200);
+      }, i*110);
+    }
+    
+/* ====== GLITTER MÁGICO ====== */
+    for(let i=0;i<18;i++){
+      setTimeout(()=>{
+        const g = document.createElement('div');
+        g.className = 'magic-glitter';
+        g.style.left = `calc(50% + ${Math.random()*120 - 60}px)`;
+        g.style.bottom = '28%';
+        fumaca.appendChild(g);
+        setTimeout(()=>g.remove(),2000);
+      }, i*160);
+    }
+  }, 1000);
+
+/* ====== IR PARA PÁGINA 2 ====== */
 window.addEventListener('load',()=>{
   setTimeout(()=>document.getElementById('carta').classList.add('aberta'),1000);
   setTimeout(()=>{

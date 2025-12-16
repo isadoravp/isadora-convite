@@ -307,13 +307,18 @@ body::after{
 const music = document.getElementById('bgMusic');
 music.volume = 0.5;
 
-const overlay = document.getElementById('audioOverlay');
+// Recupera tempo salvo se existir
+const savedTime = localStorage.getItem('musicTime');
+if(savedTime) music.currentTime = parseFloat(savedTime);
 
-function startMusic() {
+const overlay = document.getElementById("audioOverlay");
+
+function startMusic(){
   music.play().catch(()=>console.log("Música só tocará após interação"));
   overlay.remove();
 }
 
+// Garante tocar no primeiro toque/click
 overlay.addEventListener("click", startMusic, { once:true });
 overlay.addEventListener("touchstart", startMusic, { once:true });
 
@@ -364,12 +369,13 @@ window.addEventListener('load', () => {
     }
 
   },1000);
-
+  
+// IR PARA A PÁGINA 2
+window.addEventListener('load', () => {
   setTimeout(() => {
     localStorage.setItem('musicTime', music.currentTime);
-    window.location.href='convite.html';
-  },5200);
-
+    window.location.href = 'convite.html';
+  }, 5200);
 });
 </script>
 

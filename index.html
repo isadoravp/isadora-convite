@@ -118,19 +118,19 @@ html,body{
 .fumaca{
   position:absolute;
   left:50%;
-  bottom:40px;
-  width:240px;
-  height:240px;
+  bottom:60px;
+  width:260px;
+  height:260px;
   transform:translateX(-50%);
   background:radial-gradient(circle,
-    rgba(120,180,255,.75),
-    rgba(80,140,255,.45),
-    transparent 70%
+    rgba(140,190,255,.85),
+    rgba(90,150,255,.45),
+    transparent 72%
   );
-  filter:blur(30px);
-  animation:fumaça 3.2s ease-out forwards;
+  filter:blur(35px);
+  animation:fumaça 3.5s ease-out forwards;
   pointer-events:none;
-  z-index:20;
+  z-index:30;
 }
 
 @keyframes fumaça{
@@ -274,11 +274,19 @@ startParticles(particles2);
 
 /* CARTA + FUMAÇA */
 setTimeout(()=>{
-  carta.classList.add("aberta");
-  const f=document.createElement("div");
-  f.className="fumaca";
-  carta.appendChild(f);
-  setTimeout(()=>f.remove(),3200);
+  const cartaEl = document.getElementById("carta");
+  cartaEl.classList.add("aberta");
+
+  // cria a fumaça exatamente ao abrir
+  const fumaca = document.createElement("div");
+  fumaca.classList.add("fumaca");
+  cartaEl.appendChild(fumaca);
+
+  // remove após animação
+  setTimeout(()=>{
+    fumaca.remove();
+  },3500);
+
 },1200);
 
 /* TRANSIÇÃO */

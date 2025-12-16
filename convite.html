@@ -183,8 +183,6 @@ li {
 <!-- Partículas douradas -->
 <div id="particles"></div>
 
-<div id="magicContainer" style="position:absolute; inset:0; pointer-events:none; z-index:1;"></div>
-
 <!-- ================= CARTA ================= -->
 <img src="assets/convite.png" alt="Convite" class="carta">
 
@@ -257,88 +255,6 @@ function createSpark(){
   setTimeout(()=>s.remove(), 9000);
 }
 setInterval(createSpark, 180);
-
-const magicContainer = document.getElementById("magicContainer");
-const carta = document.querySelector(".carta");
-
-// Função para criar partículas douradas subindo
-function createGoldenSpark() {
-  const spark = document.createElement("div");
-  spark.className = "spark";
-  spark.style.width = spark.style.height = 4 + Math.random() * 4 + "px";
-  spark.style.left = Math.random() * 100 + "vw";
-  spark.style.bottom = "-10px";
-  spark.style.background = "radial-gradient(circle, #ffd700, rgba(255,215,0,0))";
-  spark.style.boxShadow = "0 0 8px #ffd700";
-  spark.style.borderRadius = "50%";
-  spark.style.opacity = 0.6 + Math.random() * 0.4;
-  spark.style.position = "absolute";
-  spark.style.animation = `rise${Math.random()*2+3}s linear forwards`;
-  
-  magicContainer.appendChild(spark);
-  
-  setTimeout(() => spark.remove(), 6000);
-}
-
-// Keyframes dinâmicos para partículas subindo
-const style = document.createElement("style");
-style.innerHTML = `
-@keyframes rise3s { to { transform: translateY(-110vh); opacity:0; } }
-@keyframes rise4s { to { transform: translateY(-110vh); opacity:0; } }
-@keyframes rise5s { to { transform: translateY(-110vh); opacity:0; } }
-`;
-document.head.appendChild(style);
-
-// Criar partículas constantemente
-setInterval(createGoldenSpark, 150);
-
-// Fios de luz curvos
-function createLightTrail() {
-  const trail = document.createElement("div");
-  trail.style.width = 2 + Math.random()*2 + "px";
-  trail.style.height = 40 + Math.random()*60 + "px";
-  trail.style.position = "absolute";
-  trail.style.left = Math.random()*100 + "vw";
-  trail.style.bottom = "-60px";
-  trail.style.background = "linear-gradient(to top, rgba(255,255,200,0.8), rgba(255,255,200,0))";
-  trail.style.borderRadius = "50%";
-  trail.style.filter = "blur(3px)";
-  trail.style.opacity = 0.4 + Math.random()*0.4;
-  trail.style.animation = `rise${Math.random()*2+3}s ease-out forwards`;
-  
-  magicContainer.appendChild(trail);
-  setTimeout(() => trail.remove(), 6000);
-}
-
-setInterval(createLightTrail, 300);
-
-// Fumaça etérea leve
-function createSmoke() {
-  const smoke = document.createElement("div");
-  smoke.style.width = 40 + Math.random()*30 + "px";
-  smoke.style.height = 40 + Math.random()*30 + "px";
-  smoke.style.background = "radial-gradient(circle, rgba(180,200,255,0.35), rgba(180,200,255,0))";
-  smoke.style.position = "absolute";
-  smoke.style.left = (carta.offsetLeft + carta.offsetWidth/2 + Math.random()*100-50) + "px";
-  smoke.style.bottom = (carta.offsetTop + carta.offsetHeight*0.1) + "px";
-  smoke.style.borderRadius = "50%";
-  smoke.style.filter = "blur(20px)";
-  smoke.style.opacity = 0.4 + Math.random()*0.3;
-  smoke.style.animation = `smokeRise${3 + Math.random()*2}s ease-out forwards`;
-  
-  magicContainer.appendChild(smoke);
-  setTimeout(() => smoke.remove(), 5000);
-}
-
-const smokeStyle = document.createElement("style");
-smokeStyle.innerHTML = `
-@keyframes smokeRise3s { to { transform: translateY(-120px) scale(1.8); opacity:0; } }
-@keyframes smokeRise4s { to { transform: translateY(-140px) scale(1.9); opacity:0; } }
-@keyframes smokeRise5s { to { transform: translateY(-160px) scale(2); opacity:0; } }
-`;
-document.head.appendChild(smokeStyle);
-
-setInterval(createSmoke, 200);
 
 /* ================= MODAIS ================= */
 const modalPrincipal = document.getElementById("modalPrincipal");

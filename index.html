@@ -118,31 +118,50 @@ section{
   position:absolute;
   inset:0;
   pointer-events:none;
+  z-index:10; /* acima da carta */
+  overflow:visible;
 }
 
 .smoke{
   position:absolute;
-  bottom:15%;
+  bottom:18%;
   left:50%;
-  width:60px;
-  height:60px;
+  width:80px;
+  height:80px;
   border-radius:50%;
-  background:radial-gradient(circle,
-    rgba(60,100,180,.5),
-    transparent 70%);
-  filter:blur(26px);
-  animation:smokeUp 4s forwards;
+  outline:1px solid rgba(255,255,255,0.15);
+  background:radial-gradient(
+    circle,
+    rgba(90,140,255,0.85) 0%,
+    rgba(60,110,220,0.55) 35%,
+    rgba(30,70,160,0.25) 60%,
+    transparent 75%
+  );
+
+  filter:blur(18px);
+  opacity:0;
+
+  animation:smokeUp 4.2s ease-out forwards;
 }
 
 @keyframes smokeUp{
-  from{ transform:translate(-50%,0) scale(.6); opacity:0; }
-  30%{ opacity:1; }
-  to{
-    transform:translate(calc(-50% + var(--x)),-260px) scale(2);
+  0%{
+    transform:translate(-50%,20px) scale(0.5);
+    opacity:0;
+  }
+  25%{
+    opacity:1;
+  }
+  100%{
+    transform:
+      translate(
+        calc(-50% + var(--x)),
+        -260px
+      )
+      scale(2);
     opacity:0;
   }
 }
-
 /* ================= PAGE 2 ================= */
 #page2{
   background:linear-gradient(
@@ -267,17 +286,23 @@ const fumaca=document.getElementById("fumaca");
 
 setTimeout(()=>{
   carta.classList.add("aberta");
+  fumaca.classList.add("fumaca");
 
-  for(let i=0;i<30;i++){
-    setTimeout(()=>{
-      const s=document.createElement("div");
-      s.className="smoke";
-      s.style.setProperty("--x",Math.random()*160-80+"px");
-      fumaca.appendChild(s);
-      setTimeout(()=>s.remove(),4000);
-    },i*100);
-  }
-},1000);
+  for(let i=0;i<28;i++){
+  setTimeout(()=>{
+    const s=document.createElement("div");
+    s.className="smoke";
+    s.style.setProperty("--x", (Math.random()*180 - 90) + "px");
+
+    const size = 60 + Math.random()*60;
+    s.style.width = s.style.height = size + "px";
+
+    fumaca.appendChild(s);
+
+    setTimeout(()=>s.remove(),4500);
+  }, i*110);
+}
+
 
 /* ================= TRANSIÇÃO ================= */
 setTimeout(()=>{

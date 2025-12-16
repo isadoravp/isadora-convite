@@ -280,6 +280,60 @@ html,body{
 </div>
 
 <script>
+/* =====================
+   FUMAÇA AZUL + GLITTER
+===================== */
+
+const carta = document.getElementById('carta');
+const fumaca = document.getElementById('fumaca');
+
+function criarFumaca(){
+  const largura = carta.offsetWidth;
+
+  /* FUMAÇA */
+  for(let i=0;i<28;i++){
+    setTimeout(()=>{
+      const smoke = document.createElement('div');
+      smoke.className = 'smoke';
+
+      smoke.style.setProperty(
+        '--x',
+        `${Math.random()*largura/2 - largura/4}px`
+      );
+
+      const size = largura*0.12 + Math.random()*largura*0.18;
+      smoke.style.width = size + 'px';
+      smoke.style.height = size + 'px';
+      smoke.style.opacity = 0.5 + Math.random()*0.3;
+
+      fumaca.appendChild(smoke);
+
+      setTimeout(()=>smoke.remove(),4200);
+    }, i*110);
+  }
+
+  /* GLITTER */
+  for(let i=0;i<20;i++){
+    setTimeout(()=>{
+      const g = document.createElement('div');
+      g.className = 'magic-glitter';
+
+      g.style.setProperty(
+        '--gx',
+        `${Math.random()*120 - 60}px`
+      );
+
+      fumaca.appendChild(g);
+      setTimeout(()=>g.remove(),2200);
+    }, i*140);
+  }
+}
+
+/* DISPARA JUNTO COM A ABERTURA */
+setTimeout(()=>{
+  carta.classList.add('aberta');
+  criarFumaca();
+},1000);
 /* ================= AUDIO ================= */
 const audio=document.getElementById("bgMusic");
 const overlay=document.getElementById("audioOverlay");

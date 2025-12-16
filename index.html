@@ -154,11 +154,11 @@ filter:
 .spark{
   position:absolute;
   top:-10px;
-  width:4px;
-  height:4px;
+  width:2px;
+  height:2px;
   background:var(--dourado);
   border-radius:50%;
-  box-shadow:0 0 8px var(--dourado);
+  box-shadow: 0 0 4px #ffd700;
   animation:fall linear forwards;
 }
 
@@ -315,7 +315,7 @@ box-shadow:
     rgba(255,215,0,0.3) 70%,
     transparent 100%
   );
-  filter:blur(1px);
+  filter: blur(12px);
   box-shadow:0 0 14px rgba(255,215,120,0.9);
   animation:glitterUp 2.2s ease-out forwards;
 }
@@ -412,11 +412,14 @@ box-shadow:
 const music = new Audio('assets/audio/musica.mp3');
 music.loop = true;
 music.volume = 0.5;
+  
+const savedTime = localStorage.getItem('musicTime');
+if (savedTime) music.currentTime = parseFloat(savedTime);
 
 const overlay = document.getElementById("audioOverlay");
 
 function startMusic(){
-  music.play();
+  music.play().catch(()=>console.log("Música só tocará após interação"));
   overlay.remove();
 }
 
@@ -430,12 +433,15 @@ function createSpark(){
   const s = document.createElement('div');
   s.className = 'spark';
   s.style.left = Math.random()*100 + 'vw';
-  s.style.animationDuration = (4 + Math.random()*4) + 's';
-  s.style.opacity = 0.5 + Math.random()*0.5;
+  s.style.animationDuration = (3 + Math.random()*3) + 's'; 
+  s.style.opacity = 0.4 + Math.random()*0.4;
   particleContainer.appendChild(s);
-  setTimeout(()=>s.remove(),9000);
+  setTimeout(()=>s.remove(), 7000);
 }
-setInterval(createSpark,180);
+
+const intervalTime = window.innerWidth < 768 ? 300 : 180;
+setInterval(createSpark, intervalTime);
+
 
 /* CARTA + FUMAÇA + GLITTER */
 const carta = document.getElementById('carta');

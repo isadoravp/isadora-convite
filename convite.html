@@ -148,9 +148,9 @@ li {
   bottom: -10px; /* inicia embaixo */
   width: 2px;
   height: 2px;
+  box-shadow: 0 0 4px #ffd700;
   background: #ffd700;
   border-radius: 50%;
-  box-shadow: 0 0 4px #ffd700;
   animation: rise linear forwards; /* animação de baixo pra cima */
   opacity: 0.8;
 }
@@ -299,13 +299,12 @@ function createSpark(){
   const s = document.createElement('div');
   s.className = 'spark';
   s.style.left = Math.random()*100 + 'vw';
-  s.style.animationDuration = (3 + Math.random()*3) + 's'; // mais rápido
+  s.style.animationDuration = (3 + Math.random()*3) + 's';
   s.style.opacity = 0.4 + Math.random()*0.4;
   particleContainer.appendChild(s);
   setTimeout(()=>s.remove(), 7000);
 }
 
-// Reduz quantidade de partículas em mobile
 const intervalTime = window.innerWidth < 768 ? 300 : 180;
 setInterval(createSpark, intervalTime);
   

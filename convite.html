@@ -7,13 +7,6 @@
 
 <style>
 /* ================= BASE ================= */
-:root{
-  --azul:#1f3f73;
-  --roxo:#4a3b6e;
-  --vermelho:#7a2c2c;
-  --dourado:#f2c94c;
-}
-
 html, body {
   margin: 0;
   padding: 0;
@@ -21,7 +14,12 @@ html, body {
   height: 100%;
   overflow: hidden;
   font-family: Arial, sans-serif;
-  background: linear-gradient(45deg,#ffc900,rgba(168,51,33,0.2),#00498e);
+  background: linear-gradient(
+    45deg,
+    #ffc900,
+    rgba(168, 51, 33, 0.2),
+    #00498e
+  );
   display: flex;
   align-items: center;
   justify-content: center;
@@ -37,7 +35,7 @@ html, body {
   cursor: pointer;
 }
 
-/* ================= ESTRELAS / FAÍSCAS (invertido) ================= */
+/* ================= ESTRELAS / FAÍSCAS ================= */
 .star {
   position: absolute;
   width: 2px;
@@ -51,12 +49,12 @@ html, body {
 
 @keyframes moveStar {
   from {
-    transform: translateY(110vh) scale(1);
+    transform: translateY(100vh) scale(1);
     opacity: 0;
   }
   10% { opacity: 1; }
   to {
-    transform: translateY(-20vh) scale(0.6);
+    transform: translateY(-120vh) scale(0.6);
     opacity: 0;
   }
 }
@@ -136,48 +134,53 @@ li {
   margin-bottom: 6px;
 }
 
-/* ================= PARTÍCULAS DOURADAS (de baixo para cima) ================= */
+/* ================= PARTÍCULAS DOURADAS (PÁG. 2) ================= */
 #particles{
   position: fixed;
-  inset:0;
-  pointer-events:none;
-  overflow:hidden;
-  z-index:1;
+  inset: 0;
+  pointer-events: none;
+  overflow: hidden;
+  z-index: 1;
 }
 
 .spark{
   position: absolute;
-  bottom: -6px;
+  bottom: -10px; /* inicia embaixo */
   width: 4px;
   height: 4px;
   background: #ffd700;
   border-radius: 50%;
   box-shadow: 0 0 8px #ffd700;
-  animation: rise linear forwards;
-  opacity: 0.7;
+  animation: rise linear forwards; /* animação de baixo pra cima */
+  opacity: 0.8;
 }
 
 @keyframes rise{
   to{
-    transform: translateY(-110vh);
-    opacity:0;
+    transform: translateY(-110vh); /* sobe até cima */
+    opacity: 0;
   }
 }
 
 #audioOverlay{
   position: fixed;
-  inset:0;
-  z-index:9999;
-  cursor:pointer;
+  inset: 0;
+  z-index: 9999;
+  cursor: pointer;
 }
+  
 </style>
 </head>
 
 <body>
 <div id="audioOverlay"></div>
 
-<!-- Partículas douradas -->
+  <!-- Partículas douradas -->
 <div id="particles"></div>
+
+
+<!-- ================= MÚSICA ================= -->
+<audio id="bgMusic" src="assets/audio/musica.mp3" loop></audio>
 
 <!-- ================= CARTA ================= -->
 <img src="assets/convite.png" alt="Convite" class="carta">
@@ -222,59 +225,111 @@ li {
 </div>
 
 <script>
-// ================= MÚSICA =================
-const overlay = document.getElementById("audioOverlay");
+/* ================= MÚSICA ================= */
 const music = new Audio('assets/audio/musica.mp3');
 music.loop = true;
 music.volume = 0.5;
-music.playsInline = true;
+music.playsInline = true; // essencial para iOS e Android
+music.preload = 'auto';
 
-const savedTime = localStorage.getItem('musicTime');
-if(savedTime) music.currentTime = parseFloat(savedTime);
+const overlay = document.getElementById("audioOverlay");
 
-function startMusic(){ music.play().catch(()=>{}); overlay.remove(); }
-overlay.addEventListener("click", startMusic, {once:true});
-overlay.addEventListener("touchstart", startMusic, {once:true});
+overlay.addEventListener("click", () => {
+  music.play().catch(()=>console.log("Som bloqueado, requer interação"));
+  overlay.remove();
+}, { once: true });
 
-// ================= PARTICULAS =================
-const particleContainer = document.getElementById('particles');
+overlay.addEventListener("touchstart", () => {
+  music.play().catch(()=>console.log("Som bloqueado, requer interação"));
+  overlay.remove();
+}, { once: true });
+
+// detectar mobile
+const isMobile = /Mobi|Android/i.test(navigator.userAgent);
+const particleInterval = isMobile ? 350 : 180; // menor frequência para mobile
+const maxParticles = isMobile ? 15 : 30;
+
 function createSpark(){
+  if(document.querySelectorAll('.spark').length >= maxParticles) return;
+
   const s = document.createElement('div');
-  s.className='spark';
-  s.style.left=Math.random()*100+'vw';
-  s.style.animationDuration=(4 + Math.random()*3)+'s';
-  s.style.opacity=0.4 + Math.random()*0.5;
+  s.className = 'spark';
+  s.style.left = Math.random()*100 + 'vw';
+  s.style.animationDuration = (4 + Math.random()*4) + 's';
+  s.style.opacity = 0.5 + Math.random()*0.5;
   particleContainer.appendChild(s);
+
   setTimeout(()=>s.remove(),9000);
 }
-setInterval(createSpark,180);
+setInterval(createSpark, particleInterval);
 
-// ================= ESTRELAS =================
-const totalStars = 120;
-for(let i=0;i<totalStars;i++){
+
+/* ================= ESTRELAS ================= */
+const totalStars = 160;
+for (let i = 0; i < totalStars; i++) {
   const star = document.createElement("div");
   star.className = "star";
-  star.style.left = Math.random()*100 + "vw";
-  star.style.animationDuration = (3 + Math.random()*3) + "s";
-  star.style.animationDelay = Math.random()*5 + "s";
+  star.style.left = Math.random() * 100 + "vw";
+  star.style.animationDuration = (3 + Math.random() * 4) + "s";
+  star.style.animationDelay = Math.random() * 5 + "s";
   document.body.appendChild(star);
 }
 
-// ================= MODAIS =================
+/* ================= MODAIS ================= */
 const modalPrincipal = document.getElementById("modalPrincipal");
-document.querySelector(".btn-modal").onclick = ()=>{ modalPrincipal.style.display="flex"; };
-document.getElementById("dressCode").onclick = ()=>{ document.getElementById("modalDress").style.display="flex"; };
-document.getElementById("presentear").onclick = ()=>{ document.getElementById("modalPresentes").style.display="flex"; };
-document.getElementById("verRota").onclick = ()=>{ window.open("https://maps.app.goo.gl/9Ujs9UPoccGrVMJb8","_blank"); };
-document.getElementById("confirmePresenca").onclick = ()=>{ window.open("https://wa.me/5551992226662?text=Olá,%20confirmo%20minha%20presença%20no%20seu%20aniversário!","_blank"); };
 
-document.querySelectorAll(".close").forEach(btn=>{
-  btn.onclick = ()=>{ document.getElementById(btn.dataset.close).style.display="none"; };
+document.querySelector(".btn-modal").onclick = () => {
+  modalPrincipal.style.display = "flex";
+};
+
+document.getElementById("dressCode").onclick = () => {
+  document.getElementById("modalDress").style.display = "flex";
+};
+
+document.getElementById("presentear").onclick = () => {
+  document.getElementById("modalPresentes").style.display = "flex";
+};
+
+document.getElementById("verRota").onclick = () => {
+  window.open("https://maps.app.goo.gl/9Ujs9UPoccGrVMJb8", "_blank");
+};
+
+document.getElementById("confirmePresenca").onclick = () => {
+  window.open(
+    "https://wa.me/5551992226662?text=Olá,%20confirmo%20minha%20presença%20no%20seu%20aniversário!", "_blank"
+  );
+};
+
+/* ================= FECHAR ================= */
+document.querySelectorAll(".close").forEach(btn => {
+  btn.onclick = () => {
+    document.getElementById(btn.dataset.close).style.display = "none";
+  };
 });
 
-window.onclick = e=>{
-  document.querySelectorAll(".modal, .sub-modal").forEach(m=>{ if(e.target===m) m.style.display="none"; });
+window.onclick = e => {
+  document.querySelectorAll(".modal, .sub-modal").forEach(m => {
+    if (e.target === m) m.style.display = "none";
+  });
 };
+
+/* ================= PARTÍCULAS DOURADAS ================= */
+const particleContainer = document.getElementById('particles');
+
+function createSpark(){
+  const s = document.createElement('div');
+  s.className = 'spark';
+  s.style.left = Math.random() * 100 + 'vw';
+  s.style.animationDuration = (4 + Math.random() * 4) + 's';
+  s.style.opacity = 0.5 + Math.random() * 0.5;
+  particleContainer.appendChild(s);
+
+  setTimeout(() => s.remove(), 9000);
+}
+
+setInterval(createSpark, 180);
+  
 </script>
+
 </body>
 </html>

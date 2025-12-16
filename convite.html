@@ -141,22 +141,34 @@ li {
   bottom: -10px;
   width: 6px;
   height: 6px;
-  background: rgba(255,255,255,0.8);
+  background: radial-gradient(circle at 30% 30%, #fff, rgba(255,255,255,0.1));
   clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%);
-  opacity: 0.7;
-  animation: riseRotate linear forwards;
-  filter: drop-shadow(0 0 6px rgba(255,255,255,0.5));
+  opacity: 0.6;
+  animation: riseRotateGlow linear forwards;
+  filter: drop-shadow(0 0 6px rgba(255,255,255,0.6));
 }
 
-@keyframes riseRotate{
+/* animação de subida + rotação + pulsar brilho */
+@keyframes riseRotateGlow{
   0%{
     transform: translateY(0) rotate(0deg) scale(0.7);
     opacity:0;
+    filter: drop-shadow(0 0 4px rgba(255,255,255,0.3));
   }
-  20%{ opacity:0.8; }
+  20%{
+    opacity:0.8;
+    filter: drop-shadow(0 0 8px rgba(255,255,255,0.8));
+  }
+  50%{
+    filter: drop-shadow(0 0 10px rgba(255,255,255,1));
+  }
+  80%{
+    filter: drop-shadow(0 0 6px rgba(255,255,255,0.7));
+  }
   100%{
     transform: translateY(-110vh) rotate(360deg) scale(1.2);
     opacity:0;
+    filter: drop-shadow(0 0 4px rgba(255,255,255,0.2));
   }
 }
 
@@ -253,13 +265,17 @@ function createSpark(){
   const duration = 4 + Math.random()*3;
   s.style.animationDuration = duration + 's';
   
-  // opacidade inicial
-  s.style.opacity = 0.4 + Math.random() * 0.6;
-  
   // escala inicial
   const scale = 0.6 + Math.random()*0.4;
   s.style.transform = `scale(${scale})`;
   
+  // opacidade inicial aleatória
+  s.style.opacity = 0.4 + Math.random() * 0.6;
+  
+  // variação de cor leve (branco, azul, dourado)
+  const colors = ['#ffffff', '#fdf3c3', '#aee1ff'];
+  s.style.background = `radial-gradient(circle at 30% 30%, ${colors[Math.floor(Math.random()*colors.length)]}, rgba(255,255,255,0.1))`;
+
   particleContainer.appendChild(s);
   
   setTimeout(()=>s.remove(), duration*1000);

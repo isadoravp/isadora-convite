@@ -429,6 +429,16 @@ window.addEventListener('load', () => {
 
   const largura = carta.offsetWidth;
 
+  let musicStarted = false;
+
+carta.addEventListener("click", () => {
+  if (!musicStarted) {
+    music.play();
+    musicStarted = true;
+  }
+});
+
+
   /* FUMAÇA AZUL */
   for(let i=0;i<30;i++){
     setTimeout(()=>{
@@ -442,10 +452,6 @@ window.addEventListener('load', () => {
       setTimeout(()=>smoke.remove(),4200);
     }, i*100);
   }
-
-  carta.addEventListener("click", () => {
-  music.play();
-});
 
   /* GLITTER DOURADO */
   for(let i=0;i<22;i++){

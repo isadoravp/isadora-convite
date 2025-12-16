@@ -37,9 +37,6 @@ html,body{
   background:linear-gradient(45deg,var(--azul),var(--roxo),var(--vermelho),#c98b2b);
   font-family:Georgia,serif;
   z-index:2;
-  display:flex;
-  justify-content:center;
-  align-items:center;
 }
 
 .cenario-castelo{
@@ -205,57 +202,10 @@ html,body{
   background:#f17ea1;
   cursor:pointer;
 }
-
-#modalPresentes ul {
-  list-style: none;
-  padding-left: 0;
-}
-
-#modalPresentes li {
-  margin-bottom: 10px;
-  font-size: 15px;
-}
-
-.smoke-container {
-  position: fixed;
-  inset: 0;
-  pointer-events: none;
-  z-index: 3; 
-  overflow: hidden;
-}
-
-.smoke {
-  position: absolute;
-  bottom: -120px;
-  width: 320px;
-  height: 320px;
-  background: radial-gradient(
-    circle,
-    rgba(120,180,255,0.45),
-    rgba(80,140,255,0.25),
-    transparent 70%
-  );
-  filter: blur(55px);
-  animation: smokeMove linear infinite;
-}
-
-@keyframes smokeMove {
-  from {
-    transform: translateY(0) translateX(0) scale(0.9);
-    opacity: 0;
-  }
-  25% { opacity: 0.7; }
-  to {
-    transform: translateY(-130vh) translateX(80px) scale(1.5);
-    opacity: 0;
-  }
-}
-  
 </style>
 </head>
 
 <body>
-<div class="smoke-container"></div>
 
 <div id="audioOverlay"></div>
 <audio id="bgMusic" src="assets/audio/musica.mp3" autoplay loop muted></audio>
@@ -294,12 +244,7 @@ html,body{
 
 <div class="sub-modal" id="modalPresentes">
   <div class="sub-modal-content">
-    <ul>
-  <li>Perfume</li>
-  <li>Brinco / Colar / Pulseira</li>
-  <li>Roupas Renner</li>
-  <li>Acessórios</li>
-</ul>
+    <p>Perfumes, joias, roupas, acessórios</p>
   </div>
 </div>
 
@@ -329,33 +274,33 @@ startParticles(particles2);
 
 /* CARTA + FUMAÇA */
 setTimeout(()=>{
-  document.getElementById("carta").classList.add("aberta");
+  carta.classList.add("aberta");
   const f=document.createElement("div");
   f.className="fumaca";
-  document.getElementById("carta").appendChild(f);
+  carta.appendChild(f);
   setTimeout(()=>f.remove(),3200);
 },1200);
 
 /* TRANSIÇÃO */
 setTimeout(()=>{
-  document.getElementById("page1").style.display="none";
-  document.getElementById("page2").style.display="flex";
+  page1.style.display="none";
+  page2.style.display="flex";
 },5200);
 
 /* MODAIS */
 document.getElementById("btnInfo").onclick=()=>{
-  document.getElementById("modalPrincipal").style.display="flex";
+  modalPrincipal.style.display="flex";
 };
 
-document.getElementById("dressCode").onclick=()=>document.getElementById("modalDress").style.display="flex";
-document.getElementById("presentear").onclick=()=>document.getElementById("modalPresentes").style.display="flex";
+dressCode.onclick=()=>modalDress.style.display="flex";
+presentear.onclick=()=>modalPresentes.style.display="flex";
 
-document.getElementById("verRota").onclick=()=>{
+verRota.onclick=()=>{
   window.open("https://maps.app.goo.gl/9Ujs9UPoccGrVMJb8","_blank");
 };
 
-document.getElementById("confirmePresenca").onclick=()=>{
-  window.open("https://wa.me/5551992226662?text=Olá,%20confirmo%20minha%20presença%20no%20seu%20aniversário!%20🎉","_blank");
+confirmePresenca.onclick=()=>{
+  window.open("https://wa.me/5551992226662","_blank");
 };
 
 window.onclick=e=>{
@@ -363,20 +308,6 @@ window.onclick=e=>{
     if(e.target===m) m.style.display="none";
   });
 };
-
-const smokeContainer = document.querySelector(".smoke-container");
-
-function createSmoke() {
-  const smoke = document.createElement("div");
-  smoke.className = "smoke";
-  smoke.style.left = Math.random() * 100 + "vw";
-  smoke.style.animationDuration = (18 + Math.random() * 10) + "s";
-  smokeContainer.appendChild(smoke);
-  setTimeout(() => smoke.remove(), 30000);
-}
-
-// quantidade equilibrada
-setInterval(createSmoke, 2500);
 </script>
 
 </body>

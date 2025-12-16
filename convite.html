@@ -173,6 +173,8 @@ li {
 </head>
 
 <body>
+
+<audio id="bgMusic" src="assets/audio/musica.mp3" loop muted></audio>  
 <div id="audioOverlay"></div>
 
   <!-- Partículas douradas -->
@@ -230,20 +232,27 @@ li {
 <script>
 /* ================= MÚSICA ================= */
 const audio = document.getElementById("bgMusic");
-audio.volume = 0.5;
-audio.muted = true;
 
-const overlay = document.getElementById("audioOverlay");
+audio.volume = 0;
+audio.muted = false;
 
-function startMusic(){
-  audio.muted = false;
+window.addEventListener("load", () => {
+  const savedTime = localStorage.getItem("musicTime");
+
+  if (savedTime) {
+    audio.currentTime = parseFloat(savedTime);
+  }
+
   audio.play();
-  overlay.remove();
-}
 
-overlay.addEventListener("click", startMusic);
-overlay.addEventListener("touchstart", startMusic, { once: true });
-
+  // fade-in suave
+  let vol = 0;
+  const fade = setInterval(() => {
+    vol += 0.05;
+    audio.volume = Math.min(vol, 0.5);
+    if (vol >= 0.5) clearInterval(fade);
+  }, 100);
+});
 
 /* ================= ESTRELAS ================= */
 const totalStars = 160;

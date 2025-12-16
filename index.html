@@ -413,15 +413,19 @@ const music = new Audio('assets/audio/musica.mp3');
 music.loop = true;
 music.volume = 0.5;
 
-const overlay = document.getElementById("audioOverlay");
+const overlay = document.getElementById('audioOverlay');
 
-function startMusic(){
-  music.play();
+function startMusic() {
+  music.play().catch(err => {
+    console.log('Tentativa de play falhou:', err);
+  });
+
   overlay.remove();
 }
 
-overlay.addEventListener("click", startMusic, { once: true });
-overlay.addEventListener("touchstart", startMusic, { once: true });
+// toca música no primeiro toque ou click
+overlay.addEventListener('click', startMusic, { once: true });
+overlay.addEventListener('touchstart', startMusic, { once: true });
   
 /* PARTÍCULAS DOURADAS DO FUNDO */
 const particleContainer = document.getElementById('particles');

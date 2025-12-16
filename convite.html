@@ -226,22 +226,22 @@ li {
 
 <script>
 /* ================= MÚSICA ================= */
-const audio = document.getElementById("bgMusic");
-audio.volume = 0.5;
+const music = new Audio('assets/audio/musica.mp3');
+music.loop = true;
+music.volume = 0.5;
 
-const savedTime = localStorage.getItem("musicTime");
-if (savedTime) {
-  audio.currentTime = parseFloat(savedTime);
-}
+// verifica se existe tempo salvo da página 1
+const savedTime = localStorage.getItem('musicTime');
+if (savedTime) music.currentTime = parseFloat(savedTime);
 
 const overlay = document.getElementById("audioOverlay");
 
 function startMusic(){
-  audio.play();
+  music.play();
   overlay.remove();
 }
 
-overlay.addEventListener("click", startMusic);
+overlay.addEventListener("click", startMusic, { once: true });
 overlay.addEventListener("touchstart", startMusic, { once: true });
 
 /* ================= ESTRELAS ================= */

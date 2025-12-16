@@ -417,10 +417,7 @@ music.volume = 0.5;
 const overlay = document.getElementById("audioOverlay");
 
 function startMusic(){
-  const music = new Audio('assets/audio/musica.mp3'); // criar no clique
-  music.loop = true;
-  music.volume = 0.5;
-  music.play();
+  music.play();   
   overlay.remove();
 }
 
@@ -512,7 +509,6 @@ window.addEventListener('load', () => {
 
 // IR PARA A PÁGINA 2
 setTimeout(() => {
-  // salva o tempo atual da música
   localStorage.setItem('musicTime', music.currentTime);
   window.location.href = 'convite.html';
 }, 5200);

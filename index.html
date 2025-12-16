@@ -179,21 +179,17 @@ body::after{
   left:50%;
   border-radius:50%;
   animation:smokeUp 3.8s ease-out forwards;
-
-  /* ====== AZUL MARINHO MÁGICO ====== */
   background:radial-gradient(
-  circle,
-  rgba(55,95,160,0.55) 0%,
-  rgba(40,75,140,0.38) 35%,
-  rgba(25,50,105,0.22) 60%,
-  rgba(15,30,70,0.08) 100%
-);
-
-filter:blur(24px);
-
-box-shadow:
-  0 0 26px rgba(70,120,200,0.45),
-  0 0 58px rgba(50,90,160,0.25);
+    circle,
+    rgba(255,220,140,0.75) 0%,
+    rgba(240,190,95,0.55) 35%,
+    rgba(210,160,60,0.32) 60%,
+    rgba(170,120,35,0.12) 100%
+  );
+  filter:blur(26px);
+  box-shadow:
+    0 0 32px rgba(255,210,120,0.65),
+    0 0 68px rgba(240,180,80,0.35);
 }
 
 @keyframes smokeUp{
@@ -223,16 +219,16 @@ box-shadow:
 
 @keyframes smokeGlow{
   from{
-    filter:blur(24px) brightness(1);
+    filter:blur(26px) brightness(1);
     box-shadow:
-      0 0 18px rgba(60,100,180,0.25),
-      0 0 36px rgba(40,80,150,0.15);
+      0 0 22px rgba(230,180,90,0.35),
+      0 0 44px rgba(200,150,60,0.25);
   }
   to{
-    filter:blur(26px) brightness(1.22);
+    filter:blur(28px) brightness(1.28);
     box-shadow:
-      0 0 32px rgba(90,140,220,0.55),
-      0 0 60px rgba(70,120,200,0.35);
+      0 0 42px rgba(255,215,120,0.75),
+      0 0 82px rgba(240,190,90,0.45);
   }
 }
 

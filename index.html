@@ -213,17 +213,16 @@ body::after{
 
 /* ===== CONTEÚDO DO CONVITE ===== */
 #conviteContent{
-  display:none;
+  display:none;          /* começar escondido */
   position:absolute;
   inset:0;
   background:linear-gradient(45deg,#ffc900,rgba(168,51,33,0.2),#00498e);
-  z-index:20;
+  z-index:10;            /* menor que a carta */
   align-items:center;
   justify-content:center;
   flex-direction:column;
-  display:flex;
 }
-
+  
 #conviteContent img{
   max-width:88%;
   max-height:88%;
@@ -419,9 +418,9 @@ carta.addEventListener('click',()=>{
   /* mostrar convite após animação da carta */
   setTimeout(()=>{
     convite.style.display='flex';
+    convite.style.zIndex = '20';  // sobe acima da carta
     carta.style.display='none';
-  },3200);
-});
+},3200);
 
 /* MODAIS */
 document.querySelector(".btn-modal").onclick=()=>{document.getElementById("modalPrincipal").style.display="flex";};

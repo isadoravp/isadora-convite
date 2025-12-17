@@ -407,23 +407,30 @@ setTimeout(()=>{
 });
 
 /* MÚSICA */
-window.addEventListener("load", () => {
-  const audio = document.getElementById("bgMusic");
+const music = document.getElementById('bgMusic');
+const overlay = document.getElementById('audioOverlay');
 
-  audio.volume = 0.2;   // volume fixo
-  audio.muted = false;
+/* volume fixo e baixo */
+music.volume = 0.2;
 
-  audio.play().catch(() => {
-    // autoplay bloqueado → toca no primeiro toque/clique
-    const startAudio = () => {
-      audio.play();
-      document.removeEventListener("click", startAudio);
-      document.removeEventListener("touchstart", startAudio);
-    };
+/* retoma do tempo salvo */
+const savedTime = localStorage.getItem('musicTime');
+if (savedTime) music.currentTime = parseFloat(savedTime);
 
-    document.addEventListener("click", startAudio);
-    document.addEventListener("touchstart", startAudio);
-  });
+function startMusic(){
+  music.play()
+    .then(() => overlay.remove())
+    .catch(() => {});
+}
+
+/* garante autoplay quando permitido */
+overlay.addEventListener('click', startMusic, { once: true });
+overlay.addEventListener('touchstart', startMusic, { once: true });
+window.addEventListener('load', startMusic);
+
+/* salva tempo para continuar entre páginas */
+window.addEventListener('beforeunload', () => {
+  localStorage.setItem('musicTime', music.currentTime);
 });
 
 

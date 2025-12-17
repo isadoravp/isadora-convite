@@ -296,6 +296,65 @@ window.onclick=e=>{
     if(e.target===m)m.style.display="none";
   });
 };
+
+let audioCtx, analyser, dataArray;
+
+function initAudioAnalysis(){
+  audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+  const source = audioCtx.createMediaElementSource(music);
+
+  analyser = audioCtx.createAnalyser();
+  analyser.fftSize = 256;
+
+  const bufferLength = analyser.frequencyBinCount;
+  dataArray = new Uint8Array(bufferLength);
+
+  source.connect(analyser);
+  analyser.connect(audioCtx.destination);
+}
+
+function getBeatIntensity(){
+  if(!analyser) return 0;
+  analyser.getByteFrequencyData(dataArray);
+
+  let sum = 0;
+  for(let i = 0; i < dataArray.length; i++){
+    sum += dataArray[i];
+  }
+  return sum / dataArray.length;
+}
+
+/* intercepta o play para ativar análise */
+const originalPlay = music.play.bind(music);
+music.play = () => {
+  if(!audioCtx){
+    initAudioAnalysis();
+  }
+  if(audioCtx.state === "suspended"){
+    audioCtx.resume();
+  }
+  return originalPlay();
+};
+
+/* partículas reagindo à batida */
+setInterval(()=>{
+  const intensity = getBeatIntensity();
+
+  if(intensity > 55){ // batida perceptível
+    const burst = document.createElement('div');
+    burst.className = 'spark';
+    burst.style.left = Math.random()*100 + 'vw';
+    burst.style.width = '3px';
+    burst.style.height = '3px';
+    burst.style.boxShadow = '0 0 8px #ffd700';
+    burst.style.animationDuration = '2s';
+    burst.style.opacity = 0.9;
+
+    particleContainer.appendChild(burst);
+    setTimeout(()=>burst.remove(),4000);
+  }
+},120);
+  
 </script>
 
 </body>

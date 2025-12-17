@@ -39,7 +39,6 @@ body::after{
   z-index:-1;
 }
 
-/* ====== CENÁRIO CASTELO ====== */
 .cenario-castelo{
   position:fixed;
   left:50%;
@@ -52,11 +51,12 @@ body::after{
   background-size:100% auto;
   z-index:0;
   pointer-events:none;
-  opacity:0.95;
+  opacity:0.4; 
   filter:brightness(1.12) contrast(1.08) saturate(1.05);
   mask-image:linear-gradient(to top, transparent 0%, rgba(0,0,0,0.25) 12%, rgba(0,0,0,0.6) 28%, rgba(0,0,0,0.9) 45%, black 65%);
   -webkit-mask-image:linear-gradient(to top, transparent 0%, rgba(0,0,0,0.25) 12%, rgba(0,0,0,0.6) 28%, rgba(0,0,0,0.9) 45%, black 65%);
 }
+
 
 .cenario-castelo::after{
   content:"";
@@ -374,10 +374,32 @@ window.addEventListener('load',()=>{
     }
   },1000);
 
-  setTimeout(()=>{
-    carta.style.display='none';
-    convite.style.opacity=1;
-  },5200);
+// seleciona a carta
+const carta = document.getElementById('carta');
+
+// cria o elemento do convite (pode ser a mesma imagem do convite.html)
+const convite = document.createElement('img');
+convite.src = 'assets/convite.png'; // caminho da imagem
+convite.style.position = 'fixed';
+convite.style.inset = '0';
+convite.style.width = '80%';
+convite.style.height = 'auto';
+convite.style.margin = 'auto';
+convite.style.display = 'block';
+convite.style.opacity = '0';
+convite.style.zIndex = '10';
+convite.style.transition = 'opacity 1s ease';
+document.body.appendChild(convite);
+
+// função para abrir convite ao clicar na carta
+function abrirConvite() {
+  convite.style.opacity = '1'; // mostra o convite
+  carta.style.display = 'none'; // esconde a carta
+}
+
+// adiciona o clique
+carta.addEventListener('click', abrirConvite);
+
 });
 
 /* ====== MÚSICA ====== */

@@ -254,11 +254,11 @@ function startMusic(){
   }).catch(()=>{});
   let vol = 0;
 const fade = setInterval(() => {
-  if (vol < 0.22) {
+  if (vol < 0.15) {
     vol += 0.02;
     music.volume = vol;
   } else {
-    music.volume = 0.18; 
+    music.volume = 0.13; 
     clearInterval(fade);
   }
 }, 120);

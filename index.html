@@ -388,10 +388,11 @@ carta.addEventListener('click', ()=>{
     },i*140);
   }
 
-  setTimeout(()=>{
-    convite.style.opacity=1;
-    carta.style.display='none';
-  },1800);
+setTimeout(()=>{
+  convite.style.opacity=1;
+  carta.style.display='none';
+  carta.style.pointerEvents='none';
+},1800);
 });
 
 /* ====== MÚSICA ====== */

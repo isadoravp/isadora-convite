@@ -320,6 +320,8 @@ body::after{
 
 <div class="cenario-castelo"></div>
 <div id="particles"></div>
+
+<audio id="bgMusic" src="assets/audio/entrada.mp3" loop></audio>
   
 <div class="carta-container" id="carta">
   <img src="assets/carta-fechada.png" class="carta-fechada">
@@ -329,24 +331,30 @@ body::after{
 
 <script>
 /* ====== MÚSICA ====== */
-/* ====== MÚSICA ====== */
-const entrada = new Audio('assets/audio/entrada.mp3');
-entrada.volume = 0.7;
-entrada.preload = 'auto';
+const music = document.getElementById('bgMusic');
+music.volume = 0.5;
 
 const savedTime = localStorage.getItem('musicTime');
-if (savedTime) entrada.currentTime = parseFloat(savedTime);
+if(savedTime){
+  music.currentTime = parseFloat(savedTime);
+}
 
 const overlay = document.getElementById('audioOverlay');
 
-function startMusic() {
-  entrada.currentTime = 0;
-  entrada.play().catch(() => {});
-  overlay.remove();
+function startMusic(){
+  music.play().then(()=>{
+    overlay.remove();
+  }).catch(()=>{});
 }
 
-overlay.addEventListener('click', startMusic, { once: true });
-overlay.addEventListener('touchstart', startMusic, { once: true });
+overlay.addEventListener('click', startMusic, { once:true });
+overlay.addEventListener('touchstart', startMusic, { once:true });
+
+window.addEventListener('load', startMusic);
+
+window.addEventListener('beforeunload', ()=>{
+  localStorage.setItem('musicTime', music.currentTime);
+});
 
 /* ====== PARTÍCULAS ====== */
 const particleContainer = document.getElementById('particles');

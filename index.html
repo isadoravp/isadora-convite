@@ -19,7 +19,7 @@
   --dourado:#f2c94c;
 }
 
-/* ====== BASE ====== */
+/* BASE */
 html,body{
   margin:0;
   padding:0;
@@ -45,7 +45,7 @@ body::after{
   z-index:-1;
 }
 
-/* ====== CENÁRIO CASTELO ====== */
+/* CENÁRIO CASTELO */
 cenario-castelo{
   position:fixed;
   left:50%;
@@ -76,7 +76,7 @@ cenario-castelo{
   filter:blur(48px);
 }
 
-/* ====== PARTÍCULAS ====== */
+/* PARTÍCULAS */
 #particles{
   position:fixed;
   inset:0;
@@ -102,7 +102,7 @@ cenario-castelo{
   }
 }
 
-/* ====== CARTA ====== */
+/* CARTA */
 .carta-container{
   position:absolute;
   top:50%;
@@ -113,11 +113,11 @@ cenario-castelo{
   cursor:pointer;
   z-index:3;
   filter:drop-shadow(0 18px 40px rgba(0,0,0,0.55)) drop-shadow(0 0 22px rgba(180,220,255,0.35));
-  transition: transform 0.4s ease; /* para leve “pulo” */
+  transition: transform 0.4s ease;
 }
 
 .carta-container:hover{
-  transform:translate(-50%,-50%) scale(1.03); /* leve animação ao passar o mouse */
+  transform:translate(-50%,-50%) scale(1.03); 
 }
 
 .carta-container img{
@@ -157,7 +157,7 @@ cenario-castelo{
   }
 }
 
-/* ====== FUMAÇA ====== */
+/* FUMAÇA */
 .fumaca-container{
   position:absolute;
   inset:0;
@@ -181,7 +181,7 @@ cenario-castelo{
   }
 }
 
-/* ====== GLITTER ====== */
+/* GLITTER */
 .magic-glitter{
   position:absolute;
   width:6px;
@@ -201,7 +201,7 @@ cenario-castelo{
   }
 }
 
-/* ====== CONVITE ====== */
+/* CONVITE */
 #convite{
   position:absolute;
   top:50%;
@@ -217,7 +217,7 @@ cenario-castelo{
   pointer-events: none;
 }
 
-/* ====== ESTRELAS ====== */
+/* ESTRELAS */
 .star {
   position: absolute;
   width: 2px;
@@ -235,7 +235,7 @@ cenario-castelo{
   to { transform: translateY(-120vh) scale(0.6); opacity:0; }
 }
 
-/* ====== BOTÕES / MODAIS ====== */
+/* BOTÕES / MODAIS */
 .btn-modal {
   position: fixed;
   bottom: 20px;
@@ -349,7 +349,7 @@ cenario-castelo{
 <audio id="bgMusic" src="assets/audio/musica.mp3" loop></audio>
 
 <script>
-/* ====== PARTÍCULAS ====== */
+/* PARTÍCULAS */
 const particleContainer=document.getElementById('particles');
 setInterval(()=>{
   const s=document.createElement('div');
@@ -360,13 +360,13 @@ setInterval(()=>{
   setTimeout(()=>s.remove(),7000);
 },300);
 
-/* ====== CARTA + FUMAÇA + GLITTER ====== */
+/* CARTA + FUMAÇA + GLITTER */
 const carta=document.getElementById('carta');
 const fumaca=document.getElementById('fumaca');
 const convite=document.getElementById('convite');
 
 carta.addEventListener('click', ()=>{
-  // leve “pulso” inicial antes de abrir
+  
   carta.style.transform='translate(-50%,-50%) scale(1.05)';
   setTimeout(()=>{ carta.style.transform='translate(-50%,-50%) scale(1)'; },150);
 
@@ -403,7 +403,7 @@ setTimeout(()=>{
 },1800);
 });
 
-/* ====== MÚSICA ====== */
+/* MÚSICA */
 const music = document.getElementById('bgMusic');
 music.volume=0;
 const overlay = document.getElementById('audioOverlay');
@@ -433,7 +433,7 @@ for(let i=0;i<160;i++){
   document.body.appendChild(star);
 }
 
-/* ====== PARTÍCULAS REAGINDO À BATIDA ====== */
+/* PARTÍCULAS REAGINDO À BATIDA */
 let audioCtx, analyser, dataArray;
 function initAudioAnalysis(){
   audioCtx=new (window.AudioContext||window.webkitAudioContext)();
@@ -474,7 +474,7 @@ setInterval(()=>{
   }
 },120);
 
-/* ====== MODAIS ====== */
+/* MODAIS */
 document.querySelector(".btn-modal").onclick=()=>modalPrincipal.style.display="flex";
 document.getElementById("dressCode").onclick=()=>modalDress.style.display="flex";
 document.getElementById("presentear").onclick=()=>modalPresentes.style.display="flex";

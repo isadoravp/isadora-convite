@@ -229,13 +229,38 @@ function startMusic(){
   overlay.remove();
 }
 
-/* ===== CLIQUE NA CARTA ===== */
+/* ===== CLIQUE NO OVERLAY PARA INICIAR MÚSICA ===== */
+overlay.addEventListener('click', startMusic, {once:true});
+overlay.addEventListener('touchstart', startMusic, {once:true});
+
+/* ===== ESTRELAS ===== */
+for(let i=0;i<160;i++){
+  const star=document.createElement("div");
+  star.className="star";
+  star.style.left=Math.random()*100+"vw";
+  star.style.animationDuration=(3+Math.random()*4)+"s";
+  star.style.animationDelay=Math.random()*5+"s";
+  document.body.appendChild(star);
+}
+
+/* ===== PARTICULAS ===== */
+const intervalTime = window.innerWidth < 768 ? 180 : 140;
+setInterval(()=>{
+  const s=document.createElement('div');
+  s.className='spark';
+  s.style.left=Math.random()*100+'vw';
+  s.style.animationDuration=(3+Math.random()*3)+'s';
+  s.style.opacity = 0.6 + Math.random() * 0.4;
+  particleContainer.appendChild(s);
+  setTimeout(()=>s.remove(),7000);
+},intervalTime);
+
+/* ===== CARTA + FUMAÇA + GLITTER + REDIRECIONAMENTO ===== */
 carta.addEventListener('click', ()=>{
   if(carta.classList.contains('aberta')) return;
 
   carta.classList.add('aberta');
 
-  // inicia música se ainda não começou
   if(music.paused) startMusic();
 
   const largura = carta.offsetWidth;
@@ -261,33 +286,10 @@ carta.addEventListener('click', ()=>{
       setTimeout(()=>g.remove(),2200);
     },i*140);
   }
+
+  // REDIRECIONA para convite.html após animação (1.6s)
+  setTimeout(()=>{window.location.href="convite.html";}, 1600);
 });
-
-/* ===== OVERLAY ===== */
-overlay.addEventListener('click', startMusic, {once:true});
-overlay.addEventListener('touchstart', startMusic, {once:true});
-
-/* ===== ESTRELAS ===== */
-for(let i=0;i<160;i++){
-  const star=document.createElement("div");
-  star.className="star";
-  star.style.left=Math.random()*100+"vw";
-  star.style.animationDuration=(3+Math.random()*4)+"s";
-  star.style.animationDelay=Math.random()*5+"s";
-  document.body.appendChild(star);
-}
-
-/* ===== PARTICULAS ===== */
-const intervalTime = window.innerWidth < 768 ? 180 : 140;
-setInterval(()=>{
-  const s=document.createElement('div');
-  s.className='spark';
-  s.style.left=Math.random()*100+'vw';
-  s.style.animationDuration=(3+Math.random()*3)+'s';
-  s.style.opacity = 0.6 + Math.random() * 0.4;
-  particleContainer.appendChild(s);
-  setTimeout(()=>s.remove(),7000);
-},intervalTime);
 
 /* ===== MODAIS ===== */
 document.querySelector(".btn-modal").onclick=()=>{modalPrincipal.style.display="flex";};
@@ -341,7 +343,7 @@ setInterval(()=>{
     setTimeout(()=>burst.remove(),4000);
   }
 },120);
-</script>
 
+</script>
 </body>
 </html>

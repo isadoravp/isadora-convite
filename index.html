@@ -418,7 +418,7 @@ function startMusic(){
   let vol=0;
   const fade=setInterval(()=>{
     if(vol<0.15){ vol+=0.02; music.volume=vol; } 
-    else { music.volume=0.07; clearInterval(fade); }
+    else { music.volume=0.04; clearInterval(fade); }
   },120);
 }
 overlay.addEventListener('click', startMusic, {once:true});

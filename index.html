@@ -52,8 +52,8 @@ body::after{
   background-size:100% auto;
   z-index:0;
   pointer-events:none;
-  opacity:0.75;
-  filter: brightness(1.05) contrast(1.03) saturate(1.03);
+  opacity:0.75; /* menos dominante */
+  filter:brightness(1.05) contrast(1.03) saturate(1.03);
   mask-image:linear-gradient(to top, transparent 0%, rgba(0,0,0,0.25) 12%, rgba(0,0,0,0.6) 28%, rgba(0,0,0,0.9) 45%, black 65%);
   -webkit-mask-image:linear-gradient(to top, transparent 0%, rgba(0,0,0,0.25) 12%, rgba(0,0,0,0.6) 28%, rgba(0,0,0,0.9) 45%, black 65%);
 }
@@ -104,7 +104,7 @@ body::after{
   width:300px;
   max-width:78vw;
   cursor:pointer;
-  z-index:3;
+  z-index:2;
   filter:drop-shadow(0 18px 40px rgba(0,0,0,0.55)) drop-shadow(0 0 22px rgba(180,220,255,0.35));
 }
 
@@ -116,25 +116,19 @@ body::after{
   transition:opacity 1.4s ease, transform 1.6s ease;
 }
 
-.carta-fechada{
-  opacity:1;
-  pointer-events:all;
-}
-
 .carta-aberta{
   opacity:0;
   transform:scale(0.95);
-  pointer-events:none;
 }
 
 .carta-container.aberta .carta-fechada{
-  animation:pulseGlow 1.6s ease-in-out forwards;
+  animation:pulseGlow 2.8s ease-in-out forwards;
   opacity:0;
   transform:scale(0.9);
 }
 
 .carta-container.aberta .carta-aberta{
-  animation:pulseGlow 1.6s ease-in-out forwards;
+  animation:pulseGlow 2.8s ease-in-out forwards;
   opacity:1;
   transform:scale(1);
 }
@@ -347,18 +341,22 @@ setInterval(()=>{
   setTimeout(()=>s.remove(),7000);
 },300);
 
-/* ====== CARTA + FUMAÇA + GLITTER ====== */
+/* ====== CARTA + FUMAÇA + GLITTER + ANIMAÇÃO ABERTURA ====== */
 const carta=document.getElementById('carta');
 const fumaca=document.getElementById('fumaca');
 const convite=document.getElementById('convite');
 
+carta.addEventListener('click', ()=>{
+  // animação leve do envelope
+  carta.style.transition = "transform 0.4s ease-out";
+  carta.style.transform = "translate(-50%, -50%) scale(1.05) rotateX(8deg)";
+
   setTimeout(()=>{
-    carta.classList.add('aberta'); // glow + abertura
+    carta.classList.add('aberta');
     carta.style.transform = "translate(-50%, -50%) scale(1) rotateX(0deg)";
-  }, 300); // 0.3s de animação inicial
+  }, 300);
 
   const largura=carta.offsetWidth;
-
 
   for(let i=0;i<30;i++){
     setTimeout(()=>{

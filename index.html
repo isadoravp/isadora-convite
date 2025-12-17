@@ -14,16 +14,20 @@
 }
 
 /* ===== BASE ===== */
-html, body {
+html, body{
   margin:0;
   padding:0;
   width:100%;
   height:100%;
   overflow:hidden;
   font-family:'Georgia', serif;
-  background: linear-gradient(45deg,var(--azul),var(--roxo),var(--vermelho),#c98b2b);
-  position:relative;
 }
+
+body{
+  position:relative;
+  background:linear-gradient(45deg,var(--azul),var(--roxo),var(--vermelho),#c98b2b);
+}
+
 body::after{
   content:"";
   position:fixed;
@@ -35,7 +39,7 @@ body::after{
   z-index:-1;
 }
 
-/* ===== CASTELO ===== */
+/* ===== CENÁRIO CASTELO ===== */
 .cenario-castelo{
   position:fixed;
   left:50%;
@@ -50,9 +54,24 @@ body::after{
   pointer-events:none;
   opacity:0.95;
   filter:brightness(1.12) contrast(1.08) saturate(1.05);
-  mask-image:linear-gradient(to top,transparent 0%,rgba(0,0,0,0.25) 12%,rgba(0,0,0,0.6) 28%,rgba(0,0,0,0.9) 45%,black 65%);
-  -webkit-mask-image:linear-gradient(to top,transparent 0%,rgba(0,0,0,0.25) 12%,rgba(0,0,0,0.6) 28%,rgba(0,0,0,0.9) 45%,black 65%);
+  mask-image:linear-gradient(
+    to top,
+    transparent 0%,
+    rgba(0,0,0,0.25) 12%,
+    rgba(0,0,0,0.6) 28%,
+    rgba(0,0,0,0.9) 45%,
+    black 65%
+  );
+  -webkit-mask-image:linear-gradient(
+    to top,
+    transparent 0%,
+    rgba(0,0,0,0.25) 12%,
+    rgba(0,0,0,0.6) 28%,
+    rgba(0,0,0,0.9) 45%,
+    black 65%
+  );
 }
+
 .cenario-castelo::after{
   content:"";
   position:absolute;
@@ -60,7 +79,13 @@ body::after{
   right:0;
   bottom:-60px;
   height:260px;
-  background:linear-gradient(to top, rgba(31,63,115,0.65), rgba(31,63,115,0.35), rgba(31,63,115,0.15), transparent);
+  background:linear-gradient(
+    to top,
+    rgba(31,63,115,0.65),
+    rgba(31,63,115,0.35),
+    rgba(31,63,115,0.15),
+    transparent
+  );
   filter:blur(48px);
 }
 
@@ -71,6 +96,7 @@ body::after{
   pointer-events:none;
   z-index:1;
 }
+
 .spark{
   position:absolute;
   top:-10px;
@@ -81,8 +107,12 @@ body::after{
   border-radius:50%;
   animation:fall linear forwards;
 }
+
 @keyframes fall{
-  to{transform:translateY(110vh);opacity:0;}
+  to{
+    transform:translateY(110vh);
+    opacity:0;
+  }
 }
 
 /* ===== CARTA ===== */
@@ -95,8 +125,11 @@ body::after{
   max-width:78vw;
   cursor:pointer;
   z-index:2;
-  filter:drop-shadow(0 18px 40px rgba(0,0,0,0.55)) drop-shadow(0 0 22px rgba(180,220,255,0.35));
+  filter:
+    drop-shadow(0 18px 40px rgba(0,0,0,0.55))
+    drop-shadow(0 0 22px rgba(180,220,255,0.35));
 }
+
 .carta-container img{
   width:100%;
   position:absolute;
@@ -104,10 +137,29 @@ body::after{
   left:0;
   transition:opacity 1.4s ease, transform 1.6s ease;
 }
-.carta-aberta{opacity:0; transform:scale(0.95);}
-.carta-container.aberta .carta-fechada{animation:pulseGlow 2.8s ease-in-out forwards; opacity:0; transform:scale(0.9);}
-.carta-container.aberta .carta-aberta{animation:pulseGlow 2.8s ease-in-out forwards; opacity:1; transform:scale(1);}
-@keyframes pulseGlow{40%{filter:drop-shadow(0 0 28px rgba(180,220,255,0.8));}}
+
+.carta-aberta{
+  opacity:0;
+  transform:scale(0.95);
+}
+
+.carta-container.aberta .carta-fechada{
+  animation:pulseGlow 2.8s ease-in-out forwards;
+  opacity:0;
+  transform:scale(0.9);
+}
+
+.carta-container.aberta .carta-aberta{
+  animation:pulseGlow 2.8s ease-in-out forwards;
+  opacity:1;
+  transform:scale(1);
+}
+
+@keyframes pulseGlow{
+  40%{
+    filter:drop-shadow(0 0 28px rgba(180,220,255,0.8));
+  }
+}
 
 /* ===== FUMACA ===== */
 .fumaca-container{
@@ -115,16 +167,29 @@ body::after{
   inset:0;
   pointer-events:none;
 }
+
 .smoke{
   position:absolute;
   bottom:13%;
   left:50%;
   border-radius:50%;
   animation:smokeUp 3.2s ease-out forwards;
-  background:radial-gradient(circle, rgba(255,220,140,0.75) 0%, rgba(240,190,95,0.55) 35%, rgba(210,160,60,0.32) 60%, rgba(170,120,35,0.12) 100%);
+  background:radial-gradient(
+    circle,
+    rgba(255,220,140,0.75) 0%,
+    rgba(240,190,95,0.55) 35%,
+    rgba(210,160,60,0.32) 60%,
+    rgba(170,120,35,0.12) 100%
+  );
   filter:blur(26px);
 }
-@keyframes smokeUp{to{transform:translate(calc(-50% + var(--x)),-90px) scale(1.1); opacity:0;}}
+
+@keyframes smokeUp{
+  to{
+    transform:translate(calc(-50% + var(--x)),-90px) scale(1.1);
+    opacity:0;
+  }
+}
 
 /* ===== GLITTER ===== */
 .magic-glitter{
@@ -138,50 +203,98 @@ body::after{
   filter:blur(12px);
   animation:glitterUp 2.2s ease-out forwards;
 }
-@keyframes glitterUp{to{transform:translate(calc(-50% + var(--gx)),-140px) scale(1.3); opacity:0;}}
+
+@keyframes glitterUp{
+  to{
+    transform:translate(calc(-50% + var(--gx)),-140px) scale(1.3);
+    opacity:0;
+  }
+}
+
+/* ===== CONTEÚDO DO CONVITE ===== */
+#conviteContent{
+  display:none;
+  position:absolute;
+  inset:0;
+  background:linear-gradient(45deg,#ffc900,rgba(168,51,33,0.2),#00498e);
+  z-index:20;
+  align-items:center;
+  justify-content:center;
+  flex-direction:column;
+  display:flex;
+}
+
+#conviteContent img{
+  max-width:88%;
+  max-height:88%;
+}
 
 /* ===== MODAIS ===== */
-.modal, .sub-modal{display:none; position:fixed; inset:0; background:rgba(0,0,0,0.6); z-index:10; align-items:center; justify-content:center;}
-.modal-content, .sub-modal-content{border-radius:14px; padding:22px; width:90%; max-width:420px; max-height:90vh; overflow-y:auto; display:flex; flex-direction:column; gap:12px; position:relative;}
-.modal-content{background:#00498e;}
-.close{position:absolute; right:14px; top:10px; font-size:26px; cursor:pointer;}
-.modal-button{padding:14px; border:none; border-radius:10px; background:#f17ea1; color:#00498e; font-size:16px; text-align:left; cursor:pointer;}
-.modal-button:hover{background:#ffd700; color:#000;}
+.modal, .sub-modal{
+  display:none;
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,0.6);
+  z-index:30;
+  align-items:center;
+  justify-content:center;
+}
+
+.modal-content, .sub-modal-content{
+  border-radius:14px;
+  padding:22px;
+  width:90%;
+  max-width:420px;
+  max-height:90vh;
+  overflow-y:auto;
+  display:flex;
+  flex-direction:column;
+  gap:12px;
+  position:relative;
+}
+
+.modal-content{
+  background:#00498e;
+}
+
+.close{
+  position:absolute;
+  right:14px;
+  top:10px;
+  font-size:26px;
+  cursor:pointer;
+}
+
+.modal-button{
+  padding:14px;
+  border:none;
+  border-radius:10px;
+  background:#f17ea1;
+  color:#00498e;
+  font-size:16px;
+  text-align:left;
+  cursor:pointer;
+}
+
+.modal-button:hover{
+  background:#ffd700;
+  color:#000;
+}
+
 ul{padding-left:18px; margin:0;}
 li{margin-bottom:6px;}
+
 .sub-modal-content{
   background:linear-gradient(160deg,#f2c94c,#e6b93d,#cfa432);
   color:#2b2b2b;
   box-shadow:0 0 25px rgba(242,201,76,0.45),0 0 60px rgba(242,201,76,0.25);
 }
+
 .sub-modal-content h3{color:#4a3b00;}
 .sub-modal-content li{color:#3b2a00;}
 
 /* AUDIO OVERLAY */
 #audioOverlay{position:fixed; inset:0; z-index:9999; cursor:pointer;}
-
-/* ===== CONTEÚDO CONVITE ===== */
-#conviteConteudo{
-  display:none;
-  position:absolute;
-  inset:0;
-  background:linear-gradient(45deg,#ffc900, rgba(168,51,33,0.2), #00498e);
-  z-index:3;
-  overflow-y:auto;
-  padding:20px;
-  text-align:center;
-}
-#conviteConteudo h1{
-  font-family:'Georgia', serif;
-  font-size:2.5rem;
-  color:#1f3f73;
-  margin-bottom:12px;
-}
-#conviteConteudo p{
-  color:#2b2b2b;
-  font-size:1.1rem;
-  margin-bottom:8px;
-}
 </style>
 </head>
 
@@ -192,23 +305,19 @@ li{margin-bottom:6px;}
 <div class="cenario-castelo"></div>
 <div id="particles"></div>
 
-<audio id="bgMusic" src="assets/audio/musica.mp3" loop></audio>
-
 <div class="carta-container" id="carta">
   <img src="assets/carta-fechada.png" class="carta-fechada">
   <img src="assets/carta-aberta.png" class="carta-aberta">
   <div class="fumaca-container" id="fumaca"></div>
 </div>
 
-<div id="conviteConteudo">
-  <h1>Convite de 15 Anos</h1>
-  <p>Data: 10/03/2026</p>
-  <p>Local: Salão Encantado</p>
-  <p>Seja bem-vindo(a) ao meu grande dia!</p>
+<div id="conviteContent">
+  <img src="assets/convite.png" alt="Convite">
   <button class="btn-modal">Informações</button>
 </div>
 
-<!-- MODAIS -->
+<audio id="bgMusic" src="assets/audio/musica.mp3" loop></audio>
+
 <div class="modal" id="modalPrincipal">
   <div class="modal-content">
     <span class="close" data-close="modalPrincipal">&times;</span>
@@ -234,7 +343,7 @@ li{margin-bottom:6px;}
     <ul>
       <li>Acessórios/Brinco/Colar</li>
       <li>Cartão-presente</li>
-      <li>Cremes/Creme corporal</li>
+      <li>Cremes/Creme corporalr</li>
       <li>Perfume</li>
       <li>Produtos para cabelo cacheado</li>
     </ul>
@@ -242,57 +351,49 @@ li{margin-bottom:6px;}
 </div>
 
 <script>
-const music=document.getElementById('bgMusic');
-music.volume=0.08;
+const music = document.getElementById('bgMusic');
+music.volume = 0.08;
+const overlay = document.getElementById('audioOverlay');
+const carta = document.getElementById('carta');
+const fumaca = document.getElementById('fumaca');
+const particleContainer = document.getElementById('particles');
+const convite = document.getElementById('conviteContent');
 
-const savedTime=localStorage.getItem('musicTime');
-if(savedTime) music.currentTime=parseFloat(savedTime);
+/* MÚSICA */
+const savedTime = localStorage.getItem('musicTime');
+if(savedTime) music.currentTime = parseFloat(savedTime);
 
-const overlay=document.getElementById('audioOverlay');
-const carta=document.getElementById('carta');
-const fumaca=document.getElementById('fumaca');
-const particleContainer=document.getElementById('particles');
-const conviteConteudo=document.getElementById('conviteConteudo');
-
-/* ===== FUNÇÃO INICIAR MÚSICA ===== */
 function startMusic(){
   music.play().catch(()=>{});
   overlay.remove();
 }
 
-/* ===== CLIQUE NO OVERLAY PARA INICIAR MÚSICA ===== */
-overlay.addEventListener('click', startMusic, {once:true});
-overlay.addEventListener('touchstart', startMusic, {once:true});
+overlay.addEventListener('click',()=>{
+  startMusic();
+  carta.click();
+},{once:true});
+overlay.addEventListener('touchstart',()=>{
+  startMusic();
+  carta.click();
+},{once:true});
 
-/* ===== ESTRELAS ===== */
-for(let i=0;i<160;i++){
-  const star=document.createElement("div");
-  star.className="star";
-  star.style.left=Math.random()*100+"vw";
-  star.style.animationDuration=(3+Math.random()*4)+"s";
-  star.style.animationDelay=Math.random()*5+"s";
-  document.body.appendChild(star);
-}
-
-/* ===== PARTICULAS ===== */
+/* PARTICULAS */
 const intervalTime = window.innerWidth < 768 ? 180 : 140;
 setInterval(()=>{
-  const s=document.createElement('div');
+  const s = document.createElement('div');
   s.className='spark';
   s.style.left=Math.random()*100+'vw';
   s.style.animationDuration=(3+Math.random()*3)+'s';
-  s.style.opacity = 0.6 + Math.random() * 0.4;
   particleContainer.appendChild(s);
   setTimeout(()=>s.remove(),7000);
 },intervalTime);
 
-/* ===== CARTA + FUMAÇA + GLITTER + ABRIR CONTEÚDO ===== */
+/* CARTA + FUMAÇA + GLITTER */
 carta.addEventListener('click',()=>{
   if(carta.classList.contains('aberta')) return;
   carta.classList.add('aberta');
   const largura=carta.offsetWidth;
 
-  // fumaça
   for(let i=0;i<30;i++){
     setTimeout(()=>{
       const smoke=document.createElement('div');
@@ -305,7 +406,6 @@ carta.addEventListener('click',()=>{
     },i*100);
   }
 
-  // glitter
   for(let i=0;i<22;i++){
     setTimeout(()=>{
       const g=document.createElement('div');
@@ -316,35 +416,34 @@ carta.addEventListener('click',()=>{
     },i*140);
   }
 
-  // abrir conteúdo convite após animação
+  /* mostrar convite após animação da carta */
   setTimeout(()=>{
-    conviteConteudo.style.display='block';
-  },1500);
+    convite.style.display='flex';
+    carta.style.display='none';
+  },3200);
 });
 
-/* ===== MODAIS ===== */
-document.querySelectorAll(".btn-modal").forEach(btn=>{
-  btn.onclick=()=>{modalPrincipal.style.display="flex";};
-});
-document.getElementById("dressCode").onclick=()=>{modalDress.style.display="flex";};
-document.getElementById("presentear").onclick=()=>{modalPresentes.style.display="flex";};
+/* MODAIS */
+document.querySelector(".btn-modal").onclick=()=>{document.getElementById("modalPrincipal").style.display="flex";};
+document.getElementById("dressCode").onclick=()=>{document.getElementById("modalDress").style.display="flex";};
+document.getElementById("presentear").onclick=()=>{document.getElementById("modalPresentes").style.display="flex";};
 document.getElementById("verRota").onclick=()=>{window.open("https://maps.app.goo.gl/9Ujs9UPoccGrVMJb8","_blank");};
 document.getElementById("confirmePresenca").onclick=()=>{window.open("https://wa.me/5551992226662?text=Olá,%20confirmo%20minha%20presença%20no%20seu%20aniversário!","_blank");};
 document.querySelectorAll(".close").forEach(btn=>{btn.onclick=()=>{document.getElementById(btn.dataset.close).style.display="none";};});
 window.onclick=e=>{document.querySelectorAll(".modal,.sub-modal").forEach(m=>{if(e.target===m)m.style.display="none";});};
 
-/* ===== SALVAR TEMPO DA MÚSICA ===== */
+/* SALVAR TEMPO DA MÚSICA */
 window.addEventListener('beforeunload',()=>{localStorage.setItem('musicTime',music.currentTime);});
 
-/* ===== ANALISE DE BATIDA (PARTÍCULAS) ===== */
+/* ANALISE DE BATIDA (PARTÍCULAS) */
 let audioCtx, analyser, dataArray;
 function initAudioAnalysis(){
   audioCtx = new (window.AudioContext||window.webkitAudioContext)();
-  const source=audioCtx.createMediaElementSource(music);
-  analyser=audioCtx.createAnalyser();
-  analyser.fftSize=256;
-  const bufferLength=analyser.frequencyBinCount;
-  dataArray=new Uint8Array(bufferLength);
+  const source = audioCtx.createMediaElementSource(music);
+  analyser = audioCtx.createAnalyser();
+  analyser.fftSize = 256;
+  const bufferLength = analyser.frequencyBinCount;
+  dataArray = new Uint8Array(bufferLength);
   source.connect(analyser);
   analyser.connect(audioCtx.destination);
 }

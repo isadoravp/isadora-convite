@@ -7,7 +7,7 @@
 <meta property="og:title" content="Meus 15">
 <meta property="og:description" content="Você está convidado(a) para o meu aniversário de 15 anos!">
 <meta property="og:type" content="website">
-<meta property="og:image" content="https://i.postimg.cc/XvM3GstD/convite-preview.png">
+<meta property="og:image" content="https://postimg.cc/DScRRPvq/convite-preview.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 
@@ -407,24 +407,25 @@ setTimeout(()=>{
 });
 
 /* MÚSICA */
-const music = document.getElementById('bgMusic');
-music.volume=0;
-const overlay = document.getElementById('audioOverlay');
-const savedTime = localStorage.getItem('musicTime');
-if(savedTime) music.currentTime=parseFloat(savedTime);
+window.addEventListener("load", () => {
+  const audio = document.getElementById("bgMusic");
 
-function startMusic(){
-  music.play().then(()=>overlay.remove()).catch(()=>{});
-  let vol=0;
-  const fade=setInterval(()=>{
-    if(vol<0.15){ vol+=0.02; music.volume=vol; } 
-    else { music.volume=0.04; clearInterval(fade); }
-  },120);
-}
-overlay.addEventListener('click', startMusic, {once:true});
-overlay.addEventListener('touchstart', startMusic, {once:true});
-window.addEventListener('load', startMusic);
-window.addEventListener('beforeunload', ()=>localStorage.setItem('musicTime', music.currentTime));
+  audio.volume = 0.2;   // volume fixo
+  audio.muted = false;
+
+  audio.play().catch(() => {
+    // autoplay bloqueado → toca no primeiro toque/clique
+    const startAudio = () => {
+      audio.play();
+      document.removeEventListener("click", startAudio);
+      document.removeEventListener("touchstart", startAudio);
+    };
+
+    document.addEventListener("click", startAudio);
+    document.addEventListener("touchstart", startAudio);
+  });
+});
+
 
 /* ====== ESTRELAS ====== */
 for(let i=0;i<160;i++){

@@ -329,9 +329,8 @@ body::after{
 
 <script>
 /* ====== MÚSICA ====== */
-const music = new Audio('assets/audio/musica.mp3');
-music.loop = true;
-music.volume = 0.5;
+const entrada = new Audio('assets/audio/entrada.mp3');
+entrada.volume = 0.7;
 
 const savedTime = localStorage.getItem('musicTime');
 if(savedTime) music.currentTime = parseFloat(savedTime);
@@ -339,7 +338,8 @@ if(savedTime) music.currentTime = parseFloat(savedTime);
 const overlay = document.getElementById('audioOverlay');
 
 function startMusic(){
-  music.play().catch(()=>{});
+  entrada.currentTime = 0;
+  entrada.play().catch(()=>{});
   overlay.remove();
 }
 

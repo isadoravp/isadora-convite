@@ -229,17 +229,43 @@ function startMusic(){
   overlay.remove();
 }
 
-/* ===== CLIQUE NO OVERLAY PARA INICIAR MÚSICA + CLICAR NA CARTA ===== */
-overlay.addEventListener('click',(e)=>{
-  startMusic();
-  const evt=new MouseEvent('click',{bubbles:true,cancelable:true,view:window});
-  carta.dispatchEvent(evt);
-},{once:true});
-overlay.addEventListener('touchstart',(e)=>{
-  startMusic();
-  const evt=new MouseEvent('click',{bubbles:true,cancelable:true,view:window});
-  carta.dispatchEvent(evt);
-},{once:true});
+/* ===== CLIQUE NA CARTA ===== */
+carta.addEventListener('click', ()=>{
+  if(carta.classList.contains('aberta')) return;
+
+  carta.classList.add('aberta');
+
+  // inicia música se ainda não começou
+  if(music.paused) startMusic();
+
+  const largura = carta.offsetWidth;
+
+  for(let i=0;i<30;i++){
+    setTimeout(()=>{
+      const smoke=document.createElement('div');
+      smoke.className='smoke';
+      smoke.style.setProperty('--x',`${Math.random()*largura/2-largura/4}px`);
+      const size=largura*0.1+Math.random()*largura*0.15;
+      smoke.style.width=smoke.style.height=size+'px';
+      fumaca.appendChild(smoke);
+      setTimeout(()=>smoke.remove(),4200);
+    },i*100);
+  }
+
+  for(let i=0;i<22;i++){
+    setTimeout(()=>{
+      const g=document.createElement('div');
+      g.className='magic-glitter';
+      g.style.setProperty('--gx',`${Math.random()*120-60}px`);
+      fumaca.appendChild(g);
+      setTimeout(()=>g.remove(),2200);
+    },i*140);
+  }
+});
+
+/* ===== OVERLAY ===== */
+overlay.addEventListener('click', startMusic, {once:true});
+overlay.addEventListener('touchstart', startMusic, {once:true});
 
 /* ===== ESTRELAS ===== */
 for(let i=0;i<160;i++){
@@ -263,50 +289,6 @@ setInterval(()=>{
   setTimeout(()=>s.remove(),7000);
 },intervalTime);
 
-/* ===== CARTA + FUMAÇA + GLITTER ===== */
-carta.addEventListener('click', ()=>{
-  if(carta.classList.contains('aberta')) return;
-
-  // Abre a carta
-  carta.classList.add('aberta');
-
-  // Inicia música se ainda não começou
-  if(music.paused) {
-    music.play().catch(()=>{});
-    overlay.remove();
-  }
-
-  const largura = carta.offsetWidth;
-
-  // Smoke
-  for(let i=0;i<30;i++){
-    setTimeout(()=>{
-      const smoke=document.createElement('div');
-      smoke.className='smoke';
-      smoke.style.setProperty('--x',`${Math.random()*largura/2-largura/4}px`);
-      const size=largura*0.1+Math.random()*largura*0.15;
-      smoke.style.width=smoke.style.height=size+'px';
-      fumaca.appendChild(smoke);
-      setTimeout(()=>smoke.remove(),4200);
-    },i*100);
-  }
-
-  // Glitter
-  for(let i=0;i<22;i++){
-    setTimeout(()=>{
-      const g=document.createElement('div');
-      g.className='magic-glitter';
-      g.style.setProperty('--gx',`${Math.random()*120-60}px`);
-      fumaca.appendChild(g);
-      setTimeout(()=>g.remove(),2200);
-    },i*140);
-  }
-});
-
-/* ===== OVERLAY ===== */
-// Apenas inicia música se usuário tocar fora da carta antes
-overlay.addEventListener('click', startMusic, {once:true});
-overlay.addEventListener('touchstart', startMusic, {once:true});
 /* ===== MODAIS ===== */
 document.querySelector(".btn-modal").onclick=()=>{modalPrincipal.style.display="flex";};
 document.getElementById("dressCode").onclick=()=>{modalDress.style.display="flex";};
@@ -359,7 +341,6 @@ setInterval(()=>{
     setTimeout(()=>burst.remove(),4000);
   }
 },120);
-
 </script>
 
 </body>

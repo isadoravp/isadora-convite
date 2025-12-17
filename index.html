@@ -46,11 +46,10 @@ body::after{
 }
 
 /* ====== CENÁRIO CASTELO ====== */
-/* ====== CENÁRIO CASTELO ====== */
-.cenario-castelo{
+cenario-castelo{
   position:fixed;
   left:50%;
-  bottom:16%;
+  bottom:12%;
   transform:translateX(-50%);
   width:125%;
   max-width:1400px;
@@ -59,10 +58,11 @@ body::after{
   background-size:100% auto;
   z-index:0;
   pointer-events:none;
-  opacity:0.25; 
-  filter:brightness(0.4) contrast(1.05) saturate(1.05);
-  mask-image:linear-gradient(to top, transparent 0%, rgba(0,0,0,0.25) 12%, rgba(0,0,0,0.6) 28%, rgba(0,0,0,0.9) 45%, black 65%);
-  -webkit-mask-image:linear-gradient(to top, transparent 0%, rgba(0,0,0,0.25) 12%, rgba(0,0,0,0.6) 28%, rgba(0,0,0,0.9) 45%, black 65%);
+  opacity:0.25;
+  filter:brightness(0.65) contrast(1.0) saturate(1.05);
+  mask-image:linear-gradient(to top, transparent 0%, rgba(0,0,0,0.15) 10%, rgba(0,0,0,0.35) 25%, rgba(0,0,0,0.6) 45%, black 65%);
+  -webkit-mask-image:linear-gradient(to top, transparent 0%, rgba(0,0,0,0.15) 10%, rgba(0,0,0,0.35) 25%, rgba(0,0,0,0.6) 45%, black 65%);
+  backdrop-filter: blur(2px);
 }
 
 .cenario-castelo::after{

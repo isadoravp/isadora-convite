@@ -159,6 +159,29 @@ li{margin-bottom:6px;}
 
 /* AUDIO OVERLAY */
 #audioOverlay{position:fixed; inset:0; z-index:9999; cursor:pointer;}
+
+/* ===== CONTEÚDO CONVITE ===== */
+#conviteConteudo{
+  display:none;
+  position:absolute;
+  inset:0;
+  background:linear-gradient(45deg,#ffc900, rgba(168,51,33,0.2), #00498e);
+  z-index:3;
+  overflow-y:auto;
+  padding:20px;
+  text-align:center;
+}
+#conviteConteudo h1{
+  font-family:'Georgia', serif;
+  font-size:2.5rem;
+  color:#1f3f73;
+  margin-bottom:12px;
+}
+#conviteConteudo p{
+  color:#2b2b2b;
+  font-size:1.1rem;
+  margin-bottom:8px;
+}
 </style>
 </head>
 
@@ -177,8 +200,15 @@ li{margin-bottom:6px;}
   <div class="fumaca-container" id="fumaca"></div>
 </div>
 
-<button class="btn-modal">Informações</button>
+<div id="conviteConteudo">
+  <h1>Convite de 15 Anos</h1>
+  <p>Data: 10/03/2026</p>
+  <p>Local: Salão Encantado</p>
+  <p>Seja bem-vindo(a) ao meu grande dia!</p>
+  <button class="btn-modal">Informações</button>
+</div>
 
+<!-- MODAIS -->
 <div class="modal" id="modalPrincipal">
   <div class="modal-content">
     <span class="close" data-close="modalPrincipal">&times;</span>
@@ -222,6 +252,7 @@ const overlay=document.getElementById('audioOverlay');
 const carta=document.getElementById('carta');
 const fumaca=document.getElementById('fumaca');
 const particleContainer=document.getElementById('particles');
+const conviteConteudo=document.getElementById('conviteConteudo');
 
 /* ===== FUNÇÃO INICIAR MÚSICA ===== */
 function startMusic(){
@@ -255,16 +286,13 @@ setInterval(()=>{
   setTimeout(()=>s.remove(),7000);
 },intervalTime);
 
-/* ===== CARTA + FUMAÇA + GLITTER + REDIRECIONAMENTO ===== */
-carta.addEventListener('click', ()=>{
+/* ===== CARTA + FUMAÇA + GLITTER + ABRIR CONTEÚDO ===== */
+carta.addEventListener('click',()=>{
   if(carta.classList.contains('aberta')) return;
-
   carta.classList.add('aberta');
+  const largura=carta.offsetWidth;
 
-  if(music.paused) startMusic();
-
-  const largura = carta.offsetWidth;
-
+  // fumaça
   for(let i=0;i<30;i++){
     setTimeout(()=>{
       const smoke=document.createElement('div');
@@ -277,6 +305,7 @@ carta.addEventListener('click', ()=>{
     },i*100);
   }
 
+  // glitter
   for(let i=0;i<22;i++){
     setTimeout(()=>{
       const g=document.createElement('div');
@@ -287,12 +316,16 @@ carta.addEventListener('click', ()=>{
     },i*140);
   }
 
-  // REDIRECIONA para convite.html após animação (1.6s)
-  setTimeout(()=>{window.location.href="convite.html";}, 1600);
+  // abrir conteúdo convite após animação
+  setTimeout(()=>{
+    conviteConteudo.style.display='block';
+  },1500);
 });
 
 /* ===== MODAIS ===== */
-document.querySelector(".btn-modal").onclick=()=>{modalPrincipal.style.display="flex";};
+document.querySelectorAll(".btn-modal").forEach(btn=>{
+  btn.onclick=()=>{modalPrincipal.style.display="flex";};
+});
 document.getElementById("dressCode").onclick=()=>{modalDress.style.display="flex";};
 document.getElementById("presentear").onclick=()=>{modalPresentes.style.display="flex";};
 document.getElementById("verRota").onclick=()=>{window.open("https://maps.app.goo.gl/9Ujs9UPoccGrVMJb8","_blank");};
@@ -343,7 +376,7 @@ setInterval(()=>{
     setTimeout(()=>burst.remove(),4000);
   }
 },120);
-
 </script>
+
 </body>
 </html>

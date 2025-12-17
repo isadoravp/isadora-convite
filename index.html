@@ -122,11 +122,14 @@ body::after{
   pointer-events:none;
 }
 
+.carta-fechada{
+  pointer-events:auto;
+}
+
 .carta-container.aberta .carta-fechada{
   animation:pulseGlow 2.8s ease-in-out forwards;
   opacity:0;
   transform:scale(0.9);
-  pointer-events:auto;
 }
 
 .carta-container.aberta .carta-aberta{

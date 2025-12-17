@@ -45,15 +45,15 @@ body::after{
   left:50%;
   bottom:16%;
   transform:translateX(-50%);
-  width:100%;
-  max-width:1200px;
+  width:125%;
+  max-width:1400px;
   height:90vh;
   background:url("assets/castelo1.png") center bottom no-repeat;
   background-size:100% auto;
   z-index:0;
   pointer-events:none;
-  opacity:0.7;
-  filter:brightness(1.05) contrast(1.05) saturate(1.05);
+  opacity:0.95;
+  filter:brightness(1.12) contrast(1.08) saturate(1.05);
   mask-image:linear-gradient(to top, transparent 0%, rgba(0,0,0,0.25) 12%, rgba(0,0,0,0.6) 28%, rgba(0,0,0,0.9) 45%, black 65%);
   -webkit-mask-image:linear-gradient(to top, transparent 0%, rgba(0,0,0,0.25) 12%, rgba(0,0,0,0.6) 28%, rgba(0,0,0,0.9) 45%, black 65%);
 }
@@ -116,14 +116,11 @@ body::after{
   transition:opacity 1.4s ease, transform 1.6s ease;
 }
 
+/* NOVO: carta-aberta não bloqueia clique enquanto invisível */
 .carta-aberta{
   opacity:0;
   transform:scale(0.95);
   pointer-events:none;
-}
-
-.carta-fechada{
-  pointer-events:auto;
 }
 
 .carta-container.aberta .carta-fechada{
@@ -380,10 +377,10 @@ window.addEventListener('load',()=>{
   },1000);
 });
 
-// Abrir convite ao clicar na carta (qualquer parte da div)
+// NOVO: abrir convite ao clicar em qualquer parte da carta
 carta.addEventListener('click', ()=>{
-  convite.style.opacity = 1;       // mostra convite
-  carta.style.display = 'none';    // esconde carta
+  convite.style.opacity=1;
+  carta.style.display='none';
 });
 
 /* ====== MÚSICA ====== */

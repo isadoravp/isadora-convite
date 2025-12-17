@@ -13,19 +13,19 @@
   --dourado:#f2c94c;
 }
 
-/* ===== BASE ===== */
-html, body{
+/* ====== BASE ====== */
+html,body{
   margin:0;
   padding:0;
   width:100%;
   height:100%;
   overflow:hidden;
-  font-family:'Georgia', serif;
+  font-family:'Georgia',serif;
 }
 
 body{
-  position:relative;
   background:linear-gradient(45deg,var(--azul),var(--roxo),var(--vermelho),#c98b2b);
+  position:relative;
 }
 
 body::after{
@@ -39,7 +39,7 @@ body::after{
   z-index:-1;
 }
 
-/* ===== CENÁRIO CASTELO ===== */
+/* ====== CENÁRIO CASTELO ====== */
 .cenario-castelo{
   position:fixed;
   left:50%;
@@ -54,22 +54,8 @@ body::after{
   pointer-events:none;
   opacity:0.95;
   filter:brightness(1.12) contrast(1.08) saturate(1.05);
-  mask-image:linear-gradient(
-    to top,
-    transparent 0%,
-    rgba(0,0,0,0.25) 12%,
-    rgba(0,0,0,0.6) 28%,
-    rgba(0,0,0,0.9) 45%,
-    black 65%
-  );
-  -webkit-mask-image:linear-gradient(
-    to top,
-    transparent 0%,
-    rgba(0,0,0,0.25) 12%,
-    rgba(0,0,0,0.6) 28%,
-    rgba(0,0,0,0.9) 45%,
-    black 65%
-  );
+  mask-image:linear-gradient(to top, transparent 0%, rgba(0,0,0,0.25) 12%, rgba(0,0,0,0.6) 28%, rgba(0,0,0,0.9) 45%, black 65%);
+  -webkit-mask-image:linear-gradient(to top, transparent 0%, rgba(0,0,0,0.25) 12%, rgba(0,0,0,0.6) 28%, rgba(0,0,0,0.9) 45%, black 65%);
 }
 
 .cenario-castelo::after{
@@ -79,17 +65,11 @@ body::after{
   right:0;
   bottom:-60px;
   height:260px;
-  background:linear-gradient(
-    to top,
-    rgba(31,63,115,0.65),
-    rgba(31,63,115,0.35),
-    rgba(31,63,115,0.15),
-    transparent
-  );
+  background:linear-gradient(to top, rgba(31,63,115,0.65), rgba(31,63,115,0.35), rgba(31,63,115,0.15), transparent);
   filter:blur(48px);
 }
 
-/* ===== PARTICULAS ===== */
+/* ====== PARTÍCULAS ====== */
 #particles{
   position:fixed;
   inset:0;
@@ -115,7 +95,7 @@ body::after{
   }
 }
 
-/* ===== CARTA ===== */
+/* ====== CARTA ====== */
 .carta-container{
   position:absolute;
   top:50%;
@@ -125,9 +105,7 @@ body::after{
   max-width:78vw;
   cursor:pointer;
   z-index:2;
-  filter:
-    drop-shadow(0 18px 40px rgba(0,0,0,0.55))
-    drop-shadow(0 0 22px rgba(180,220,255,0.35));
+  filter:drop-shadow(0 18px 40px rgba(0,0,0,0.55)) drop-shadow(0 0 22px rgba(180,220,255,0.35));
 }
 
 .carta-container img{
@@ -161,7 +139,7 @@ body::after{
   }
 }
 
-/* ===== FUMACA ===== */
+/* ====== FUMAÇA ====== */
 .fumaca-container{
   position:absolute;
   inset:0;
@@ -174,13 +152,7 @@ body::after{
   left:50%;
   border-radius:50%;
   animation:smokeUp 3.2s ease-out forwards;
-  background:radial-gradient(
-    circle,
-    rgba(255,220,140,0.75) 0%,
-    rgba(240,190,95,0.55) 35%,
-    rgba(210,160,60,0.32) 60%,
-    rgba(170,120,35,0.12) 100%
-  );
+  background:radial-gradient(circle, rgba(255,220,140,0.75) 0%, rgba(240,190,95,0.55) 35%, rgba(210,160,60,0.32) 60%, rgba(170,120,35,0.12) 100%);
   filter:blur(26px);
 }
 
@@ -191,7 +163,7 @@ body::after{
   }
 }
 
-/* ===== GLITTER ===== */
+/* ====== GLITTER ====== */
 .magic-glitter{
   position:absolute;
   width:6px;
@@ -211,97 +183,103 @@ body::after{
   }
 }
 
-/* ===== CONTEÚDO DO CONVITE ===== */
-#conviteContent{
-  display:none;          /* começar escondido */
+/* ====== CONVITE ====== */
+#convite{
   position:absolute;
-  inset:0;
-  background:linear-gradient(45deg,#ffc900,rgba(168,51,33,0.2),#00498e);
-  z-index:10;            /* menor que a carta */
-  align-items:center;
-  justify-content:center;
-  flex-direction:column;
-}
-  
-#conviteContent img{
+  top:50%;
+  left:50%;
+  transform:translate(-50%,-50%);
   max-width:88%;
   max-height:88%;
+  object-fit:contain;
+  z-index:2;
+  opacity:0;
+  transition:opacity 1.2s ease;
+  cursor:pointer;
 }
 
-/* ===== MODAIS ===== */
-.modal, .sub-modal{
-  display:none;
-  position:fixed;
+/* ====== ESTRELAS ====== */
+.star {
+  position: absolute;
+  width: 2px;
+  height: 2px;
+  background: radial-gradient(circle, #ffd700, rgba(255,255,255,0));
+  border-radius: 50%;
+  pointer-events: none;
+  opacity: 0.8;
+  animation: moveStar linear infinite;
+}
+
+@keyframes moveStar {
+  from { transform: translateY(100vh) scale(1); opacity:0; }
+  10% { opacity:1; }
+  to { transform: translateY(-120vh) scale(0.6); opacity:0; }
+}
+
+/* ====== BOTÕES / MODAIS ====== */
+.btn-modal {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background: #f17ea1;
+  color: #fff;
+  border: none;
+  border-radius: 10px;
+  padding: 14px 20px;
+  font-size: 15px;
+  cursor: pointer;
+  z-index:5;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+}
+
+.modal, .sub-modal {
+  display: none;
+  position: fixed;
   inset:0;
-  background:rgba(0,0,0,0.6);
-  z-index:30;
+  background: rgba(0,0,0,0.6);
+  z-index:10;
   align-items:center;
   justify-content:center;
 }
 
-.modal-content, .sub-modal-content{
+.modal-content, .sub-modal-content {
   border-radius:14px;
   padding:22px;
   width:90%;
   max-width:420px;
   max-height:90vh;
   overflow-y:auto;
+  position: relative;
   display:flex;
   flex-direction:column;
   gap:12px;
-  position:relative;
 }
 
-.modal-content{
-  background:#00498e;
-}
-
-.close{
-  position:absolute;
-  right:14px;
-  top:10px;
-  font-size:26px;
-  cursor:pointer;
-}
-
+.modal-content{ background:#00498e; color:#fff; }
+.close{ position:absolute; right:14px; top:10px; font-size:26px; cursor:pointer; }
 .modal-button{
-  padding:14px;
-  border:none;
-  border-radius:10px;
-  background:#f17ea1;
-  color:#00498e;
-  font-size:16px;
-  text-align:left;
-  cursor:pointer;
+  padding:14px; border:none; border-radius:10px; background:#f17ea1; color:#00498e;
+  font-size:16px; text-align:left; cursor:pointer;
 }
-
-.modal-button:hover{
-  background:#ffd700;
-  color:#000;
-}
-
-ul{padding-left:18px; margin:0;}
-li{margin-bottom:6px;}
+.modal-button:hover{ background:#ffd700; color:#000; }
 
 .sub-modal-content{
-  background:linear-gradient(160deg,#f2c94c,#e6b93d,#cfa432);
+  background: linear-gradient(160deg, #f2c94c, #e6b93d, #cfa432);
   color:#2b2b2b;
   box-shadow:0 0 25px rgba(242,201,76,0.45),0 0 60px rgba(242,201,76,0.25);
 }
+.sub-modal-content h3{ color:#4a3b00; }
+.sub-modal-content li{ color:#3b2a00; }
 
-.sub-modal-content h3{color:#4a3b00;}
-.sub-modal-content li{color:#3b2a00;}
-
-/* AUDIO OVERLAY */
-#audioOverlay{position:fixed; inset:0; z-index:9999; cursor:pointer;}
+#audioOverlay{
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+}
 </style>
 </head>
 
 <body>
-
-<audio id="bgMusic" src="assets/audio/musica.mp3" loop></audio>
-<div id="audioOverlay"></div>
-
 <div class="cenario-castelo"></div>
 <div id="particles"></div>
 
@@ -310,12 +288,12 @@ li{margin-bottom:6px;}
   <img src="assets/carta-aberta.png" class="carta-aberta">
   <div class="fumaca-container" id="fumaca"></div>
 </div>
-  
-<div id="conviteContent">
-  <img src="assets/convite.png" class="carta">
-  <button class="btn-modal">Informações</button>
-</div>
 
+<img src="assets/convite.png" id="convite">
+
+<div id="audioOverlay"></div>
+
+<button class="btn-modal">Informações</button>
 
 <div class="modal" id="modalPrincipal">
   <div class="modal-content">
@@ -349,100 +327,98 @@ li{margin-bottom:6px;}
   </div>
 </div>
 
+<audio id="bgMusic" src="assets/audio/musica.mp3" loop></audio>
+
 <script>
-const music = document.getElementById('bgMusic');
-music.volume = 0.08;
-const overlay = document.getElementById('audioOverlay');
-const carta = document.getElementById('carta');
-const fumaca = document.getElementById('fumaca');
-const particleContainer = document.getElementById('particles');
-const convite = document.getElementById('conviteContent');
-
-/* MÚSICA */
-const savedTime = localStorage.getItem('musicTime');
-if(savedTime) music.currentTime = parseFloat(savedTime);
-
-function startMusic(){
-  music.play().catch(()=>{});
-  overlay.remove();
-}
-
-overlay.addEventListener('click',()=>{
-  startMusic();
-  carta.click();
-},{once:true});
-overlay.addEventListener('touchstart',()=>{
-  startMusic();
-  carta.click();
-},{once:true});
-
-/* PARTICULAS */
-const intervalTime = window.innerWidth < 768 ? 180 : 140;
+/* ====== PARTÍCULAS ====== */
+const particleContainer=document.getElementById('particles');
 setInterval(()=>{
-  const s = document.createElement('div');
+  const s=document.createElement('div');
   s.className='spark';
   s.style.left=Math.random()*100+'vw';
   s.style.animationDuration=(3+Math.random()*3)+'s';
   particleContainer.appendChild(s);
   setTimeout(()=>s.remove(),7000);
-},intervalTime);
+},300);
 
-/* CARTA + FUMAÇA + GLITTER */
-carta.addEventListener('click',()=>{
-  if(carta.classList.contains('aberta')) return;
-  carta.classList.add('aberta');
-  const largura=carta.offsetWidth;
+/* ====== CARTA + FUMAÇA + GLITTER ====== */
+const carta=document.getElementById('carta');
+const fumaca=document.getElementById('fumaca');
+const convite=document.getElementById('convite');
 
-  for(let i=0;i<30;i++){
-    setTimeout(()=>{
-      const smoke=document.createElement('div');
-      smoke.className='smoke';
-      smoke.style.setProperty('--x',`${Math.random()*largura/2-largura/4}px`);
-      const size=largura*0.1+Math.random()*largura*0.15;
-      smoke.style.width=smoke.style.height=size+'px';
-      fumaca.appendChild(smoke);
-      setTimeout(()=>smoke.remove(),4200);
-    },i*100);
-  }
-
-  for(let i=0;i<22;i++){
-    setTimeout(()=>{
-      const g=document.createElement('div');
-      g.className='magic-glitter';
-      g.style.setProperty('--gx',`${Math.random()*120-60}px`);
-      fumaca.appendChild(g);
-      setTimeout(()=>g.remove(),2200);
-    },i*140);
-  }
-
-  /* mostrar convite após animação da carta */
+window.addEventListener('load',()=>{
   setTimeout(()=>{
-    convite.style.display='flex';
-    convite.style.zIndex = '20';  // sobe acima da carta
+    carta.classList.add('aberta');
+    const largura=carta.offsetWidth;
+
+    for(let i=0;i<30;i++){
+      setTimeout(()=>{
+        const smoke=document.createElement('div');
+        smoke.className='smoke';
+        smoke.style.setProperty('--x',`${Math.random()*largura/2-largura/4}px`);
+        const size=largura*0.1+Math.random()*largura*0.15;
+        smoke.style.width=smoke.style.height=size+'px';
+        fumaca.appendChild(smoke);
+        setTimeout(()=>smoke.remove(),4200);
+      },i*100);
+    }
+
+    for(let i=0;i<22;i++){
+      setTimeout(()=>{
+        const g=document.createElement('div');
+        g.className='magic-glitter';
+        g.style.setProperty('--gx',`${Math.random()*120-60}px`);
+        fumaca.appendChild(g);
+        setTimeout(()=>g.remove(),2200);
+      },i*140);
+    }
+  },1000);
+
+  setTimeout(()=>{
     carta.style.display='none';
-},3200);
+    convite.style.opacity=1;
+  },5200);
+});
 
-/* MODAIS */
-document.querySelector(".btn-modal").onclick=()=>{document.getElementById("modalPrincipal").style.display="flex";};
-document.getElementById("dressCode").onclick=()=>{document.getElementById("modalDress").style.display="flex";};
-document.getElementById("presentear").onclick=()=>{document.getElementById("modalPresentes").style.display="flex";};
-document.getElementById("verRota").onclick=()=>{window.open("https://maps.app.goo.gl/9Ujs9UPoccGrVMJb8","_blank");};
-document.getElementById("confirmePresenca").onclick=()=>{window.open("https://wa.me/5551992226662?text=Olá,%20confirmo%20minha%20presença%20no%20seu%20aniversário!","_blank");};
-document.querySelectorAll(".close").forEach(btn=>{btn.onclick=()=>{document.getElementById(btn.dataset.close).style.display="none";};});
-window.onclick=e=>{document.querySelectorAll(".modal,.sub-modal").forEach(m=>{if(e.target===m)m.style.display="none";});};
+/* ====== MÚSICA ====== */
+const music = document.getElementById('bgMusic');
+music.volume=0;
+const overlay = document.getElementById('audioOverlay');
+const savedTime = localStorage.getItem('musicTime');
+if(savedTime) music.currentTime=parseFloat(savedTime);
 
-/* SALVAR TEMPO DA MÚSICA */
-window.addEventListener('beforeunload',()=>{localStorage.setItem('musicTime',music.currentTime);});
+function startMusic(){
+  music.play().then(()=>overlay.remove()).catch(()=>{});
+  let vol=0;
+  const fade=setInterval(()=>{
+    if(vol<0.15){ vol+=0.02; music.volume=vol; } 
+    else { music.volume=0.13; clearInterval(fade); }
+  },120);
+}
+overlay.addEventListener('click', startMusic, {once:true});
+overlay.addEventListener('touchstart', startMusic, {once:true});
+window.addEventListener('load', startMusic);
+window.addEventListener('beforeunload', ()=>localStorage.setItem('musicTime', music.currentTime));
 
-/* ANALISE DE BATIDA (PARTÍCULAS) */
+/* ====== ESTRELAS ====== */
+for(let i=0;i<160;i++){
+  const star=document.createElement("div");
+  star.className="star";
+  star.style.left=Math.random()*100+"vw";
+  star.style.animationDuration=(3+Math.random()*4)+"s";
+  star.style.animationDelay=Math.random()*5+"s";
+  document.body.appendChild(star);
+}
+
+/* ====== PARTÍCULAS REAGINDO À BATIDA ====== */
 let audioCtx, analyser, dataArray;
 function initAudioAnalysis(){
-  audioCtx = new (window.AudioContext||window.webkitAudioContext)();
-  const source = audioCtx.createMediaElementSource(music);
-  analyser = audioCtx.createAnalyser();
-  analyser.fftSize = 256;
-  const bufferLength = analyser.frequencyBinCount;
-  dataArray = new Uint8Array(bufferLength);
+  audioCtx=new (window.AudioContext||window.webkitAudioContext)();
+  const source=audioCtx.createMediaElementSource(music);
+  analyser=audioCtx.createAnalyser();
+  analyser.fftSize=256;
+  const bufferLength=analyser.frequencyBinCount;
+  dataArray=new Uint8Array(bufferLength);
   source.connect(analyser);
   analyser.connect(audioCtx.destination);
 }
@@ -453,14 +429,14 @@ function getBeatIntensity(){
   for(let i=0;i<dataArray.length;i++) sum+=dataArray[i];
   return sum/dataArray.length;
 }
-const originalPlay = music.play.bind(music);
-music.play = ()=>{
+const originalPlay=music.play.bind(music);
+music.play=()=>{
   if(!audioCtx) initAudioAnalysis();
   if(audioCtx.state==="suspended") audioCtx.resume();
   return originalPlay();
 };
 setInterval(()=>{
-  const intensity = getBeatIntensity();
+  const intensity=getBeatIntensity();
   if(intensity>55){
     const burst=document.createElement('div');
     burst.className='spark';
@@ -474,6 +450,15 @@ setInterval(()=>{
     setTimeout(()=>burst.remove(),4000);
   }
 },120);
+
+/* ====== MODAIS ====== */
+document.querySelector(".btn-modal").onclick=()=>modalPrincipal.style.display="flex";
+document.getElementById("dressCode").onclick=()=>modalDress.style.display="flex";
+document.getElementById("presentear").onclick=()=>modalPresentes.style.display="flex";
+document.getElementById("verRota").onclick=()=>window.open("https://maps.app.goo.gl/9Ujs9UPoccGrVMJb8","_blank");
+document.getElementById("confirmePresenca").onclick=()=>window.open("https://wa.me/5551992226662?text=Olá,%20confirmo%20minha%20presença%20no%20seu%20aniversário!","_blank");
+document.querySelectorAll(".close").forEach(btn=>btn.onclick=()=>document.getElementById(btn.dataset.close).style.display="none");
+window.onclick=e=>document.querySelectorAll(".modal,.sub-modal").forEach(m=>{if(e.target===m)m.style.display="none";});
 </script>
 
 </body>

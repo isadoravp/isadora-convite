@@ -52,8 +52,8 @@ body::after{
   background-size:100% auto;
   z-index:0;
   pointer-events:none;
-  opacity:0.95;
-  filter:brightness(1.12) contrast(1.08) saturate(1.05);
+  opacity:0.75;
+  filter: brightness(1.05) contrast(1.03) saturate(1.03);
   mask-image:linear-gradient(to top, transparent 0%, rgba(0,0,0,0.25) 12%, rgba(0,0,0,0.6) 28%, rgba(0,0,0,0.9) 45%, black 65%);
   -webkit-mask-image:linear-gradient(to top, transparent 0%, rgba(0,0,0,0.25) 12%, rgba(0,0,0,0.6) 28%, rgba(0,0,0,0.9) 45%, black 65%);
 }
@@ -352,10 +352,13 @@ const carta=document.getElementById('carta');
 const fumaca=document.getElementById('fumaca');
 const convite=document.getElementById('convite');
 
-carta.addEventListener('click', ()=>{
-  carta.classList.add('aberta');
+  setTimeout(()=>{
+    carta.classList.add('aberta'); // glow + abertura
+    carta.style.transform = "translate(-50%, -50%) scale(1) rotateX(0deg)";
+  }, 300); // 0.3s de animação inicial
 
   const largura=carta.offsetWidth;
+
 
   for(let i=0;i<30;i++){
     setTimeout(()=>{

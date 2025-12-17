@@ -103,8 +103,9 @@ body::after{
   transform:translate(-50%,-50%);
   width:300px;
   max-width:78vw;
+  height:auto; /* altura proporcional */
   cursor:pointer;
-  z-index:2;
+  z-index:3; /* acima do convite */
   filter:drop-shadow(0 18px 40px rgba(0,0,0,0.55)) drop-shadow(0 0 22px rgba(180,220,255,0.35));
 }
 
@@ -116,29 +117,15 @@ body::after{
   transition:opacity 1.4s ease, transform 1.6s ease;
 }
 
-/* NOVO: carta-aberta não bloqueia clique enquanto invisível */
 .carta-aberta{
   opacity:0;
   transform:scale(0.95);
   pointer-events:none;
 }
 
-.carta-container.aberta .carta-fechada{
-  animation:pulseGlow 2.8s ease-in-out forwards;
-  opacity:0;
-  transform:scale(0.9);
-}
-
-.carta-container.aberta .carta-aberta{
-  animation:pulseGlow 2.8s ease-in-out forwards;
-  opacity:1;
-  transform:scale(1);
-}
-
-@keyframes pulseGlow{
-  40%{
-    filter:drop-shadow(0 0 28px rgba(180,220,255,0.8));
-  }
+.carta-fechada{
+  opacity:0; /* invisível mas captura clique */
+  pointer-events: all;
 }
 
 /* ====== FUMAÇA ====== */
@@ -375,12 +362,15 @@ window.addEventListener('load',()=>{
       },i*140);
     }
   },1000);
+
+  // não mostra convite ainda, espera clique
+  // carta invisível permanece acima do convite
 });
 
-// NOVO: abrir convite ao clicar em qualquer parte da carta
+/* ====== ABRIR CONVITE AO CLICAR ====== */
 carta.addEventListener('click', ()=>{
-  convite.style.opacity=1;
-  carta.style.display='none';
+  convite.style.opacity=1;   // mostra o convite
+  carta.style.display='none'; // remove a carta invisível acima
 });
 
 /* ====== MÚSICA ====== */

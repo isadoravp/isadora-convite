@@ -264,11 +264,21 @@ setInterval(()=>{
 },intervalTime);
 
 /* ===== CARTA + FUMAÇA + GLITTER ===== */
-carta.addEventListener('click',()=>{
+carta.addEventListener('click', ()=>{
   if(carta.classList.contains('aberta')) return;
-  carta.classList.add('aberta');
-  const largura=carta.offsetWidth;
 
+  // Abre a carta
+  carta.classList.add('aberta');
+
+  // Inicia música se ainda não começou
+  if(music.paused) {
+    music.play().catch(()=>{});
+    overlay.remove();
+  }
+
+  const largura = carta.offsetWidth;
+
+  // Smoke
   for(let i=0;i<30;i++){
     setTimeout(()=>{
       const smoke=document.createElement('div');
@@ -281,6 +291,7 @@ carta.addEventListener('click',()=>{
     },i*100);
   }
 
+  // Glitter
   for(let i=0;i<22;i++){
     setTimeout(()=>{
       const g=document.createElement('div');
@@ -292,6 +303,10 @@ carta.addEventListener('click',()=>{
   }
 });
 
+/* ===== OVERLAY ===== */
+// Apenas inicia música se usuário tocar fora da carta antes
+overlay.addEventListener('click', startMusic, {once:true});
+overlay.addEventListener('touchstart', startMusic, {once:true});
 /* ===== MODAIS ===== */
 document.querySelector(".btn-modal").onclick=()=>{modalPrincipal.style.display="flex";};
 document.getElementById("dressCode").onclick=()=>{modalDress.style.display="flex";};

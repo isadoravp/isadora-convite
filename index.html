@@ -52,7 +52,7 @@ body::after{
   background-size:100% auto;
   z-index:0;
   pointer-events:none;
-  opacity:0.65; 
+  opacity:0.35; 
   filter:brightness(1.05) contrast(1.05) saturate(1.03); 
   mask-image:linear-gradient(to top, transparent 0%, rgba(0,0,0,0.25) 12%, rgba(0,0,0,0.6) 28%, rgba(0,0,0,0.9) 45%, black 65%);
   -webkit-mask-image:linear-gradient(to top, transparent 0%, rgba(0,0,0,0.25) 12%, rgba(0,0,0,0.6) 28%, rgba(0,0,0,0.9) 45%, black 65%);
@@ -207,6 +207,7 @@ body::after{
   opacity:0;
   transition:opacity 1.2s ease;
   cursor:pointer;
+  pointer-events: none;
 }
 
 /* ====== ESTRELAS ====== */
@@ -389,10 +390,11 @@ carta.addEventListener('click', ()=>{
   }
 
 setTimeout(()=>{
-  convite.style.opacity=1;
-  carta.style.display='none';
-  carta.style.pointerEvents='none';
+  convite.style.opacity = 1;
+  convite.style.pointerEvents = 'all';
+  carta.style.display = 'none';
 },1800);
+
 });
 
 /* ====== MÚSICA ====== */

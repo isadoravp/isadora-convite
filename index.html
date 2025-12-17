@@ -410,10 +410,8 @@ setTimeout(()=>{
 const music = document.getElementById('bgMusic');
 const overlay = document.getElementById('audioOverlay');
 
-/* volume fixo e baixo */
-music.volume = 0.2;
+music.volume = 0.13;
 
-/* retoma do tempo salvo */
 const savedTime = localStorage.getItem('musicTime');
 if (savedTime) music.currentTime = parseFloat(savedTime);
 
@@ -423,16 +421,13 @@ function startMusic(){
     .catch(() => {});
 }
 
-/* garante autoplay quando permitido */
 overlay.addEventListener('click', startMusic, { once: true });
 overlay.addEventListener('touchstart', startMusic, { once: true });
 window.addEventListener('load', startMusic);
 
-/* salva tempo para continuar entre páginas */
 window.addEventListener('beforeunload', () => {
   localStorage.setItem('musicTime', music.currentTime);
 });
-
 
 /* ====== ESTRELAS ====== */
 for(let i=0;i<160;i++){

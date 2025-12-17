@@ -100,19 +100,6 @@ html, body {
   gap: 12px;
 }
 
-.sub-modal-content{
-    background: linear-gradient(
-    135deg,
-    #f2c94c,
-    #e6b84c,
-    #d4a73a
-  );
-  color: #00498e;
-  box-shadow:
-    0 0 25px rgba(242,201,76,0.45),
-    0 0 60px rgba(242,201,76,0.25);
-}
-
 .close {
   position: absolute;
   right: 14px;
@@ -180,6 +167,28 @@ li {
   inset: 0;
   z-index: 9999;
 }
+
+.sub-modal-content{
+  background: linear-gradient(
+    160deg,
+    #f2c94c,
+    #e6b93d,
+    #cfa432
+  );
+  color: #2b2b2b;
+  box-shadow:
+    0 0 25px rgba(242,201,76,0.45),
+    0 0 60px rgba(242,201,76,0.25);
+}
+
+.sub-modal-content h3{
+  color: #4a3b00;
+}
+
+.sub-modal-content li{
+  color: #3b2a00;
+}
+  
 </style>
 </head>
 
@@ -230,7 +239,7 @@ li {
 
 <script>
 const music = document.getElementById('bgMusic');
-music.volume = 0.18;
+music.volume = 0;
 
 const savedTime = localStorage.getItem('musicTime');
 if(savedTime){
@@ -243,6 +252,16 @@ function startMusic(){
   music.play().then(()=>{
     overlay.remove();
   }).catch(()=>{});
+  let vol = 0;
+const fade = setInterval(() => {
+  if (vol < 0.22) {
+    vol += 0.02;
+    music.volume = vol;
+  } else {
+    music.volume = 0.18; 
+    clearInterval(fade);
+  }
+}, 120);
 }
 
 overlay.addEventListener('click', startMusic, { once:true });

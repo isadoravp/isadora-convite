@@ -6,7 +6,7 @@
 <title>Convite</title>
 
 <style>
-/* ================= BASE ================= */
+/* BASE */
 html, body {
   margin: 0;
   padding: 0;
@@ -26,7 +26,7 @@ html, body {
   position: relative;
 }
 
-/* ================= CARTA ================= */
+/* CARTA */
 .carta {
   max-width: 88%;
   max-height: 88%;
@@ -35,7 +35,7 @@ html, body {
   cursor: pointer;
 }
 
-/* ================= ESTRELAS ================= */
+/* ESTRELAS */
 .star {
   position: absolute;
   width: 2px;
@@ -59,7 +59,7 @@ html, body {
   }
 }
 
-/* ================= BOTÃO INFO ================= */
+/* BOTÃO */
 .btn-modal {
   position: fixed;
   bottom: 20px;
@@ -75,7 +75,7 @@ html, body {
   box-shadow: 0 4px 12px rgba(0,0,0,0.3);
 }
 
-/* ================= MODAIS ================= */
+/* MODAIS */
 .modal, .sub-modal {
   display: none;
   position: fixed;
@@ -108,7 +108,7 @@ html, body {
   cursor: pointer;
 }
 
-/* ================= BOTÕES MODAL ================= */
+/* BOTÕES MODAL */
 .modal-button {
   padding: 14px;
   border: none;
@@ -125,7 +125,7 @@ html, body {
   color: #000;
 }
 
-/* ================= LISTAS ================= */
+/* LISTAS */
 ul {
   padding-left: 18px;
 }
@@ -134,7 +134,7 @@ li {
   margin-bottom: 6px;
 }
 
-/* ================= PARTÍCULAS ================= */
+/* PARTÍCULAS */
 #particles{
   position: fixed;
   inset: 0;
@@ -252,14 +252,14 @@ for(let i=0;i<160;i++){
 
 /* partículas */
 const particleContainer=document.getElementById('particles');
-const intervalTime=window.innerWidth<768?300:180;
+const intervalTime = window.innerWidth < 768 ? 180 : 140;
 
 setInterval(()=>{
   const s=document.createElement('div');
   s.className='spark';
   s.style.left=Math.random()*100+'vw';
   s.style.animationDuration=(3+Math.random()*3)+'s';
-  s.style.opacity=0.4+Math.random()*0.4;
+  s.style.opacity = 0.6 + Math.random() * 0.4;
   particleContainer.appendChild(s);
   setTimeout(()=>s.remove(),7000);
 },intervalTime);

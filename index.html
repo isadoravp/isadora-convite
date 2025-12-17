@@ -103,7 +103,6 @@ body::after{
   transform:translate(-50%,-50%);
   width:300px;
   max-width:78vw;
-  height:auto;
   cursor:pointer;
   z-index:3;
   filter:drop-shadow(0 18px 40px rgba(0,0,0,0.55)) drop-shadow(0 0 22px rgba(180,220,255,0.35));
@@ -118,8 +117,8 @@ body::after{
 }
 
 .carta-fechada{
-  opacity:1; /* visível no início */
-  pointer-events:all; /* captura clique */
+  opacity:1;
+  pointer-events:all;
 }
 
 .carta-aberta{
@@ -145,7 +144,7 @@ body::after{
     filter:drop-shadow(0 0 28px rgba(180,220,255,0.8));
   }
 }
-  
+
 /* ====== FUMAÇA ====== */
 .fumaca-container{
   position:absolute;
@@ -353,13 +352,11 @@ const carta=document.getElementById('carta');
 const fumaca=document.getElementById('fumaca');
 const convite=document.getElementById('convite');
 
-window.addEventListener('load',()=>{
-  setTimeout(()=>{
-    carta.classList.add('aberta');
+carta.addEventListener('click', ()=>{
+  carta.classList.add('aberta');
 
-    const largura = carta.offsetWidth;
+  const largura=carta.offsetWidth;
 
-      // fumaca
   for(let i=0;i<30;i++){
     setTimeout(()=>{
       const smoke=document.createElement('div');
@@ -372,7 +369,6 @@ window.addEventListener('load',()=>{
     },i*100);
   }
 
-  // glitter
   for(let i=0;i<22;i++){
     setTimeout(()=>{
       const g=document.createElement('div');
@@ -383,17 +379,10 @@ window.addEventListener('load',()=>{
     },i*140);
   }
 
-  // depois da animação, mostra o convite
   setTimeout(()=>{
-    convite.style.opacity = 1;
-    carta.style.display = 'none';
-  },1800); // tempo da animação
-});
-
-/* ====== ABRIR CONVITE AO CLICAR ====== */
-carta.addEventListener('click', ()=>{
-  convite.style.opacity=1;   // mostra o convite
-  carta.style.display='none'; // remove a carta invisível acima
+    convite.style.opacity=1;
+    carta.style.display='none';
+  },1800);
 });
 
 /* ====== MÚSICA ====== */
